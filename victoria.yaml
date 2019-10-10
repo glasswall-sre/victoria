@@ -1,5 +1,6 @@
 plugins:
-  - "example_plugins/confisg.py"
+  - "example_plugins/config.py"
+  - "example_plugins/pbi.py"
 
 logging_config:
   version: 1

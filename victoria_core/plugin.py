@@ -36,10 +36,11 @@ def load(plugin_path: str) -> click.Command:
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         cli_fn = getattr(module, plugin_name)
-        if type(cli_fn) is not click.Command:
+        if type(cli_fn) is not click.Command \
+                and type(cli_fn) is not click.Group:
             # check that the command in the plugin was decorated as a click Command
             print(f"Error loading plugin '{plugin_path}': '{plugin_name}()'"
-                  " did not have click.command decorator!")
+                  " did not have click.command or click.group decorator!")
             return None
         return cli_fn
     except AttributeError:
