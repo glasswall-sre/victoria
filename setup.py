@@ -1,9 +1,9 @@
 """setup.py
 
-Used for installing Victora via pip.
+Used for installing Victoria via pip.
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     dependency_links=[],
@@ -13,6 +13,9 @@ setup(
     description="SRE automation toolbelt",
     author="Sam Gibson",
     author_email="sgibson@glasswallsolutions.com",
-    scripts=["cmd/victoria"],
-    packages=["victoria_core"],
+    packages=find_packages(),
+    entry_points='''
+        [console_scripts]
+        victoria=victoria.script.victoria:main
+    ''',
 )

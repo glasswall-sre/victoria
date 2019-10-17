@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8eb73bbf2ea1319de8cf365b9fe6be6fdee05d6be988b4fe03ec5aa997531679"
+            "sha256": "e167ab5a36eaa47b3ecd344e09f86c27b611309ef6c70119aa27f4bd516015ca"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -54,6 +54,10 @@
         "victoria": {
             "editable": true,
             "path": "."
+        },
+        "victoria-config": {
+            "editable": true,
+            "path": "./example_plugins/victoria_config"
         }
     },
     "develop": {

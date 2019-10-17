@@ -1,0 +1,24 @@
+# the python logging config
+logging_config:
+  version: 1
+  formatters:
+    default:
+      format: "%(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: default
+      stream: ext://sys.stdout
+  root:
+    level: DEBUG
+    handlers: [console]
+
+# config for any plugins loaded, objects should have the same name as
+# the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
+plugins_config:
+  config:
+    indent: 2
+  pbi:
+    pat: ITS A SECRET
+    organisation: glasswallsolutions
