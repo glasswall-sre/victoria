@@ -1,4 +1,4 @@
-"""config.py
+"""victoria_config
 
 A Victoria plugin to print the currently loaded config.
 

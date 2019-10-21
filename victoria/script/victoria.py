@@ -70,7 +70,7 @@ class VictoriaCLI(click.MultiCommand):
             # if the command name matches a loaded plugin name
             if plgn.name == name:
                 # if the plugin has a config schema, load its config
-                if plgn.config_schema:
+                if plgn.config_schema and ctx.obj:
                     cfg = config.load_plugin_config(plgn, ctx.obj)
                     if not cfg:
                         # if there was an error loading the config, exit
@@ -96,7 +96,8 @@ class VictoriaCLI(click.MultiCommand):
 def cli(ctx, config_file):
     """This is the main CLI of the application. It uses VictoriaCLI to call
     loaded plugins based on subcommand name."""
-    pass
+    if config_file is None:
+        raise SystemExit(1)
 
 
 def main():
@@ -110,8 +111,6 @@ def main():
 
     # load the config
     cfg = config.load(parsed_args.config_file)
-    if cfg is None:
-        raise SystemExit(1)
 
     # execute the main CLI, passing the config in through the context
     cli.main(obj=cfg)

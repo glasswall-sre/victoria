@@ -85,6 +85,12 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     Raises:
         ValueError: if the plugin didn't have a config schema.
     """
+    # we don't want to try to load a config from the config if it wasn't loaded
+    if cfg is None:
+        logging.warn(f"Can't load '{plugin.name}' config: victoria config "
+                     "not loaded.")
+        return None
+
     if plugin.config_schema is None:
         raise ValueError(f"Can't load plugin config: plugin '{plugin.name}' "
                          "did not have config schema")
