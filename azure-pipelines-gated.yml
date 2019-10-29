@@ -1,38 +1,11 @@
 name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
-continueOnError: true
-trigger:
-  branches:
-    exclude:
-    - master
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: "3.7"
-- script: |
-    python -m pip install --upgrade pip pipenv
-  displayName: Install tools
-- script: pipenv install --dev
-  displayName: Install dependencies
-- script: pipenv run pylint --disable=C,W,R victoria
-  displayName: Lint Python package
-- script: pipenv run pytest tests/ --cov victoria --cov-report html
-  displayName: Test Python package
-- task: SonarCloudPrepare@1
-  displayName: Prepare analysis on SonarCloud
-  inputs:
-    SonarCloud: 'SonarCloud connection'
-    organization: 'glasswall-cloud-key-a42w31'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: '$(Build.Repository.Name)'
-    cliProjectName: '$(Build.Repository.Name)'
-    cliProjectVersion: '0.1'
-    cliSources: '.'
-    extraProperties: |
-      "sonar.python.coverage.reportPaths=$(Agent.BuildDirectory)/coverage.xml"
-      "sonar.python.xunit.reportPath=$(Agent.BuildDirectory)/test-output.xml"
-- task: SonarCloudAnalyze@1
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: Glasswall.Pipelines.Templates
+jobs:
+- template: Python/template-gated.yml@templates
+  parameters:
+    PackageName: victoria
