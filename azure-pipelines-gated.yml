@@ -1,4 +1,4 @@
-name: $(BuildDefinitionName)-Gated-$(Date:yyyyMMdd)$(Rev:.r)
+name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
 continueOnError: true
 trigger:
