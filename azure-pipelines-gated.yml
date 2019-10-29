@@ -1,5 +1,10 @@
-name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
+name: $(BuildDefinitionName)-Gated-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
+continueOnError: true
+trigger:
+  branches:
+    exclude:
+    - master
 steps:
 - task: UsePythonVersion@0
   inputs:
@@ -28,3 +33,6 @@ steps:
       "sonar.python.coverage.reportPaths=$(Agent.BuildDirectory)/coverage.xml"
       "sonar.python.xunit.reportPath=$(Agent.BuildDirectory)/test-output.xml"
 - task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
