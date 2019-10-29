@@ -8,6 +8,9 @@ setuptools = "*"
 pylint = "*"
 yapf = "*"
 pipenv-setup = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-azurepipelines = "*"
 
 [packages]
 click = "*"
