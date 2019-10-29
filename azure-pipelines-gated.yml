@@ -9,9 +9,9 @@ steps:
   displayName: Install tools
 - script: pipenv install --dev
   displayName: Install dependencies
-- script: pipenv run pylint --disable=C,W,R victoria_core
+- script: pipenv run pylint --disable=C,W,R victoria
   displayName: Lint Python package
-- script: pipenv run pytest tests/ --cov victoria_core --cov-report html
+- script: pipenv run pytest tests/ --cov victoria --cov-report html
   displayName: Test Python package
 - task: SonarCloudPrepare@1
   displayName: Prepare analysis on SonarCloud
