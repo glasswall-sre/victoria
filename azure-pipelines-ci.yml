@@ -2,21 +2,10 @@ name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
 trigger:
 - master
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: "3.7"
-- script: |
-    python -m pip install --upgrade pip pipenv
-    python -m pip install pipenv setuptools wheel twine
-  displayName: Install tools
-- script: pipenv install --dev
-  displayName: Install dependencies
-- script: python setup.py bdist_wheel
-  displayName: Build Python package
-- task: TwineAuthenticate@1
-  inputs:
-    artifactFeed: 'Glasswall Cloud/GlasswallSRE'
-  displayName: Generate Python package feed Twine credentials
-- script: twine upload -r GlasswallSRE --config-file $(PYPIRC_PATH) dist/*.whl
-  displayName: Publish Python package to Azure DevOps feed
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: Glasswall.Pipelines.Templates
+jobs:
+- template: Python/template-ci.yml@templates
