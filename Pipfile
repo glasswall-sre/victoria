@@ -17,6 +17,7 @@ click = "*"
 marshmallow = "*"
 pyyaml = "*"
 victoria = {editable = true,path = "."}
+victoria-config = {editable = true,path = "./example_plugins/victoria_config"}
 
 [requires]
 python_version = "3.7"
