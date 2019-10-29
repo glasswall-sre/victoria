@@ -18,5 +18,5 @@ steps:
   inputs:
       artifactFeed: GlasswallSRE
   displayName: Generate Python package feed Twine credentials
-#- script: twine upload -r "GlasswallSRE" --config-file $(PYPIRC_PATH) dist/*.whl
-#  displayName: Publish Python package to Azure DevOps feed
+- script: twine upload -r "GlasswallSRE" --config-file $(PYPIRC_PATH) dist/*.whl
+  displayName: Publish Python package to Azure DevOps feed
