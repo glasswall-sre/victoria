@@ -33,6 +33,12 @@ class Plugin:
         self.cli = cli
         self.config_schema = config_schema
 
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.name == other.name and self.cli == other.cli \
+                and self.config_schema == other.config_schema
+        return False
+
 
 def load(plugin_name: str) -> Plugin:
     """Load a plugin by name.
@@ -109,6 +115,6 @@ def ls() -> List[str]:
             will be in the list without the "victoria_" prefix.
     """
     return [
-        name[len("victoria_"):] for _, name, _ in pkgutil.iter_modules()
-        if name.startswith("victoria_")
+        name[len("victoria_"):] for _, name, ispkg in pkgutil.iter_modules()
+        if name.startswith("victoria_") and ispkg
     ]

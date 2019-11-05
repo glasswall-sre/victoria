@@ -42,6 +42,12 @@ class Config:
         logging.config.dictConfig(logging_config)
         self.plugins_config = plugins_config
 
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.logging_config == other.logging_config \
+                and self.plugins_config == other.plugins_config
+        return False
+
 
 pass_config = click.make_pass_decorator(Config)
 """Decorator for passing the Victoria config to a command."""
@@ -87,8 +93,8 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     """
     # we don't want to try to load a config from the config if it wasn't loaded
     if cfg is None:
-        logging.warn(f"Can't load '{plugin.name}' config: victoria config "
-                     "not loaded.")
+        logging.warning(f"Can't load '{plugin.name}' config: victoria config "
+                        "not loaded.")
         return None
 
     if plugin.config_schema is None:
