@@ -2,34 +2,41 @@ import builtins
 from contextlib import nullcontext as does_not_raise
 import io
 
+from marshmallow import Schema, fields
 import pytest
 
 import victoria.config
 import victoria.plugin
 
-VALID_CONFIG = victoria.config.Config(
-    {
-        'version': 1,
-        'formatters': {
-            'default': {
-                'format': '%(message)s'
-            }
-        },
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-                'level': 'DEBUG',
-                'formatter': 'default',
-                'stream': 'ext://sys.stdout'
-            }
-        },
-        'root': {
-            'level': 'DEBUG',
-            'handlers': ['console']
+VALID_LOGGING_CONFIG = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '%(message)s'
         }
-    }, {'config': {
-        'indent': 2
-    }})
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'formatter': 'default',
+            'stream': 'ext://sys.stdout'
+        }
+    },
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['console']
+    }
+}
+
+VALID_CONFIG = victoria.config.Config(VALID_LOGGING_CONFIG,
+                                      {'test': {
+                                          'test_field': 2
+                                      }})
+
+
+class PluginSchema(Schema):
+    test_field = fields.Int()
 
 
 @pytest.mark.parametrize(
@@ -48,8 +55,8 @@ VALID_CONFIG = victoria.config.Config(
     level: DEBUG
     handlers: [console]
 plugins_config:
-  config:
-    indent: 2""", VALID_CONFIG), ("non-valid yaml: sadad:", None),
+  test:
+    test_field: 2""", VALID_CONFIG), ("non-valid yaml: sadad:", None),
                              ("""logging_config:
   version: 1
   formatters:
@@ -79,8 +86,8 @@ plugins_config: invalid!""", None),
     level: DEBUG
     handlers: [console]
 plugins_config:
-  config:
-    indent: 2""", None)],
+  test:
+    test_field: 2""", None)],
     ids=["success", "YAMLError", "ValidationError", "InvalidLoggingConfig"])
 def test_load(monkeypatch, config_file, expected):
     def mock_open(*args, **kwargs):
@@ -104,9 +111,27 @@ def test_config_eq(a, b, expected):
 @pytest.mark.parametrize("plugin,cfg,expected,raises", [
     (victoria.plugin.Plugin("test", None, None), None, None, does_not_raise()),
     (victoria.plugin.Plugin(
-        "test", None, None), VALID_CONFIG, None, pytest.raises(ValueError))
+        "test", None, None), VALID_CONFIG, None, pytest.raises(ValueError)),
+    (victoria.plugin.Plugin("test", None, Schema()),
+     victoria.config.Config(VALID_LOGGING_CONFIG,
+                            None), None, does_not_raise()),
+    (victoria.plugin.Plugin("test", None, Schema()),
+     victoria.config.Config(VALID_LOGGING_CONFIG,
+                            {"not_here": {}}), None, does_not_raise()),
+    (victoria.plugin.Plugin("test", None, PluginSchema()),
+     victoria.config.Config(VALID_LOGGING_CONFIG,
+                            {"test": {
+                                "test_field": "not an int"
+                            }}), None, does_not_raise()),
+    (victoria.plugin.Plugin("test", None, PluginSchema()), VALID_CONFIG, {
+        "test_field": 2
+    }, does_not_raise())
 ],
-                         ids=["NoConfig", "NoPluginConfig"])
+                         ids=[
+                             "NoConfig", "NoPluginConfig", "NoConfigPlugins",
+                             "NoConfigPluginsSection", "BadPluginConfig",
+                             "Success"
+                         ])
 def test_load_plugin_config(plugin, cfg, expected, raises):
     with raises:
         result = victoria.config.load_plugin_config(plugin, cfg)
