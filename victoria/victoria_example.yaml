@@ -19,6 +19,3 @@ logging_config:
 plugins_config:
   config:
     indent: 2
-  pbi:
-    pat: ITS A SECRET
-    organisation: glasswallsolutions

@@ -17,6 +17,7 @@ from . import schema
 @click.group()
 @click.pass_obj
 def config(cfg: schema.ConfigConfig):
+    """Print the loaded config, and the path to the default config file."""
     pass
 
 
@@ -27,11 +28,11 @@ def path(cfg: schema.ConfigConfig):
     print(victoria.config.get_config_loc())
 
 
-@click.command()
+@config.command()
 @click.pass_obj
 def view(cfg: schema.ConfigConfig):
     """Print the current loaded config and exit."""
     # as the plugin config is the current context, the app config will be in
     # the parent context
-    main_config = click.get_current_context().parent.obj
+    main_config = click.get_current_context().parent.parent.obj
     print(yaml.safe_dump(main_config.__dict__, indent=cfg.indent))

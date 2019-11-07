@@ -93,5 +93,5 @@ def test_victoria_cli_config():
 
         cfg = victoria.config.load("victoria.yaml")
 
-        result = runner.invoke(cli, ["config"], obj=cfg)
+        result = runner.invoke(cli, ["config", "view"], obj=cfg)
         assert result.output == DEFAULT_CONFIG
