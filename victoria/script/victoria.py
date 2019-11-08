@@ -102,8 +102,9 @@ def main():
     parser.add_argument("-c", "--config-file", default=config.get_config_loc())
     parsed_args, _ = parser.parse_known_args()
 
-    # make sure a config already exists
-    config.ensure()
+    # make sure a config already exists if a custom one was not specified
+    if parsed_args.config_file == config.get_config_loc():
+        config.ensure()
 
     # load the config
     cfg = config.load(parsed_args.config_file)
