@@ -17,6 +17,7 @@ click = "*"
 marshmallow = "*"
 pyyaml = "*"
 victoria = {editable = true,path = "."}
+victoria_config = {editable = true,path= "example_plugins/victoria_config"}
 appdirs = "*"
 
 [requires]
