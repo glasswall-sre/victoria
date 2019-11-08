@@ -1,3 +1,7 @@
+import builtins
+import contextlib
+import io
+
 from click.testing import CliRunner
 import pytest
 
@@ -45,7 +49,25 @@ plugins_config:
 """
 
 
-def test_victoria_cli():
+@pytest.fixture
+def mock_open(monkeypatch):
+    """Fixture used to mock open() to make sure tests don't write to the
+    host filesystem."""
+    files = {}
+
+    @contextlib.contextmanager
+    def mocked_open(filename, *args, **kwargs):
+        file = io.StringIO(files.get(filename, ""))
+        try:
+            yield file
+        finally:
+            files[filename] = file.getvalue()
+            file.close()
+
+    monkeypatch.setattr(builtins, "open", mocked_open)
+
+
+def test_victoria_cli(mock_open):
     """Test to see if the CLI runs fine with no args."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -58,7 +80,7 @@ def test_victoria_cli():
         assert result.exit_code == 0
 
 
-def test_victoria_cli_bad_plugin_config():
+def test_victoria_cli_bad_plugin_config(mock_open):
     """Test to see if the CLI exits with 1 on loading a bad plugin config."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -67,11 +89,11 @@ def test_victoria_cli_bad_plugin_config():
 
         cfg = victoria.config.load("victoria.yaml")
 
-        result = runner.invoke(cli, ["config"], obj=cfg)
+        result = runner.invoke(cli, ["config", "view"], obj=cfg)
         assert result.exit_code == 1
 
 
-def test_victoria_cli_bad_command():
+def test_victoria_cli_bad_command(mock_open):
     """Test to see if the CLI exits with 2 on specifying a nonexistent command."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -84,7 +106,7 @@ def test_victoria_cli_bad_command():
         assert result.exit_code == 2
 
 
-def test_victoria_cli_config():
+def test_victoria_cli_config(mock_open):
     """Test to see if the example plugin works correctly."""
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -93,5 +115,5 @@ def test_victoria_cli_config():
 
         cfg = victoria.config.load("victoria.yaml")
 
-        result = runner.invoke(cli, ["config"], obj=cfg)
+        result = runner.invoke(cli, ["config", "view"], obj=cfg)
         assert result.output == DEFAULT_CONFIG

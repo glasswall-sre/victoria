@@ -12,6 +12,7 @@ Author:
 import argparse
 import importlib
 import importlib.util
+import pkg_resources
 
 import click
 
@@ -41,15 +42,8 @@ subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
 """
 
-DEFAULT_CONFIG_FILENAME = "victoria.yaml"
-"""The default filename of the config file. This will be loaded if no other
-file is given."""
-
 VERSION_NUMBER = "0.1"
 """The version number of the application, to print when calling with --version."""
-
-APP_NAME = "victoria"
-"""The name of the application."""
 
 
 class VictoriaCLI(click.MultiCommand):
@@ -85,12 +79,11 @@ class VictoriaCLI(click.MultiCommand):
 @click.command(cls=VictoriaCLI,
                context_settings=CONTEXT_SETTINGS,
                help=HELP_TEXT)
-@click.option(
-    "-c",
-    "--config-file",
-    default=DEFAULT_CONFIG_FILENAME,
-    metavar="FILE",
-    help=f"The config file to load. Defaults to '{DEFAULT_CONFIG_FILENAME}'.")
+@click.option("-c",
+              "--config-file",
+              default=config.get_config_loc(),
+              metavar="FILE",
+              help=f"The config file to load.")
 @click.version_option(version=VERSION_NUMBER)
 @click.pass_context
 def cli(ctx, config_file):
@@ -106,8 +99,12 @@ def main():
     # this is utter filth, but I couldn't think of a better way to do it,
     # and it works transparent to the user
     parser = argparse.ArgumentParser(description="", add_help=False)
-    parser.add_argument("-c", "--config-file", default=DEFAULT_CONFIG_FILENAME)
+    parser.add_argument("-c", "--config-file", default=config.get_config_loc())
     parsed_args, _ = parser.parse_known_args()
+
+    # make sure a config already exists if a custom one was not specified
+    if parsed_args.config_file == config.get_config_loc():
+        config.ensure()
 
     # load the config
     cfg = config.load(parsed_args.config_file)

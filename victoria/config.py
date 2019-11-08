@@ -7,13 +7,58 @@ Author:
 """
 
 import logging.config
+import os
+from os import path
 from typing import List
 
+import appdirs
 import click
 from marshmallow import Schema, fields, post_load, ValidationError
+import pkg_resources
 import yaml
 
 from .plugin import Plugin
+
+APP_NAME = "victoria"
+"""What the app is called."""
+
+APP_AUTHOR = "GlasswallSRE"
+"""Who the author of the application is."""
+
+DEFAULT_CONFIG_NAME = "victoria.yaml"
+"""The default filename of the config file. This will be loaded if no other
+file is given."""
+
+EXAMPLE_CONFIG_FILE = "victoria_example.yaml"
+"""The example config that will be created if a config wasn't found."""
+
+
+def get_config_loc() -> str:
+    """Get the path to the config file."""
+    return path.join(appdirs.user_config_dir(APP_NAME, APP_AUTHOR),
+                     DEFAULT_CONFIG_NAME)
+
+
+def ensure() -> None:
+    """Ensure that a config exists in the location."""
+    if not path.exists(get_config_loc()):
+        print("Didn't find config file -- installing default to "
+              f"{get_config_loc()}")
+
+        # make all of the directories to the config file
+        try:
+            os.makedirs(path.dirname(get_config_loc()))
+        except FileExistsError:
+            pass
+
+        # now write the example config file to the config location
+        with open(get_config_loc(), "w") as cfg_file:
+            # load the example config from package resources and replace any
+            # funky windows line endings that may be in it
+            example_cfg_file = pkg_resources.resource_string(
+                "victoria",
+                EXAMPLE_CONFIG_FILE).decode("utf-8").replace("\r", "")
+            cfg_file.write(example_cfg_file)
 
 
 class ConfigSchema(Schema):
