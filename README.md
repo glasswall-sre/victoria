@@ -10,10 +10,11 @@ productivity.
 ### Prerequisites
 - Python
 - Pip
+- You've set up the [SRE package feed](https://dev.azure.com/glasswall/Glasswall%20Cloud/_wiki/wikis/Service%20Reliability%20Engineering%20Wiki/393/Using-SRE-Python-Packages)
 
 ### Installation
 ```terminal
-pip install git+https://glasswall@dev.azure.com/glasswall/Glasswall%20Cloud/_git/Glasswall.SRE.Victoria
+pip install victoria --extra-index-url $SRE_PACKAGE_FEED
 ```
 
 ## Development guide
