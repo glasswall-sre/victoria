@@ -2,10 +2,19 @@ name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
 resources:
   repositories:
-  - repository: templates
-    type: git
-    name: Glasswall.Pipelines.Templates
+    - repository: templates
+      type: git
+      name: Glasswall.Pipelines.Templates
+    - repository: this
+      type: git
+      name: Glasswall.SRE.Victoria
+      trigger:
+        branches:
+          - master
+      pr:
+        branches:
+          - master
 jobs:
-- template: Python/template-gated.yml@templates
-  parameters:
-    PackageName: victoria
+  - template: Python/template-gated.yml@templates
+    parameters:
+      PackageName: victoria
