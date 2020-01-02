@@ -1,15 +1,13 @@
 name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
+trigger:
+  tags:
+    include:
+      - "*"
 resources:
   repositories:
     - repository: templates
       type: git
       name: Glasswall.Pipelines.Templates
-    - repository: this
-      type: git
-      name: Glasswall.SRE.Victoria
-      trigger:
-        branches:
-          - master
 jobs:
   - template: Python/template-ci.yml@templates
