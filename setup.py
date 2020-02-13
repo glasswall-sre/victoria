@@ -20,15 +20,17 @@ setup(dependency_links=[],
       ],
       name="victoria",
       version="#{TAG_NAME}#",
-      description="SRE automation toolbelt",
+      description="Automation toolbelt",
       long_description=repo_file_as_string("README.md"),
       long_description_content_type="text/markdown",
       author="Sam Gibson",
       author_email="sgibson@glasswallsolutions.com",
       packages=find_packages(".") +
-      find_packages("example_plugins/victoria_config"),
+      find_packages("example_plugins/victoria_config") +
+      find_packages("example_plugins/victoria_store"),
       package_dir={
-          "victoria_config": "example_plugins/victoria_config/victoria_config"
+          "victoria_config": "example_plugins/victoria_config/victoria_config",
+          "victoria_store": "example_plugins/victoria_store/victoria_store"
       },
       entry_points="""
         [console_scripts]

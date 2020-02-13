@@ -17,8 +17,10 @@ click = "*"
 marshmallow = "*"
 pyyaml = "*"
 victoria = {editable = true,path = "."}
-victoria_config = {editable = true,path= "example_plugins/victoria_config"}
+victoria_config = {editable = true,path = "example_plugins/victoria_config"}
+victoria_store = {editable = true,path = "example_plugins/victoria_store"}
 appdirs = "*"
+azure-storage = "*"
 
 [requires]
 python_version = "3.7"

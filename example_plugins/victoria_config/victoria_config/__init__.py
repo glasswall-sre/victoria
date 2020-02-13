@@ -18,3 +18,10 @@ from . import schema
 plugin = Plugin(name="config",
                 cli=functionality.config,
                 config_schema=schema.ConfigSchema())
+
+
+@click.group()
+@click.pass_obj
+def config(cfg: schema.ConfigConfig):
+    """Print the loaded config, and the path to the default config file."""
+    pass
