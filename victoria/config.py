@@ -13,12 +13,13 @@ from typing import List, Mapping
 
 import appdirs
 import click
-from marshmallow import Schema, fields, post_load, ValidationError
+from marshmallow import Schema, fields, post_load, ValidationError, EXCLUDE
 import pkg_resources
 import yaml
 
 from .plugin import Plugin
 from . import storage
+from . import encryption
 
 APP_NAME = "victoria"
 """What the app is called."""
@@ -66,6 +67,8 @@ class ConfigSchema(Schema):
     """Marshmallow schema for the Config object."""
     logging_config = fields.Dict(required=True)
     storage_providers = fields.Dict(required=False)
+    encryption_provider = fields.Nested(
+        encryption.EncryptionProviderConfigSchema, required=False)
     plugins_config_location = fields.Mapping(keys=fields.Str(),
                                              values=fields.Str(),
                                              default={})
@@ -76,7 +79,7 @@ class ConfigSchema(Schema):
         return Config(**data)
 
 
-CONFIG_SCHEMA = ConfigSchema()
+CONFIG_SCHEMA = ConfigSchema(unknown=EXCLUDE)
 """Instance of ConfigSchema used for validating loaded configs."""
 
 
@@ -88,23 +91,29 @@ class Config:
         plugins_config (dict): The config to use for plugins.
         plugins_config_location (Mapping[str, str]): Config file location overrides for plugins.
         storage_providers (dict): Data used for connecting to storage.
+        encryption_provider (EncryptionProviderConfig): Config for the encryption provider.
     """
-    def __init__(self,
-                 logging_config: dict,
-                 plugins_config: dict = None,
-                 plugins_config_location: Mapping[str, str] = {},
-                 storage_providers: dict = None):
+    def __init__(
+        self,
+        logging_config: dict,
+        plugins_config: dict = None,
+        plugins_config_location: Mapping[str, str] = {},
+        storage_providers: dict = None,
+        encryption_provider: encryption.EncryptionProviderConfig = None):
         self.logging_config = logging_config
         logging.config.dictConfig(logging_config)
         self.plugins_config = plugins_config
         self.plugins_config_location = plugins_config_location
         self.storage_providers = storage_providers
+        self.encryption_provider = encryption_provider
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.logging_config == other.logging_config \
                 and self.plugins_config == other.plugins_config \
-                and self.plugins_config_location == other.plugins_config_location
+                and self.plugins_config_location == other.plugins_config_location \
+                and self.storage_providers == other.storage_providers \
+                and self.encryption_provider == other.encryption_provider
         return False
 
     def get_storage(self, provider: str) -> storage.StorageProvider:
@@ -114,6 +123,16 @@ class Config:
             return None
         return storage.make_provider(provider,
                                      **self.storage_providers[provider])
+
+    def get_encryption(self) -> encryption.EncryptionProvider:
+        if self.encryption_provider.provider not in encryption.PROVIDERS_MAP.keys(
+        ):
+            logging.error(
+                f"encryption provider '{self.encryption_provider.provider}' not valid"
+            )
+            return None
+        return encryption.make_provider(self.encryption_provider.provider,
+                                        **self.encryption_provider.config)
 
 
 pass_config = click.make_pass_decorator(Config)

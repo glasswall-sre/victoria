@@ -1,18 +1,22 @@
 # the python logging config
 logging_config:
   version: 1
+  disable_existing_loggers: True
   formatters:
     default:
       format: "%(message)s"
   handlers:
     console:
       class: logging.StreamHandler
-      level: DEBUG
+      level: INFO
       formatter: default
       stream: ext://sys.stdout
   root:
-    level: DEBUG
+    level: INFO
     handlers: [console]
+  loggers:
+    azure.core.pipeline.policies.http_logging_policy:
+      level: CRITICAL
 
 # config for any plugins loaded, objects should have the same name as
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here

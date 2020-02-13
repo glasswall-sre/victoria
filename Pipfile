@@ -19,8 +19,12 @@ pyyaml = "*"
 victoria = {editable = true,path = "."}
 victoria_config = {editable = true,path = "example_plugins/victoria_config"}
 victoria_store = {editable = true,path = "example_plugins/victoria_store"}
+victoria_encrypt = {editable = true,path = "example_plugins/victoria_encrypt"}
 appdirs = "*"
 azure-storage = "*"
+cryptography = "*"
+azure-keyvault = "*"
+azure-identity = "*"
 
 [requires]
 python_version = "3.7"

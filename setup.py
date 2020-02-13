@@ -27,10 +27,13 @@ setup(dependency_links=[],
       author_email="sgibson@glasswallsolutions.com",
       packages=find_packages(".") +
       find_packages("example_plugins/victoria_config") +
-      find_packages("example_plugins/victoria_store"),
+      find_packages("example_plugins/victoria_store") +
+      find_packages("example_plugins/victoria_encrypt"),
       package_dir={
           "victoria_config": "example_plugins/victoria_config/victoria_config",
-          "victoria_store": "example_plugins/victoria_store/victoria_store"
+          "victoria_store": "example_plugins/victoria_store/victoria_store",
+          "victoria_encrypt":
+          "example_plugins/victoria_encrypt/victoria_encrypt"
       },
       entry_points="""
         [console_scripts]
