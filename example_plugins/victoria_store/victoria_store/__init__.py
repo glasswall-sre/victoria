@@ -20,11 +20,12 @@ from victoria.plugin import Plugin
 
 @click.group()
 @click.pass_context
-def store(ctx):
+@click.argument("backend")
+def store(ctx, backend: str):
     """Store files/data in cloud storage."""
     # get the victoria config, so we can get cloud storage details from it
     v_cfg = ctx.obj
-    ctx.obj = v_cfg.get_storage("azure")
+    ctx.obj = v_cfg.get_storage(backend)
 
 
 @store.command()

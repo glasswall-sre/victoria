@@ -8,7 +8,6 @@ Author:
 import logging
 
 import click
-import yaml
 
 from victoria.config import Config
 from victoria.plugin import Plugin
@@ -21,12 +20,10 @@ from victoria.encryption import azure_provider
 def encrypt(cfg: Config, plaintext: str):
     """Envelope encrypt data easily."""
     provider = cfg.get_encryption()
-    print("--> Encrypting data...")
     envelope = provider.encrypt(plaintext.encode("utf-8"))
-    print(f"--> Ciphertext: {envelope.data}")
-    print(f"--> Decrypting data...")
-    plaintext = provider.decrypt(envelope)
-    print(f"--> Plaintext: {plaintext}")
+    print(f"data: {envelope.data}")
+    print(f"iv: {envelope.iv}")
+    print(f"key: {envelope.key}")
 
 
 # this object is loaded by Victoria and used as the plugin entry point

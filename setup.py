@@ -13,10 +13,9 @@ def repo_file_as_string(file_path: str) -> str:
 
 setup(dependency_links=[],
       install_requires=[
-          "appdirs==1.4.3",
-          "click==7.0",
-          "marshmallow==3.2.1",
-          "pyyaml==5.1.2",
+          "appdirs==1.4.3", "click==7.0", "marshmallow==3.2.1",
+          "pyyaml==5.1.2", "azure-storage==0.36.0", "cryptography==2.8",
+          "azure-keyvault==4.0.0", "azure-identity==1.3.0"
       ],
       name="victoria",
       version="#{TAG_NAME}#",
