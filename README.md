@@ -39,6 +39,50 @@ A quick way to edit your config if you have VSCode installed is by running
 Please note that the config file is not isolated. All installations of Victoria
 on the same machine will use the same core config file.
 
+#### Plugin configuration
+Config is in a section of the Victoria YAML config called `plugins_config`. 
+```yaml
+plugins_config:
+  some_plugin:
+    some_value: 123
+```
+
+Sub-objects of `plugins_config` have keys of the same name as the plugins. So
+a plugin called `verb` would have a key in `plugins_config` also called `verb`.
+
+Additionally, you can specify separate config files for plugins with the
+`plugins_config_location` section of the YAML config, instead of
+keeping your config all in the core Victoria config file. You can even use
+config files stored in the cloud! To do this, you need to have configured a 
+storage provider in your core config. A simple one to use is the `local`
+provider, which just uses a directory on your machine to store config files:
+
+```yaml
+storage_providers:
+  local:
+    container: C:/victoria_storage
+```
+
+Put that in your core config (you can change the directory to be wherever you
+want), and you can now configure a separate config location for `some_plugin`
+in your `plugins_config_location`:
+
+```yaml
+plugins_config_location:
+  some_plugin: local://path/to/the_config_for_some_plugin.yaml
+```
+
+As with `plugins_config`, the keys are plugin names. The values are of the
+format `{storage-provider-name}://{path-to-config-file}`, where
+`{storage-provider-name}` is a key in the `storage_providers` section of your
+core config. The `{storage-provider-name}` can be called anything if you'd like
+it to be.
+
+Victoria will grab it and load it as if it were in `plugins_config`. 
+
+Please see the 'Cloud storage' and 'Cloud backends' sections of the README for 
+setting up a cloud storage provider.
+
 #### Example
 ```yaml
 # the python logging config
@@ -367,12 +411,6 @@ You can specify plugin config by setting `config_schema` of your `Plugin` object
 to be an instance of a [Marshmallow schema](https://marshmallow.readthedocs.io/en/stable/).
 
 Config is in a section of the Victoria YAML config called `plugins_config`. 
-```yaml
-plugins_config:
-  some_plugin:
-    some_value: 123
-```
-
 Sub-objects of `plugins_config` have keys of the same name as the `name` parameter
 in your `Plugin` object in `__init__.py`. So this `Plugin(name="some_plugin", ...)`
 would be in key `some_plugin` under `plugins_config`.
