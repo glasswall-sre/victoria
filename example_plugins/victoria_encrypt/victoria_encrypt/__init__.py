@@ -11,7 +11,6 @@ import click
 
 from victoria.config import Config
 from victoria.plugin import Plugin
-from victoria.encryption import azure_provider
 
 
 @click.command()
