@@ -18,8 +18,11 @@ from victoria.plugin import Plugin
 @click.argument("plaintext")
 def encrypt(cfg: Config, plaintext: str):
     """Envelope encrypt data easily."""
+    # get the provider, and encrypt the data
     provider = cfg.get_encryption()
-    envelope = provider.encrypt(plaintext.encode("utf-8"))
+    envelope = provider.encrypt_str(plaintext)
+
+    # print out the encrypted data in YAML format
     print(f"data: {envelope.data}")
     print(f"iv: {envelope.iv}")
     print(f"key: {envelope.key}")

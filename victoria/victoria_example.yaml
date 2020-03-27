@@ -15,11 +15,22 @@ logging_config:
     level: INFO
     handlers: [console]
   loggers:
+    # otherwise the python azure API will spew out HTTP logging at us
     azure.core.pipeline.policies.http_logging_policy:
       level: CRITICAL
+
+# the encryption backend to use - to configure this, see the README
+encryption_provider: null
+
+# the storage backends to use - to configure this, see the README
+storage_providers: null
 
 # config for any plugins loaded, objects should have the same name as
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
 plugins_config:
   config:
     indent: 2
+
+# file locations for plugins if you don't want to specify the config inline
+# in this file - see the README for more info
+plugins_config_location: {}

@@ -117,6 +117,16 @@ class Config:
         return False
 
     def get_storage(self, provider: str) -> storage.StorageProvider:
+        """Get the storage provider of a given type.
+
+        Args:
+            provider (str): The provider type to get. Any key of 'storage_providers'
+                mapping in Victoria core config.
+
+        Returns:
+            StorageProvider: The storage provider.
+            None: If the provider type was invalid.
+        """
         if provider not in self.storage_providers:
             logging.error(
                 f"no configuration for storage provider '{provider}'")
@@ -125,6 +135,12 @@ class Config:
                                      **self.storage_providers[provider])
 
     def get_encryption(self) -> encryption.EncryptionProvider:
+        """Get the encryption provider.
+
+        Returns:
+            EncryptionProvider: The encryption provider.
+            None: If the provider type (in the config) was invalid.
+        """
         if self.encryption_provider.provider not in encryption.PROVIDERS_MAP.keys(
         ):
             logging.error(
@@ -220,6 +236,19 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
 
 def _handle_config_file_override(override_loc: str, plugin: Plugin,
                                  cfg: Config) -> object:
+    """Handle a plugin config override from the 'plugins_config_location'
+    section of the Victoria core config.
+
+    Attempts to get config from a storage provider.
+
+    Args:
+        override_loc (str): The location of the file. {provider}://{file_path}
+        plugin (Plugin): The plugin we're getting config for.
+        cfg (Config): Core Victoria config.
+
+    Returns:
+        object: The config loaded from the storage provider.
+    """
     provider_type, path = tuple(override_loc.split("://"))
     provider = cfg.get_storage(provider_type)
     config_file = io.BytesIO()

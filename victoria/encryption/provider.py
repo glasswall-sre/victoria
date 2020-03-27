@@ -1,3 +1,10 @@
+"""victoria.encryption.provider
+
+Abstract base class of an encryption provider.
+
+Author:
+    Sam Gibson <sgibson@glasswallsolutions.com>
+"""
 from abc import ABC, abstractmethod
 import os
 from typing import Tuple
@@ -8,22 +15,59 @@ from .schemas import EncryptionEnvelope
 
 
 class EncryptionProvider(ABC):
+    """Abstract base class for an encryption provider. Provides methods
+    for envelope encrypting/decrypting arbitrary byte/string sequences.
+    """
     @abstractmethod
     def encrypt(self, data: bytes) -> EncryptionEnvelope:
+        """Encrypt bytes to an EncryptionEnvelope.
+
+        Args:
+            data (bytes): The data to encrypt.
+
+        Returns:
+            EncryptionEnvelope: The encrypted data.
+        """
         raise NotImplementedError()
 
     def encrypt_str(self,
                     data: str,
                     encoding: str = "utf-8") -> EncryptionEnvelope:
+        """Encrypt a string to an EncryptionEnvelope.
+
+        Args:
+            data (str): The string to encrypt.
+            encoding (str, optional): The encoding of the data. Default utf-8.
+
+        Returns:
+            EncryptionEnvelope: The encrypted data.
+        """
         return self.encrypt(data.encode(encoding))
 
     @abstractmethod
     def decrypt(self, envelope: EncryptionEnvelope) -> bytes:
+        """Decrypt an EncryptionEnvelope to bytes.
+
+        Args:
+            envelope (EncryptionEnvelope): The envelope to decrypt.
+
+        Returns:
+            bytes: The decrypted data.
+        """
         raise NotImplementedError()
 
     def decrypt_str(self,
                     envelope: EncryptionEnvelope,
                     encoding: str = "utf-8") -> str:
+        """Decrypt an EncryptionEnvelope to a string.
+
+        Args:
+            envelope (EncryptionEnvelope): The envelope to decrypt.
+            encoding (str, optional): The encoding of the data. Default utf-8.
+
+        Returns:
+            str: The decrypted data.
+        """
         return self.decrypt(envelope).decode(encoding)
 
     def _data_encrypt(self, data: bytes) -> Tuple[bytes, bytes, bytes]:
