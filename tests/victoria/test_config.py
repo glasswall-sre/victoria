@@ -124,7 +124,8 @@ def test_config_eq(a, b, expected):
                                 "test_field": "not an int"
                             }}), None, does_not_raise()),
     (victoria.plugin.Plugin("test", None, PluginSchema()), VALID_CONFIG, {
-        "test_field": 2
+        "test_field": 2,
+        "victoria_config": VALID_CONFIG
     }, does_not_raise())
 ],
                          ids=[

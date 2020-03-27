@@ -29,6 +29,30 @@ plugins_config:
 
 """
 
+DEFAULT_CONFIG_OUTPUT = """encryption_provider: null
+logging_config:
+  formatters:
+    default:
+      format: '%(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: default
+      level: DEBUG
+      stream: ext://sys.stdout
+  root:
+    handlers:
+    - console
+    level: DEBUG
+  version: 1
+plugins_config:
+  config:
+    indent: 2
+plugins_config_location: {}
+storage_providers: null
+
+"""
+
 DEFAULT_CONFIG_BAD_PLUGIN = """logging_config:
   formatters:
     default:
@@ -116,4 +140,4 @@ def test_victoria_cli_config(mock_open):
         cfg = victoria.config.load("victoria.yaml")
 
         result = runner.invoke(cli, ["config", "view"], obj=cfg)
-        assert result.output == DEFAULT_CONFIG
+        assert result.output == DEFAULT_CONFIG_OUTPUT

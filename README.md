@@ -401,6 +401,9 @@ class HelloConfig:
         self.greeting = greeting
 ```
 
+Note: you can use any field name inside your plugin schema except `victoria_config`,
+as this is reserved for storing the core Victoria config in Plugin configs.
+
 And now modify the definition of your `Plugin` object to include the schema:
 ```python
 plugin = Plugin(name="hello", cli=hello, config_schema=HelloConfigSchema())
@@ -436,6 +439,26 @@ def grouped(cfg: HelloConfig):
 def subcommand(cfg: HelloConfig):
     pass
 ```
+
+#### Accessing core Victoria config from a plugin's config
+All plugin config objects will have the core Victoria config injected into them.
+Following the above example, within our `hello` function, we could access the
+core Victoria config like so:
+```python
+from pprint import pprint
+
+@click.command()
+@click.argument('name', nargs=1, type=str, required=True)
+@click.pass_obj
+def hello(cfg: HelloConfig, name: str):
+    core_config = cfg.victoria_config
+    print(f"My logging config is:\n {pprint(core_config.logging_config)}")
+```
+
+Every plugin config will have the `victoria_config` field injected into it.
+It is of type `victoria.config.Config`. As a result of the injection process,
+it is recommended to not use `victoria_config` as a field name in your
+schemas, as it is liable to be overwitten.
 
 ### Storing secrets in config files
 **THIS SECTION WILL BE FLESHED OUT MORE LATER!!**

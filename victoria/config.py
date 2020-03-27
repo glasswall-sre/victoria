@@ -193,7 +193,7 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     if plugin.name in cfg.plugins_config_location:
         loc = cfg.plugins_config_location[plugin.name]
         raw_config = _handle_config_file_override(loc, plugin, cfg)
-    elif plugin.name in cfg.plugins_config:
+    elif cfg.plugins_config is not None and plugin.name in cfg.plugins_config:
         # otherwise use the one in the main config
         if not cfg.plugins_config:
             logging.error("Can't load plugin config: config did not "
@@ -210,6 +210,7 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     # try validating the contents of the plugin section with the schema
     try:
         loaded_config = plugin.config_schema.load(raw_config)
+        loaded_config = _inject_core_config(cfg, loaded_config)
         return loaded_config
     except ValidationError as err:
         # if the loaded YAML wasn't a valid config
@@ -225,6 +226,17 @@ def _handle_config_file_override(override_loc: str, plugin: Plugin,
     provider.retrieve(path, config_file)
     config_str = config_file.getvalue().decode("utf-8")
     return yaml.safe_load(config_str)
+
+
+def _inject_core_config(core_cfg: Config, loaded_config: object) -> object:
+    """Inject the core config into a loaded plugin config object."""
+    if isinstance(loaded_config, dict):
+        # if it's a dict, add it as a key
+        loaded_config["victoria_config"] = core_cfg
+    else:
+        # otherwise assume it's an object
+        loaded_config.victoria_config = core_cfg
+    return loaded_config
 
 
 def load(config_path: str) -> Config:
