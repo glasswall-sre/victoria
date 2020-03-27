@@ -12,9 +12,19 @@ class EncryptionProvider(ABC):
     def encrypt(self, data: bytes) -> EncryptionEnvelope:
         raise NotImplementedError()
 
+    def encrypt_str(self,
+                    data: str,
+                    encoding: str = "utf-8") -> EncryptionEnvelope:
+        return self.encrypt(data.encode(encoding))
+
     @abstractmethod
     def decrypt(self, envelope: EncryptionEnvelope) -> bytes:
         raise NotImplementedError()
+
+    def decrypt_str(self,
+                    envelope: EncryptionEnvelope,
+                    encoding: str = "utf-8") -> str:
+        return self.decrypt(envelope).decode(encoding)
 
     def _data_encrypt(self, data: bytes) -> Tuple[bytes, bytes, bytes]:
         """Asymmetrically encrypt a piece of data, returning a tuple containing
