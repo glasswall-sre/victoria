@@ -31,9 +31,9 @@ def make_provider(provider_type: str, **kwargs) -> provider.EncryptionProvider:
         EncryptionProvider: The provider of the given type.
 
     Raises:
-        KeyError: If provider_type was invalid (i.e. not in PROVIDERS_MAP).
+        ValueError: If provider_type was invalid (i.e. not in PROVIDERS_MAP).
     """
     try:
         return PROVIDERS_MAP[provider_type](**kwargs)
     except KeyError:
-        logging.error(f"Invalid encryption provider type '{provider_type}'")
+        raise ValueError(f"Invalid encryption provider_type '{provider_type}'")

@@ -1,17 +1,29 @@
+"""victoria.storage.local_provider
+
+Implementation of a StorageProvider for local file storage.
+
+Author:
+    Sam Gibson <sgibson@glasswallsolutions.com>
+"""
 from io import IOBase
 import os
 from os import path
 import shutil
-from typing import Generator
+from typing import Generator, Union
 
 from . import provider
 
 
 class LocalStorageProvider(provider.StorageProvider):
+    """Storage provider for local file storage.
+
+    Attributes:
+        container (str): The folder we're using to store files in.
+    """
     def __init__(self, container: str, **kwargs):
         self.container = container
 
-    def store(self, data, key: str) -> None:
+    def store(self, data: Union[IOBase, str, bytes], key: str) -> None:
         self._ensure_container()
         file_path = path.join(self.container, key)
         if issubclass(type(data), IOBase):
