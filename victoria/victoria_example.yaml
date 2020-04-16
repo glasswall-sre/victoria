@@ -25,12 +25,18 @@ encryption_provider: null
 # the storage backends to use - to configure this, see the README
 storage_providers: null
 
-# config for any plugins loaded, objects should have the same name as
+# inline config for any plugins loaded, objects should have the same name as
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
+# note: if you don't want to put this inline, use 'plugins_config_location'
+# as below, you don't have to specify it all here
+# note: plugins_config_location takes precedence over this
 plugins_config:
   config:
     indent: 2
 
-# file locations for plugins if you don't want to specify the config inline
-# in this file - see the README for more info
+# here you can specify separate file locations for plugin config files
+# these use the storage_providers defined above. Like plugins_config, the
+# keys of this object need to have the same name as the plugin.
+# please see the README for information on how to configure storage_providers
+# note: this takes precedence over plugins_config
 plugins_config_location: {}

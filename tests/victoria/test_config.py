@@ -11,6 +11,9 @@ import pytest
 import victoria.config
 import victoria.plugin
 
+from test_storage_azure import mock_azure_classes as mock_storage
+from test_encryption_azure import mock_azure_classes as mock_encryption
+
 VALID_LOGGING_CONFIG = {
     'version': 1,
     'formatters': {
@@ -40,6 +43,46 @@ VALID_CONFIG = victoria.config.Config(VALID_LOGGING_CONFIG,
 
 class PluginSchema(Schema):
     test_field = fields.Int()
+
+@pytest.fixture
+def config_fixture(mock_storage, mock_encryption, fs):
+    config_yml = """logging_config:
+  version: 1
+  disable_existing_loggers: True
+  formatters:
+    default:
+      format: "%(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: INFO
+      formatter: default
+      stream: ext://sys.stdout
+  root:
+    level: INFO
+    handlers: [console]
+  loggers:
+    azure.core.pipeline.policies.http_logging_policy:
+      level: CRITICAL
+encryption_provider:
+  provider: azure
+  config:
+    vault_url: "https://your-vault.vault.azure.net/"
+    key: keyencryptionkey
+    tenant_id: tenant-id-here
+    client_id: sp-client-id-here
+    client_secret: sp-client-secret-here
+storage_providers:
+  azure:
+    account: storageaccountname
+    credential: your-access-key-here
+    container: victoria
+plugins_config:
+  config:
+    indent: 2
+plugins_config_location: {}"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    return victoria.config.load("victoria.yaml")
 
 
 @pytest.mark.parametrize(
@@ -141,4 +184,96 @@ def test_load_plugin_config(plugin, cfg, expected, raises):
         result = victoria.config.load_plugin_config(plugin, cfg)
         assert result == expected
 
+def test_get_storage(config_fixture):
+    storage = config_fixture.get_storage("azure")
+    assert storage.container == "victoria"
 
+def test_get_storage_error(config_fixture):
+    with pytest.raises(ValueError):
+        config_fixture.get_storage("bad type")
+
+def test_get_storage_invalid_config(mock_storage, fs):
+    config_yml = """storage_providers:
+  azure:
+    wrong: values
+logging_config:
+  version: 1
+encryption_provider: null
+plugins_config: {}
+plugins_config_location: {}"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    config = victoria.config.load("victoria.yaml")
+    with pytest.raises(TypeError):
+        config.get_storage("azure")
+
+def test_get_encryption(config_fixture):
+    encryption = config_fixture.get_encryption()
+    assert encryption.key_client.vault_url == "https://your-vault.vault.azure.net/"
+
+def test_get_encryption_error(mock_encryption, fs):
+    config_yml = """storage_providers: {}
+logging_config:
+  version: 1
+encryption_provider:
+  provider: non exist
+  config: {}
+plugins_config: {}
+plugins_config_location: {}"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    config = victoria.config.load("victoria.yaml")
+    with pytest.raises(ValueError):
+        config.get_encryption()
+
+def test_get_encryption_invalid_config(mock_encryption, fs):
+    config_yml = """storage_providers: {}
+logging_config:
+  version: 1
+encryption_provider:
+  provider: azure
+  config:
+    bad: config
+plugins_config: {}
+plugins_config_location: {}"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    config = victoria.config.load("victoria.yaml")
+    with pytest.raises(TypeError):
+        config.get_encryption()
+
+def test_load_plugin_config_storage_provider(fs):
+    config_yml = """storage_providers:
+  local:
+    container: container
+logging_config:
+  version: 1
+encryption_provider: null
+plugins_config: {}
+plugins_config_location:
+  config: local://config.yaml"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    fs.create_file("container/config.yaml", contents="test_field: 2")
+    config = victoria.config.load("victoria.yaml")
+    plugin_def = victoria.plugin.Plugin("config", None, PluginSchema())
+    plugin_config = victoria.config.load_plugin_config(plugin_def, config)
+    assert plugin_config["test_field"] == 2
+
+def test_load_plugin_config_from_both(fs):
+    config_yml = """storage_providers:
+  local:
+    container: container
+logging_config:
+  version: 1
+encryption_provider: null
+plugins_config:
+  config:
+    test_field: 4
+plugins_config_location:
+  config: local://config.yaml
+"""
+    fs.create_file("victoria.yaml", contents=config_yml)
+    fs.create_file("container/config.yaml", contents="test_field: 2")
+    config = victoria.config.load("victoria.yaml")
+    plugin_def = victoria.plugin.Plugin("config", None, PluginSchema())
+    plugin_config = victoria.config.load_plugin_config(plugin_def, config)
+
+    # plugins_config_location should take precedence over plugins_config
+    assert plugin_config["test_field"] == 2

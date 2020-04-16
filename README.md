@@ -129,6 +129,7 @@ encryption_provider:
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
 # note: if you don't want to put this inline, use 'plugins_config_location'
 # as below, you don't have to specify it all here
+# note: plugins_config_location takes precedence over this
 plugins_config:
   config:
     indent: 2
@@ -136,6 +137,7 @@ plugins_config:
 # here you can specify separate file locations for plugin config files
 # these use the storage_providers defined above. Like plugins_config, the
 # keys of this object need to have the same name as the plugin.
+# note: this takes precedence over plugins_config
 plugins_config_location:
   a_plugin: "local://a_subdir/config_for_a_plugin.yaml"
   another_plugin: "azure://another_subdir/further/config_file.yaml"
@@ -175,6 +177,10 @@ plugins_config_location:
 
 They can remove their old config from `plugins_config`, and now when they run
 `helpful` it will use the config from cloud storage! Easy.
+
+Please note that `plugins_config_location` takes precedence over `plugins_config`,
+so if you have a config specified for the same plugin in both, then only the one
+in `plugins_config_location` will be loaded.
 
 
 ### Cloud encryption

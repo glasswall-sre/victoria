@@ -66,13 +66,15 @@ def ensure() -> None:
 class ConfigSchema(Schema):
     """Marshmallow schema for the Config object."""
     logging_config = fields.Dict(required=True)
-    storage_providers = fields.Dict(required=False)
+    storage_providers = fields.Dict(required=False, default={})
     encryption_provider = fields.Nested(
-        encryption.EncryptionProviderConfigSchema, required=False)
+        encryption.EncryptionProviderConfigSchema,
+        required=False,
+        allow_none=True)
     plugins_config_location = fields.Mapping(keys=fields.Str(),
                                              values=fields.Str(),
                                              default={})
-    plugins_config = fields.Dict(required=False)
+    plugins_config = fields.Dict(required=False, default={})
 
     @post_load
     def make_config_obj(self, data, **kwargs):
@@ -97,13 +99,13 @@ class Config:
         self,
         logging_config: dict,
         plugins_config: dict = None,
-        plugins_config_location: Mapping[str, str] = {},
+        plugins_config_location: Mapping[str, str] = None,
         storage_providers: dict = None,
         encryption_provider: encryption.EncryptionProviderConfig = None):
         self.logging_config = logging_config
         logging.config.dictConfig(logging_config)
         self.plugins_config = plugins_config
-        self.plugins_config_location = plugins_config_location
+        self.plugins_config_location = {} if plugins_config_location is None else plugins_config_location
         self.storage_providers = storage_providers
         self.encryption_provider = encryption_provider
 
@@ -132,7 +134,10 @@ class Config:
         try:
             return storage.make_provider(provider,
                                          **self.storage_providers[provider])
-        except (ValueError, TypeError) as err:
+        except KeyError as err:
+            logging.error(f"unknown storage provider type '{provider}'")
+            raise ValueError(f"unknown storage provider type '{provider}'")
+        except (ValueError, TypeError, KeyError) as err:
             logging.error(err)
             raise
 

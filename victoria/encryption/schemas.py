@@ -57,7 +57,7 @@ class EncryptionProviderConfigSchema(Schema):
         config (Mapping[str, str]): Params to pass to the constructor of the
             encryption provider implementation.
     """
-    provider = fields.Str()
+    provider = fields.Str(required=True)
     config = fields.Mapping(keys=fields.Str(), values=fields.Str(), missing={})
 
     @post_load
