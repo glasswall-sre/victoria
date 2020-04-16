@@ -32,6 +32,7 @@ def make_provider(provider_type: str, **kwargs) -> provider.EncryptionProvider:
 
     Raises:
         ValueError: If provider_type was invalid (i.e. not in PROVIDERS_MAP).
+        TypeError: If the wrong arguments were given in kwargs.
     """
     try:
         return PROVIDERS_MAP[provider_type](**kwargs)

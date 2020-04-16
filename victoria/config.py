@@ -125,13 +125,16 @@ class Config:
 
         Returns:
             StorageProvider: The storage provider.
+
+        Raises:
+            ValueError: if the provider type was invalid.
         """
-        if provider not in self.storage_providers:
-            logging.error(
-                f"no configuration for storage provider '{provider}'")
-            raise SystemExit(1)
-        return storage.make_provider(provider,
-                                     **self.storage_providers[provider])
+        try:
+            return storage.make_provider(provider,
+                                         **self.storage_providers[provider])
+        except (ValueError, TypeError) as err:
+            logging.error(err)
+            raise
 
     def get_encryption(self) -> encryption.EncryptionProvider:
         """Get the encryption provider.
@@ -139,14 +142,12 @@ class Config:
         Returns:
             EncryptionProvider: The encryption provider.
         """
-        if self.encryption_provider.provider not in encryption.PROVIDERS_MAP.keys(
-        ):
-            logging.error(
-                f"encryption provider '{self.encryption_provider.provider}' not valid"
-            )
-            raise SystemExit(1)
-        return encryption.make_provider(self.encryption_provider.provider,
-                                        **self.encryption_provider.config)
+        try:
+            return encryption.make_provider(self.encryption_provider.provider,
+                                            **self.encryption_provider.config)
+        except (ValueError, TypeError) as err:
+            logging.error(err)
+            raise
 
 
 pass_config = click.make_pass_decorator(Config)

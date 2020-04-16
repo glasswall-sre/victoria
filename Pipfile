@@ -12,6 +12,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-azurepipelines = "*"
 pyfakefs = "*"
+munch = "*"
 
 [packages]
 click = "*"
