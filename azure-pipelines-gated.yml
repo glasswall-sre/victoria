@@ -9,3 +9,4 @@ jobs:
   - template: Python/template-gated.yml@templates
     parameters:
       PackageName: victoria
+      SonarExclusions: example_plugins/**

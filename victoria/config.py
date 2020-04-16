@@ -137,7 +137,7 @@ class Config:
         except KeyError as err:
             logging.error(f"unknown storage provider type '{provider}'")
             raise ValueError(f"unknown storage provider type '{provider}'")
-        except (ValueError, TypeError, KeyError) as err:
+        except (ValueError, TypeError) as err:
             logging.error(err)
             raise
 
