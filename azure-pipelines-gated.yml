@@ -8,12 +8,6 @@ resources:
     - repository: this
       type: git
       name: Glasswall.SRE.Victoria
-      trigger:
-        branches:
-          - master
-      pr:
-        branches:
-          - master
 jobs:
   - template: Python/template-gated.yml@templates
     parameters:

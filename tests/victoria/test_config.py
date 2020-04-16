@@ -1,8 +1,11 @@
 import builtins
 from contextlib import nullcontext as does_not_raise
 import io
+from os import path
+import pkg_resources
 
 from marshmallow import Schema, fields
+from pyfakefs.pytest_plugin import fs
 import pytest
 
 import victoria.config
@@ -137,3 +140,5 @@ def test_load_plugin_config(plugin, cfg, expected, raises):
     with raises:
         result = victoria.config.load_plugin_config(plugin, cfg)
         assert result == expected
+
+

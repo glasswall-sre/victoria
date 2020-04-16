@@ -11,6 +11,7 @@ pipenv-setup = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-azurepipelines = "*"
+pyfakefs = "*"
 
 [packages]
 click = "*"
