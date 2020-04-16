@@ -17,10 +17,12 @@ class EncryptionEnvelopeSchema(Schema):
         data (str): The base64-encoded encrypted data.
         key (str): The base64-encoded encrypted data encryption key.
         iv (str): The base64-encoded nonce.
+        version (str): The version of the key encryption key used.
     """
     data = fields.Str()
     key = fields.Str()
     iv = fields.Str()
+    version = fields.Str()
 
     @post_load
     def make_encryption_envelope(self, data, **kwargs):
@@ -34,14 +36,16 @@ class EncryptionEnvelope:
         data (str): The base64-encoded encrypted data.
         key (str): The base64-encoded encrypted data encryption key.
         iv (str): The base64-encoded nonce.
+        version (str): The version of the key encryption key used.
 
     See:
         https://cloud.google.com/kms/docs/envelope-encryption
     """
-    def __init__(self, data: str, key: str, iv: str) -> None:
+    def __init__(self, data: str, key: str, iv: str, version: str) -> None:
         self.data = data
         self.key = key
         self.iv = iv
+        self.version = version
 
 
 class EncryptionProviderConfigSchema(Schema):

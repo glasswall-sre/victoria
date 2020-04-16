@@ -7,7 +7,7 @@ Author:
 """
 from abc import ABC, abstractmethod
 import os
-from typing import Tuple
+from typing import Tuple, Optional, Union
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
@@ -32,7 +32,7 @@ class EncryptionProvider(ABC):
 
     def encrypt_str(self,
                     data: str,
-                    encoding: str = "utf-8") -> EncryptionEnvelope:
+                    encoding: Optional[str] = "utf-8") -> EncryptionEnvelope:
         """Encrypt a string to an EncryptionEnvelope.
 
         Args:
@@ -45,21 +45,28 @@ class EncryptionProvider(ABC):
         return self.encrypt(data.encode(encoding))
 
     @abstractmethod
-    def decrypt(self, envelope: EncryptionEnvelope) -> bytes:
+    def decrypt(self, envelope: EncryptionEnvelope) -> Union[bytes, None]:
         """Decrypt an EncryptionEnvelope to bytes.
+
+        Please note that this can return None if the key encryption key
+        is out of date.
 
         Args:
             envelope (EncryptionEnvelope): The envelope to decrypt.
 
         Returns:
             bytes: The decrypted data.
+            None: If the key encryption key was out of date.
         """
         raise NotImplementedError()
 
     def decrypt_str(self,
                     envelope: EncryptionEnvelope,
-                    encoding: str = "utf-8") -> str:
+                    encoding: Optional[str] = "utf-8") -> Union[str, None]:
         """Decrypt an EncryptionEnvelope to a string.
+
+        Please note that this can return None if the key encryption key
+        is out of date.
 
         Args:
             envelope (EncryptionEnvelope): The envelope to decrypt.
@@ -67,8 +74,33 @@ class EncryptionProvider(ABC):
 
         Returns:
             str: The decrypted data.
+            None: If the key encryption key was out of date.
         """
-        return self.decrypt(envelope).decode(encoding)
+        decrypted = self.decrypt(envelope)
+        if decrypted is None:
+            return None
+        return decrypted.decode(encoding)
+
+    @abstractmethod
+    def rotate_key(self,
+                   envelope: EncryptionEnvelope,
+                   version: Optional[str] = None) -> EncryptionEnvelope:
+        """Rotate an EncryptionEnvelope encrypted with an old version of the
+        key encryption key to a different version.
+
+        Basically just decrypts it with the old key and reencrypts it with the 
+        new key.
+
+        Args:
+            envelope (EncryptionEnvelope): The envelope to rotate.
+            version (str, optional): The specific KEK version to use. Defaults
+                to the latest if not given. You probably don't want to specify 
+                this, as the latest will be the best version.
+        
+        Returns:
+            EncryptionEnvelope: The newly rotated encrypted data.
+        """
+        raise NotImplementedError()
 
     def _data_encrypt(self, data: bytes) -> Tuple[bytes, bytes, bytes]:
         """Asymmetrically encrypt a piece of data, returning a tuple containing

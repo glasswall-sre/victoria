@@ -8,6 +8,8 @@ Author:
 import base64
 import logging
 import os
+from os import path
+from typing import Optional, Union
 
 from azure.identity import ClientSecretCredential
 from azure.keyvault.keys import KeyClient
@@ -56,10 +58,13 @@ class AzureEncryptionProvider(EncryptionProvider):
                 "in config or in environment variables as in "
                 "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity#service-principal-with-secret"
             )
-        cred = ClientSecretCredential(tenant_id, client_id, client_secret)
-        self.key_client = KeyClient(vault_url, credential=cred, logger=None)
-        self.crypto_client = CryptographyClient(self.key_client.get_key(key),
-                                                cred)
+        self.cred = ClientSecretCredential(tenant_id, client_id, client_secret)
+        self.key_client = KeyClient(vault_url,
+                                    credential=self.cred,
+                                    logger=None)
+        self.key_encryption_key = self.key_client.get_key(key)
+        self.crypto_client = CryptographyClient(self.key_encryption_key,
+                                                self.cred)
 
     # overrides EncryptionProvider.encrypt()
     def encrypt(self, data: bytes) -> EncryptionEnvelope:
@@ -78,10 +83,17 @@ class AzureEncryptionProvider(EncryptionProvider):
         b64_nonce = base64.b64encode(nonce).decode("utf-8")
 
         return EncryptionEnvelope(b64_ciphertext, b64_encrypted_data_key,
-                                  b64_nonce)
+                                  b64_nonce,
+                                  self.key_encryption_key.properties.version)
 
     # overrides EncryptionProvider.decrypt()
-    def decrypt(self, envelope: EncryptionEnvelope) -> bytes:
+    def decrypt(self, envelope: EncryptionEnvelope) -> Union[bytes, None]:
+        if envelope.version != self.key_encryption_key.properties.version:
+            logging.error(
+                f"Encryption key version {envelope.version} is out of "
+                "date, please re-encrypt with 'victoria encrypt rotate'")
+            return None
+
         # decode from base64
         ciphertext = base64.b64decode(envelope.data)
         encrypted_data_key = base64.b64decode(envelope.key)
@@ -94,3 +106,27 @@ class AzureEncryptionProvider(EncryptionProvider):
 
         # decrypt the data locally using the nonce and decrypted data key
         return self._data_decrypt(ciphertext, data_key, nonce)
+
+    # overrides EncryptionProvider.rotate_key()
+    def rotate_key(self,
+                   envelope: EncryptionEnvelope,
+                   version: Optional[str] = None) -> EncryptionEnvelope:
+        old_key = self.key_client.get_key(self.key_encryption_key.name,
+                                          version=envelope.version)
+        old_crypto_client = CryptographyClient(old_key, self.cred)
+
+        # decode from base64
+        ciphertext = base64.b64decode(envelope.data)
+        encrypted_data_key = base64.b64decode(envelope.key)
+        nonce = base64.b64decode(envelope.iv)
+
+        # decrypt the data key
+        result = old_crypto_client.decrypt(ENCRYPTION_ALGORITHM,
+                                           encrypted_data_key)
+        data_key = result.plaintext
+
+        # decrypt the data locally using the nonce and decrypted data key
+        decrypted_data = self._data_decrypt(ciphertext, data_key, nonce)
+
+        # now re-encrypt with the latest key encryption key
+        return self.encrypt(decrypted_data)

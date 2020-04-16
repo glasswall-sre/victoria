@@ -125,12 +125,11 @@ class Config:
 
         Returns:
             StorageProvider: The storage provider.
-            None: If the provider type was invalid.
         """
         if provider not in self.storage_providers:
             logging.error(
                 f"no configuration for storage provider '{provider}'")
-            return None
+            raise SystemExit(1)
         return storage.make_provider(provider,
                                      **self.storage_providers[provider])
 
@@ -139,14 +138,13 @@ class Config:
 
         Returns:
             EncryptionProvider: The encryption provider.
-            None: If the provider type (in the config) was invalid.
         """
         if self.encryption_provider.provider not in encryption.PROVIDERS_MAP.keys(
         ):
             logging.error(
                 f"encryption provider '{self.encryption_provider.provider}' not valid"
             )
-            return None
+            raise SystemExit(1)
         return encryption.make_provider(self.encryption_provider.provider,
                                         **self.encryption_provider.config)
 

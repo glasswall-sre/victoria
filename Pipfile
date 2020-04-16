@@ -25,6 +25,7 @@ azure-storage = "*"
 cryptography = "*"
 azure-keyvault = "*"
 azure-identity = "*"
+dpath = "*"
 
 [requires]
 python_version = "3.7"
