@@ -1,6 +1,6 @@
 """setup.py
 
-Used for installing victoria_config via pip.
+Used for installing victoria_store via pip.
 
 Author:
     Sam Gibson <sgibson@glasswallsolutions.com>
@@ -13,9 +13,9 @@ setup(
     install_requires=[
         "click==7.0", "pyyaml==5.1.2", "marshmallow==3.2.1", "victoria"
     ],
-    name="victoria_config",
+    name="victoria_store",
     version="0.1",
-    description="Victoria plugin to print config",
+    description="Victoria plugin to store things in cloud storage",
     author="Sam Gibson",
     author_email="sgibson@glasswallsolutions.com",
     packages=find_packages(),

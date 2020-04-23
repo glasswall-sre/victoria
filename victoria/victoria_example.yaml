@@ -1,21 +1,42 @@
 # the python logging config
 logging_config:
   version: 1
+  disable_existing_loggers: True
   formatters:
     default:
       format: "%(message)s"
   handlers:
     console:
       class: logging.StreamHandler
-      level: DEBUG
+      level: INFO
       formatter: default
       stream: ext://sys.stdout
   root:
-    level: DEBUG
+    level: INFO
     handlers: [console]
+  loggers:
+    # otherwise the python azure API will spew out HTTP logging at us
+    azure.core.pipeline.policies.http_logging_policy:
+      level: CRITICAL
 
-# config for any plugins loaded, objects should have the same name as
+# the encryption backend to use - to configure this, see the README
+encryption_provider: null
+
+# the storage backends to use - to configure this, see the README
+storage_providers: null
+
+# inline config for any plugins loaded, objects should have the same name as
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
+# note: if you don't want to put this inline, use 'plugins_config_location'
+# as below, you don't have to specify it all here
+# note: plugins_config_location takes precedence over this
 plugins_config:
   config:
     indent: 2
+
+# here you can specify separate file locations for plugin config files
+# these use the storage_providers defined above. Like plugins_config, the
+# keys of this object need to have the same name as the plugin.
+# please see the README for information on how to configure storage_providers
+# note: this takes precedence over plugins_config
+plugins_config_location: {}

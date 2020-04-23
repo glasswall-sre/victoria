@@ -32,7 +32,5 @@ def path(cfg: schema.ConfigConfig):
 @click.pass_obj
 def view(cfg: schema.ConfigConfig):
     """Print the current loaded config and exit."""
-    # as the plugin config is the current context, the app config will be in
-    # the parent context
-    main_config = click.get_current_context().parent.parent.obj
-    print(yaml.safe_dump(main_config.__dict__, indent=cfg.indent))
+    core_config = cfg.victoria_config
+    print(yaml.safe_dump(core_config.__dict__, indent=cfg.indent))

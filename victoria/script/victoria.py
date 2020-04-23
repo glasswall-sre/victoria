@@ -42,7 +42,7 @@ subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
 """
 
-VERSION_NUMBER = "0.1"
+VERSION_NUMBER = "#{TAG_NAME}#"
 """The version number of the application, to print when calling with --version."""
 
 

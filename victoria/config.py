@@ -5,19 +5,21 @@ Contains various classes and methods for loading the config of Victoria.
 Author:
     Sam Gibson <sgibson@glasswallsolutions.com>
 """
-
+import io
 import logging.config
 import os
 from os import path
-from typing import List
+from typing import List, Mapping
 
 import appdirs
 import click
-from marshmallow import Schema, fields, post_load, ValidationError
+from marshmallow import Schema, fields, post_load, ValidationError, EXCLUDE
 import pkg_resources
 import yaml
 
 from .plugin import Plugin
+from . import storage
+from . import encryption
 
 APP_NAME = "victoria"
 """What the app is called."""
@@ -63,15 +65,23 @@ def ensure() -> None:
 
 class ConfigSchema(Schema):
     """Marshmallow schema for the Config object."""
-    logging_config = fields.Dict()
-    plugins_config = fields.Dict(required=False)
+    logging_config = fields.Dict(required=True)
+    storage_providers = fields.Dict(required=False, default={})
+    encryption_provider = fields.Nested(
+        encryption.EncryptionProviderConfigSchema,
+        required=False,
+        allow_none=True)
+    plugins_config_location = fields.Mapping(keys=fields.Str(),
+                                             values=fields.Str(),
+                                             default={})
+    plugins_config = fields.Dict(required=False, default={})
 
     @post_load
     def make_config_obj(self, data, **kwargs):
         return Config(**data)
 
 
-CONFIG_SCHEMA = ConfigSchema()
+CONFIG_SCHEMA = ConfigSchema(unknown=EXCLUDE)
 """Instance of ConfigSchema used for validating loaded configs."""
 
 
@@ -81,17 +91,68 @@ class Config:
     Attributes:
         logging_config (dict): The config to use for logging.
         plugins_config (dict): The config to use for plugins.
+        plugins_config_location (Mapping[str, str]): Config file location overrides for plugins.
+        storage_providers (dict): Data used for connecting to storage.
+        encryption_provider (EncryptionProviderConfig): Config for the encryption provider.
     """
-    def __init__(self, logging_config: dict, plugins_config: dict = None):
+    def __init__(
+        self,
+        logging_config: dict,
+        plugins_config: dict = None,
+        plugins_config_location: Mapping[str, str] = None,
+        storage_providers: dict = None,
+        encryption_provider: encryption.EncryptionProviderConfig = None):
         self.logging_config = logging_config
         logging.config.dictConfig(logging_config)
         self.plugins_config = plugins_config
+        self.plugins_config_location = {} if plugins_config_location is None else plugins_config_location
+        self.storage_providers = storage_providers
+        self.encryption_provider = encryption_provider
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.logging_config == other.logging_config \
-                and self.plugins_config == other.plugins_config
+                and self.plugins_config == other.plugins_config \
+                and self.plugins_config_location == other.plugins_config_location \
+                and self.storage_providers == other.storage_providers \
+                and self.encryption_provider == other.encryption_provider
         return False
+
+    def get_storage(self, provider: str) -> storage.StorageProvider:
+        """Get the storage provider of a given type.
+
+        Args:
+            provider (str): The provider type to get. Any key of 'storage_providers'
+                mapping in Victoria core config.
+
+        Returns:
+            StorageProvider: The storage provider.
+
+        Raises:
+            ValueError: if the provider type was invalid.
+        """
+        try:
+            return storage.make_provider(provider,
+                                         **self.storage_providers[provider])
+        except KeyError as err:
+            logging.error(f"unknown storage provider type '{provider}'")
+            raise ValueError(f"unknown storage provider type '{provider}'")
+        except (ValueError, TypeError) as err:
+            logging.error(err)
+            raise
+
+    def get_encryption(self) -> encryption.EncryptionProvider:
+        """Get the encryption provider.
+
+        Returns:
+            EncryptionProvider: The encryption provider.
+        """
+        try:
+            return encryption.make_provider(self.encryption_provider.provider,
+                                            **self.encryption_provider.config)
+        except (ValueError, TypeError) as err:
+            logging.error(err)
+            raise
 
 
 pass_config = click.make_pass_decorator(Config)
@@ -146,28 +207,69 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
         raise ValueError(f"Can't load plugin config: plugin '{plugin.name}' "
                          "did not have config schema")
 
-    # check to see if we have the plugins_config section in the main config
-    if not cfg.plugins_config:
-        logging.error("Can't load plugin config: config did not "
-                      "have 'plugins_config' section")
-        return None
+    raw_config = {}
 
-    # check to see if that section has a section for the plugin
-    if not cfg.plugins_config.get(plugin.name):
+    # check to see if there's a location override for the config
+    if plugin.name in cfg.plugins_config_location:
+        loc = cfg.plugins_config_location[plugin.name]
+        raw_config = _handle_config_file_override(loc, plugin, cfg)
+    elif cfg.plugins_config is not None and plugin.name in cfg.plugins_config:
+        # otherwise use the one in the main config
+        if not cfg.plugins_config:
+            logging.error("Can't load plugin config: config did not "
+                          "have 'plugins_config' section")
+            return None
+        raw_config = cfg.plugins_config[plugin.name]
+    else:
         logging.error(
             "Can't load plugin config: "
-            f"config did not have section for plugin '{plugin.name}'")
+            f"config did not have section for plugin '{plugin.name}' "
+            "and no location was given in 'plugins_config_location'")
         return None
 
     # try validating the contents of the plugin section with the schema
     try:
-        loaded_config = plugin.config_schema.load(
-            cfg.plugins_config[plugin.name])
+        loaded_config = plugin.config_schema.load(raw_config)
+        loaded_config = _inject_core_config(cfg, loaded_config)
         return loaded_config
     except ValidationError as err:
         # if the loaded YAML wasn't a valid config
         _print_validation_err(err, f"plugins_config.{plugin.name}")
         return None
+
+
+def _handle_config_file_override(override_loc: str, plugin: Plugin,
+                                 cfg: Config) -> object:
+    """Handle a plugin config override from the 'plugins_config_location'
+    section of the Victoria core config.
+
+    Attempts to get config from a storage provider.
+
+    Args:
+        override_loc (str): The location of the file. {provider}://{file_path}
+        plugin (Plugin): The plugin we're getting config for.
+        cfg (Config): Core Victoria config.
+
+    Returns:
+        object: The config loaded from the storage provider.
+    """
+    provider_type, path = tuple(override_loc.split("://"))
+    provider = cfg.get_storage(provider_type)
+    config_file = io.BytesIO()
+    provider.retrieve(path, config_file)
+    config_str = config_file.getvalue().decode("utf-8")
+    return yaml.safe_load(config_str)
+
+
+def _inject_core_config(core_cfg: Config, loaded_config: object) -> object:
+    """Inject the core config into a loaded plugin config object."""
+    if isinstance(loaded_config, dict):
+        # if it's a dict, add it as a key
+        loaded_config["victoria_config"] = core_cfg
+    else:
+        # otherwise assume it's an object
+        loaded_config.victoria_config = core_cfg
+    return loaded_config
 
 
 def load(config_path: str) -> Config:

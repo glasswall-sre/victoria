@@ -5,16 +5,8 @@ resources:
     - repository: templates
       type: git
       name: Glasswall.Pipelines.Templates
-    - repository: this
-      type: git
-      name: Glasswall.SRE.Victoria
-      trigger:
-        branches:
-          - master
-      pr:
-        branches:
-          - master
 jobs:
   - template: Python/template-gated.yml@templates
     parameters:
       PackageName: victoria
+      SonarExclusions: example_plugins/**

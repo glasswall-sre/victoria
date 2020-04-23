@@ -13,22 +13,26 @@ def repo_file_as_string(file_path: str) -> str:
 
 setup(dependency_links=[],
       install_requires=[
-          "appdirs==1.4.3",
-          "click==7.0",
-          "marshmallow==3.2.1",
-          "pyyaml==5.1.2",
+          "appdirs>=1.4.3", "click>=7.0", "marshmallow>=3.2.1",
+          "pyyaml>=5.1.2", "azure-storage>=0.36.0", "cryptography>=2.8",
+          "azure-keyvault>=4.0.0", "azure-identity>=1.3.0", "dpath>=2.0.1"
       ],
       name="victoria",
       version="#{TAG_NAME}#",
-      description="SRE automation toolbelt",
+      description="Automation toolbelt",
       long_description=repo_file_as_string("README.md"),
       long_description_content_type="text/markdown",
       author="Sam Gibson",
       author_email="sgibson@glasswallsolutions.com",
       packages=find_packages(".") +
-      find_packages("example_plugins/victoria_config"),
+      find_packages("example_plugins/victoria_config") +
+      find_packages("example_plugins/victoria_store") +
+      find_packages("example_plugins/victoria_encrypt"),
       package_dir={
-          "victoria_config": "example_plugins/victoria_config/victoria_config"
+          "victoria_config": "example_plugins/victoria_config/victoria_config",
+          "victoria_store": "example_plugins/victoria_store/victoria_store",
+          "victoria_encrypt":
+          "example_plugins/victoria_encrypt/victoria_encrypt"
       },
       entry_points="""
         [console_scripts]
