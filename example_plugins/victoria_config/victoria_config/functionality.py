@@ -33,4 +33,4 @@ def path(cfg: schema.ConfigConfig):
 def view(cfg: schema.ConfigConfig):
     """Print the current loaded config and exit."""
     core_config = cfg.victoria_config
-    print(yaml.safe_dump(core_config.__dict__, indent=cfg.indent))
+    print(yaml.safe_dump(core_config.as_dict(), indent=cfg.indent))

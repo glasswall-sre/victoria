@@ -73,6 +73,10 @@ class EncryptionProviderConfig:
         config (Mapping[str, str]): Params to pass to the constructor of the
             encryption provider implementation.
     """
-    def __init__(self, provider: str, config: Mapping[str, str]) -> None:
+    def __init__(self, provider: str, config: dict) -> None:
         self.provider = provider
         self.config = config
+
+    @classmethod
+    def to_yaml(cls, dumper, data):
+        return vars(data)

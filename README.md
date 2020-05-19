@@ -152,9 +152,8 @@ logging_config:
 # storage is supported
 storage_providers:
   azure:
-    account: storageaccountname
-    credential: your-access-key-here
-    container: victoria
+    connection_string: your-connection-string
+    container: victoriacontainer
   local:
     container: C:/victoria_storage
 
@@ -335,8 +334,7 @@ This storage account can be used by putting this in your Victoria config:
 ```yaml
 storage_providers:
   azure:
-    account: your-storage-account-name-here
-    credential: your-access-key-here
+    connection_string: your-connection-string-here
     container: victoria
 ```
 
@@ -344,10 +342,10 @@ Make sure you put your storage account name in the `account` field.
 
 In order to get the access key for the container, you can run (with Azure CLI):
 ```bash
-$ az storage account keys list \
-    --account-name stvictoria \
+$ az storage account show-connection-string \
+    --name stvictoria \
     --resource-group rg-victoria \
-    --query "[0].value" \
+    --query "connectionString" \
     -o tsv
 ```
 

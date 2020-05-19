@@ -15,8 +15,7 @@ from test_storage_local import fs
         "container": ""
     }, local_provider.LocalStorageProvider, does_not_raise()),
      ("azure", {
-         "account": "",
-         "credential": "",
+         "connection_string": "",
          "container": ""
      }, azure_provider.AzureStorageProvider, does_not_raise()),
      ("unknown", {}, None, pytest.raises(ValueError))])

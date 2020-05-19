@@ -44,6 +44,7 @@ VALID_CONFIG = victoria.config.Config(VALID_LOGGING_CONFIG,
 class PluginSchema(Schema):
     test_field = fields.Int()
 
+
 @pytest.fixture
 def config_fixture(mock_storage, mock_encryption, fs):
     config_yml = """logging_config:
@@ -74,8 +75,7 @@ encryption_provider:
     client_secret: sp-client-secret-here
 storage_providers:
   azure:
-    account: storageaccountname
-    credential: your-access-key-here
+    connection_string: conn_str
     container: victoria
 plugins_config:
   config:
@@ -184,13 +184,16 @@ def test_load_plugin_config(plugin, cfg, expected, raises):
         result = victoria.config.load_plugin_config(plugin, cfg)
         assert result == expected
 
+
 def test_get_storage(config_fixture):
     storage = config_fixture.get_storage("azure")
-    assert storage.container == "victoria"
+    assert storage.client is not None
+
 
 def test_get_storage_error(config_fixture):
     with pytest.raises(ValueError):
         config_fixture.get_storage("bad type")
+
 
 def test_get_storage_invalid_config(mock_storage, fs):
     config_yml = """storage_providers:
@@ -206,9 +209,11 @@ plugins_config_location: {}"""
     with pytest.raises(TypeError):
         config.get_storage("azure")
 
+
 def test_get_encryption(config_fixture):
     encryption = config_fixture.get_encryption()
     assert encryption.key_client.vault_url == "https://your-vault.vault.azure.net/"
+
 
 def test_get_encryption_error(mock_encryption, fs):
     config_yml = """storage_providers: {}
@@ -224,6 +229,7 @@ plugins_config_location: {}"""
     with pytest.raises(ValueError):
         config.get_encryption()
 
+
 def test_get_encryption_invalid_config(mock_encryption, fs):
     config_yml = """storage_providers: {}
 logging_config:
@@ -238,6 +244,7 @@ plugins_config_location: {}"""
     config = victoria.config.load("victoria.yaml")
     with pytest.raises(TypeError):
         config.get_encryption()
+
 
 def test_load_plugin_config_storage_provider(fs):
     config_yml = """storage_providers:
@@ -255,6 +262,7 @@ plugins_config_location:
     plugin_def = victoria.plugin.Plugin("config", None, PluginSchema())
     plugin_config = victoria.config.load_plugin_config(plugin_def, config)
     assert plugin_config["test_field"] == 2
+
 
 def test_load_plugin_config_from_both(fs):
     config_yml = """storage_providers:

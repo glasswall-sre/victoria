@@ -1,5 +1,5 @@
 from contextlib import nullcontext as does_not_raise
-from io import StringIO
+from io import IOBase, StringIO, RawIOBase
 
 import pytest
 from munch import munchify
@@ -9,46 +9,58 @@ from victoria.storage import azure_provider
 
 @pytest.fixture
 def mock_azure_classes(monkeypatch):
-    class BlockBlobServiceMock:
-        def __init__(self, **kwargs):
+    class MockStreamDownloader(RawIOBase):
+        def __init__(self, contents):
+            self.stream = StringIO(contents)
+
+        def readall(self):
+            return self.stream.read()
+
+    class BlobClientMock:
+        def __init__(self):
+            self.data = None
+
+        def upload_blob(self, data):
+            if isinstance(data, IOBase):
+                self.data = data.read()
+            else:
+                self.data = data
+
+        def download_blob(self):
+            return MockStreamDownloader(self.data)
+
+    class ContainerClientMock:
+        def __init__(self, *args, **kwargs):
             self.blobs = {}
 
-        def create_blob_from_stream(self, container, key, data):
-            self.blobs[key] = data.read()
-
-        def create_blob_from_text(self, container, key, data):
-            self.blobs[key] = data
-
-        def create_blob_from_bytes(self, container, key, data):
-            self.blobs[key] = data
-
-        def get_blob_to_stream(self, container, key, stream):
-            stream.write(self.blobs[key])
-            return stream
-
-        def list_blobs(self, container):
+        def list_blobs(self):
             for key, _ in self.blobs.items():
                 yield munchify({"name": key})
 
-    monkeypatch.setattr(azure_provider, "BlockBlobService",
-                        BlockBlobServiceMock)
+        @classmethod
+        def from_connection_string(cls, conn_str: str, container: str):
+            return cls()
+
+        def get_blob_client(self, key):
+            return self.blobs.setdefault(key, BlobClientMock())
+
+    monkeypatch.setattr(azure_provider, "ContainerClient", ContainerClientMock)
 
 
 @pytest.mark.parametrize(
     "data,key,expected,raises",
     [("test", "text_blob.txt", "test", does_not_raise()),
      (b"test", "byte_blob.bin", b"test", does_not_raise()),
-     (StringIO("test"), "stream_blob.txt", "test", does_not_raise()),
-     (123, "invalid_blob", None, pytest.raises(TypeError))])
+     (StringIO("test"), "stream_blob.txt", "test", does_not_raise())])
 def test_store(mock_azure_classes, data, key, expected, raises):
     with raises:
-        provider = azure_provider.AzureStorageProvider("", "", "container")
+        provider = azure_provider.AzureStorageProvider("", "container")
         provider.store(data, key)
-        assert provider.client.blobs[key] == expected
+        assert provider.client.blobs[key].data == expected
 
 
 def test_retrieve(mock_azure_classes):
-    provider = azure_provider.AzureStorageProvider("", "", "container")
+    provider = azure_provider.AzureStorageProvider("", "container")
     provider.store("test", "test.file")
     stream = StringIO()
     provider.retrieve("test.file", stream)
@@ -56,14 +68,8 @@ def test_retrieve(mock_azure_classes):
 
 
 def test_ls(mock_azure_classes):
-    provider = azure_provider.AzureStorageProvider("", "", "container")
+    provider = azure_provider.AzureStorageProvider("", "container")
     provider.store("test", "test.file")
     provider.store("test", "test2.file")
     ls = list(provider.ls())
     assert ls == ["test.file", "test2.file"]
-
-
-def test_ensure_container(mock_azure_classes):
-    provider = azure_provider.AzureStorageProvider("", "", "")
-    with pytest.raises(ValueError):
-        provider._ensure_container()

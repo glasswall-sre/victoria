@@ -10,7 +10,7 @@ from io import IOBase
 import logging
 from typing import Generator, ContextManager, Union
 
-from azure.storage.blob.blockblobservice import BlockBlobService
+from azure.storage.blob import ContainerClient
 
 from . import provider
 
@@ -19,40 +19,24 @@ class AzureStorageProvider(provider.StorageProvider):
     """Storage provider for Azure Blob Storage.
 
     Attributes:
-        client (BlockBlobService): The Azure API blob client.
-        container (str): The container we are currently using.
+        client (ContainerClient): The Azure API blob client.
 
     Args:
-        account (str): The storage account name to connect to.
-        credential (str): The connection string of the storage account.
-        container (str): The container within the account to focus on.
+        connection_string (str): The connection string to the Azure Storage account.
     """
-    def __init__(self, account: str, credential: str, container: str = None):
-        self.client = BlockBlobService(account_name=account,
-                                       account_key=credential)
-        self.container = container
+    def __init__(self, connection_string: str, container: str = None):
+        self.client = ContainerClient.from_connection_string(
+            connection_string, container)
 
     def store(self, data: Union[IOBase, str, bytes], key: str) -> None:
-        self._ensure_container()
-        if issubclass(type(data), IOBase):
-            self.client.create_blob_from_stream(self.container, key, data)
-        elif type(data) == str:
-            self.client.create_blob_from_text(self.container, key, data)
-        elif type(data) == bytes:
-            self.client.create_blob_from_bytes(self.container, key, data)
-        else:
-            raise TypeError(f"invalid data type '{type(data)}'")
+        blob_client = self.client.get_blob_client(key)
+        blob_client.upload_blob(data)
 
     def retrieve(self, key: str, stream: IOBase):
-        self._ensure_container()
-        self.client.get_blob_to_stream(self.container, key, stream)
+        blob_client = self.client.get_blob_client(key)
+        download_stream = blob_client.download_blob()
+        stream.write(download_stream.readall())
 
     def ls(self) -> Generator[str, None, None]:
-        self._ensure_container()
-        for blob in self.client.list_blobs(self.container):
+        for blob in self.client.list_blobs():
             yield blob.name
-
-    def _ensure_container(self):
-        """Ensure that we are actually connected to a container."""
-        if not self.container:
-            raise ValueError("storage container has not been set")

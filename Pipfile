@@ -23,7 +23,7 @@ victoria_config = {editable = true,path = "example_plugins/victoria_config"}
 victoria_store = {editable = true,path = "example_plugins/victoria_store"}
 victoria_encrypt = {editable = true,path = "example_plugins/victoria_encrypt"}
 appdirs = "*"
-azure-storage = "*"
+azure-storage-blob = "*"
 cryptography = "*"
 azure-keyvault = "*"
 azure-identity = "*"

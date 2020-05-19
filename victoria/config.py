@@ -118,6 +118,13 @@ class Config:
                 and self.encryption_provider == other.encryption_provider
         return False
 
+    def as_dict(self) -> dict:
+        d = vars(self)
+        for k, v in d.items():
+            if hasattr(v, "__dict__"):
+                d[k] = vars(v)
+        return d
+
     def get_storage(self, provider: str) -> storage.StorageProvider:
         """Get the storage provider of a given type.
 
