@@ -2,7 +2,13 @@
 
 # V.I.C.T.O.R.I.A.
 
+![Victoria demo](img/victoria.gif)
+
 **V**ery **I**mportant **C**ommands for **T**oil **O**ptimization: **R**educing **I**nessential **A**ctivities.
+
+Victoria is the SRE toolbelt—a single command with multiple pluggable
+subcommands for automating any number of 'toil' tasks that inhibit SRE
+productivity.
 
 <img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=alert_status">
 <img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=sqale_rating">
@@ -12,12 +18,6 @@
 <img align="center" src="https://img.shields.io/github/workflow/status/glasswall-sre/victoria/CD">
 <img align="center" src="https://img.shields.io/pypi/pyversions/victoria">
 <img align="center" src="https://img.shields.io/pypi/v/victoria">
-
-Victoria is the SRE toolbelt—a single command with multiple pluggable
-subcommands for automating any number of 'toil' tasks that inhibit SRE
-productivity.
-
-![Victoria demo](img/victoria.gif)
 </div>
 
 ## Table of Contents
