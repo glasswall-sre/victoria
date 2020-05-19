@@ -1,9 +1,43 @@
-# V.I.C.T.O.R.I.A.
-Very Important Commands for Toil Optimization: Reducing Inessential Activities.
+<div align="center" style="text-align:center">
 
-Victoria is the SRE toolbelt -- a single command with multiple pluggable
+# V.I.C.T.O.R.I.A.
+**V**ery **I**mportant **C**ommands for **T**oil **O**ptimization: **R**educing **I**nessential **A**ctivities.
+
+Victoria is the SRE toolbelt—a single command with multiple pluggable
 subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
+
+![Victoria demo](img/victoria.gif)
+</div>
+
+## Table of Contents
+- [V.I.C.T.O.R.I.A.](#victoria)
+  - [Table of Contents](#table-of-contents)
+  - [User guide](#user-guide)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Stock plugins](#stock-plugins)
+    - [Configuration](#configuration)
+      - [Plugin configuration](#plugin-configuration)
+      - [Example](#example)
+    - [Cloud storage](#cloud-storage)
+    - [Cloud encryption](#cloud-encryption)
+      - [KEK rotation](#kek-rotation)
+    - [Cloud backends](#cloud-backends)
+      - [Azure](#azure)
+        - [Storage](#storage)
+        - [Encryption](#encryption)
+  - [Development guide](#development-guide)
+    - [Prerequisites](#prerequisites-1)
+    - [Quick start](#quick-start)
+  - [Making a plugin](#making-a-plugin)
+    - [General](#general)
+    - [`setup.py`](#setuppy)
+    - [Package structure](#package-structure)
+    - [`__init__.py`](#initpy)
+    - [Specifying plugin config](#specifying-plugin-config)
+      - [Accessing core Victoria config from a plugin's config](#accessing-core-victoria-config-from-a-plugins-config)
+    - [Storing secrets in config files](#storing-secrets-in-config-files)
 
 ## User guide
 
