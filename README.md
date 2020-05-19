@@ -2,7 +2,7 @@
 
 # V.I.C.T.O.R.I.A.
 
-![Victoria demo](img/victoria.gif)
+![Victoria demo](https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/victoria.gif)
 
 **V**ery **I**mportant **C**ommands for **T**oil **O**ptimization: **R**educing **I**nessential **A**ctivities.
 
