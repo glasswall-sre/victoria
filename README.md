@@ -36,6 +36,9 @@ productivity.
 pip install -U victoria
 ```
 
+## Documentation
+The documentation [can be found here](https://sre.glasswallsolutions.com/victoria/index.html).
+
 ## Development guide
 
 ### Prerequisites
