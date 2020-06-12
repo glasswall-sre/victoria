@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>victoria.encryption.azure_provider &mdash; Victoria  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Victoria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer-guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugin-creation.html">Plugin Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Victoria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.encryption.azure_provider</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/autoapi/victoria/encryption/azure_provider/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-victoria.encryption.azure_provider">
+<span id="victoria-encryption-azure-provider"></span><h1><a class="reference internal" href="#module-victoria.encryption.azure_provider" title="victoria.encryption.azure_provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.encryption.azure_provider</span></code></a><a class="headerlink" href="#module-victoria.encryption.azure_provider" title="Permalink to this headline">¶</a></h1>
+<p><p>victoria.encryption.azure_provider</p>
+<p>Implementation of an EncryptionProvider for Azure Key Vault.</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>Sam Gibson &lt;<a class="reference external" href="mailto:sgibson&#37;&#52;&#48;glasswallsolutions&#46;com">sgibson<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
+</dd>
+</dl>
+</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.azure_provider.AzureEncryptionProvider" title="victoria.encryption.azure_provider.AzureEncryptionProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AzureEncryptionProvider</span></code></a>(vault_url: str, key: str, **kwargs)</p></td>
+<td><p>An EncryptionProvider implementation for Azure Key Vault.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt id="victoria.encryption.azure_provider.ENCRYPTION_ALGORITHM">
+<code class="sig-prename descclassname">victoria.encryption.azure_provider.</code><code class="sig-name descname">ENCRYPTION_ALGORITHM</code><a class="headerlink" href="#victoria.encryption.azure_provider.ENCRYPTION_ALGORITHM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="victoria.encryption.azure_provider.TENANT_ID_ENVVAR">
+<code class="sig-prename descclassname">victoria.encryption.azure_provider.</code><code class="sig-name descname">TENANT_ID_ENVVAR</code><em class="property"> = AZURE_TENANT_ID</em><a class="headerlink" href="#victoria.encryption.azure_provider.TENANT_ID_ENVVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="victoria.encryption.azure_provider.CLIENT_ID_ENVVAR">
+<code class="sig-prename descclassname">victoria.encryption.azure_provider.</code><code class="sig-name descname">CLIENT_ID_ENVVAR</code><em class="property"> = AZURE_CLIENT_ID</em><a class="headerlink" href="#victoria.encryption.azure_provider.CLIENT_ID_ENVVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="victoria.encryption.azure_provider.CLIENT_SECRET_ENVVAR">
+<code class="sig-prename descclassname">victoria.encryption.azure_provider.</code><code class="sig-name descname">CLIENT_SECRET_ENVVAR</code><em class="property"> = AZURE_CLIENT_SECRET</em><a class="headerlink" href="#victoria.encryption.azure_provider.CLIENT_SECRET_ENVVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider">
+<em class="property">class </em><code class="sig-prename descclassname">victoria.encryption.azure_provider.</code><code class="sig-name descname">AzureEncryptionProvider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vault_url</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../provider/index.html#victoria.encryption.provider.EncryptionProvider" title="victoria.encryption.provider.EncryptionProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider</span></code></a></p>
+<p>An EncryptionProvider implementation for Azure Key Vault.</p>
+<p>To authenticate, please provide Azure AD service principal info as
+‘tenant_id’, ‘client_id’, and ‘client_secret’ kwargs, or as
+AZURE_TENANT_ID, AZURE_CLIENT_ID, and AZURE_CLIENT_SECRET environment
+variables.</p>
+<dl class="py attribute">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.tenant_id">
+<code class="sig-name descname">tenant_id</code><em class="property">: str</em><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.tenant_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The tenant ID of the Azure SP to connect with.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.client_id">
+<code class="sig-name descname">client_id</code><em class="property">: str</em><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.client_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The client ID of the Azure SP to connect with.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.client_secret">
+<code class="sig-name descname">client_secret</code><em class="property">: str</em><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.client_secret" title="Permalink to this definition">¶</a></dt>
+<dd><p>The client secret of the Azure SP to connect with.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.key_client">
+<code class="sig-name descname">key_client</code><em class="property">: KeyClient</em><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.key_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azure Key Vault key client.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.crypto_client">
+<code class="sig-name descname">crypto_client</code><em class="property">: CryptographyClient</em><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.crypto_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azure Key Vault crypto client.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vault_url</strong> (<em>str</em>) – The URL of the key vault to connect to.</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – The name of the key encryption key to use for envelope encryption.</p></li>
+<li><p><strong>**kwargs</strong> – Authentication information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If authentication information is not provided correctly.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.encrypt">
+<code class="sig-name descname">encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encrypt bytes to an EncryptionEnvelope.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>bytes</em>) – The data to encrypt.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encrypted data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../schemas/index.html#victoria.encryption.schemas.EncryptionEnvelope" title="victoria.encryption.schemas.EncryptionEnvelope">EncryptionEnvelope</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.decrypt">
+<code class="sig-name descname">decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrypt an EncryptionEnvelope to bytes.</p>
+<p>Please note that this can return None if the key encryption key
+is out of date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>envelope</strong> (<a class="reference internal" href="../schemas/index.html#victoria.encryption.schemas.EncryptionEnvelope" title="victoria.encryption.schemas.EncryptionEnvelope"><em>EncryptionEnvelope</em></a>) – The envelope to decrypt.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The decrypted data.
+None: If the key encryption key was out of date.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.rotate_key">
+<code class="sig-name descname">rotate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.rotate_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate an EncryptionEnvelope encrypted with an old version of the
+key encryption key to a different version.</p>
+<p>Basically just decrypts it with the old key and reencrypts it with the
+new key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>envelope</strong> (<a class="reference internal" href="../schemas/index.html#victoria.encryption.schemas.EncryptionEnvelope" title="victoria.encryption.schemas.EncryptionEnvelope"><em>EncryptionEnvelope</em></a>) – The envelope to rotate.</p></li>
+<li><p><strong>version</strong> (<em>str</em><em>, </em><em>optional</em>) – The specific KEK version to use. Defaults
+to the latest if not given. You probably don’t want to specify
+this, as the latest will be the best version.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The newly rotated encrypted data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../schemas/index.html#victoria.encryption.schemas.EncryptionEnvelope" title="victoria.encryption.schemas.EncryptionEnvelope">EncryptionEnvelope</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Glasswall SRE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

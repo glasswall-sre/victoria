@@ -1,0 +1,25 @@
+:mod:`victoria.script`
+======================
+
+.. py:module:: victoria.script
+
+.. autoapi-nested-parse::
+
+   victoria.script
+
+   This is the main CLI entrypoint of the Victoria application.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   victoria/index.rst
+
+

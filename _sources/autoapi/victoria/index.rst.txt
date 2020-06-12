@@ -1,0 +1,39 @@
+:mod:`victoria`
+===============
+
+.. py:module:: victoria
+
+.. autoapi-nested-parse::
+
+   victoria
+
+   This is the core functionality of Victoria. It contains functionality common
+   to all of Victoria such as Config and plugin loading.
+
+   Author
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   encryption/index.rst
+   script/index.rst
+   storage/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   config/index.rst
+   plugin/index.rst
+   util/index.rst
+
+

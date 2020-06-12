@@ -1,0 +1,64 @@
+:mod:`victoria.storage.provider`
+================================
+
+.. py:module:: victoria.storage.provider
+
+.. autoapi-nested-parse::
+
+   victoria.storage.provider
+
+   Abstract base class of a storage provider.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.storage.provider.StorageProvider
+
+
+
+.. py:class:: StorageProvider
+
+   Bases: :class:`abc.ABC`
+
+   Abstract base class of a storage provider.
+
+   .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
+      :abstractmethod:
+
+
+      Store a piece of data at a given key in blob storage.
+
+      :param data: The data to store.
+      :param key: The path within the container to store it in.
+
+
+   .. method:: retrieve(self, key: str, stream: IOBase)
+      :abstractmethod:
+
+
+      Retrieve a piece of data from a given key in blob storage.
+
+      :param key: The key within the container to get the data from.
+      :param stream: The stream to stream the data into.
+
+
+   .. method:: ls(self)
+      :abstractmethod:
+
+
+      List blobs within a container.
+
+      :Yields: *str* -- The names of blobs within the container.
+
+
+

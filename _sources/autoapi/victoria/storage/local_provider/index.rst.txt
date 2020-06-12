@@ -1,0 +1,70 @@
+:mod:`victoria.storage.local_provider`
+======================================
+
+.. py:module:: victoria.storage.local_provider
+
+.. autoapi-nested-parse::
+
+   victoria.storage.local_provider
+
+   Implementation of a StorageProvider for local file storage.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.storage.local_provider.LocalStorageProvider
+
+
+
+.. py:class:: LocalStorageProvider(container: str, **kwargs)
+
+   Bases: :class:`victoria.storage.provider.StorageProvider`
+
+   Storage provider for local file storage.
+
+   .. attribute:: container
+      :type: str
+
+      The folder we're using to store files in.
+
+   .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
+
+
+      Store a piece of data at a given key in blob storage.
+
+      :param data: The data to store.
+      :param key: The path within the container to store it in.
+
+
+   .. method:: retrieve(self, key: str, stream: IOBase)
+
+
+      Retrieve a piece of data from a given key in blob storage.
+
+      :param key: The key within the container to get the data from.
+      :param stream: The stream to stream the data into.
+
+
+   .. method:: ls(self)
+
+
+      List blobs within a container.
+
+      :Yields: *str* -- The names of blobs within the container.
+
+
+   .. method:: _ensure_container(self)
+
+
+
+

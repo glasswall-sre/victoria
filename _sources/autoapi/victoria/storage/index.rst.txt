@@ -1,0 +1,69 @@
+:mod:`victoria.storage`
+=======================
+
+.. py:module:: victoria.storage
+
+.. autoapi-nested-parse::
+
+   victoria.storage
+
+   Package providing storage functionality for Victoria.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   azure_provider/index.rst
+   local_provider/index.rst
+   provider/index.rst
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   victoria.storage.make_provider
+
+
+.. data:: StorageProvider
+   
+
+   
+
+.. data:: PROVIDERS_MAP
+   
+
+   Map provider names to implementations. Used in make_provider() factory
+   function.
+
+
+.. function:: make_provider(provider_type: str, **kwargs) -> provider.StorageProvider
+
+   Make a StorageProvider from a provider type. Call with the arguments
+   you would normally provide to the specific implementation's constructor.
+
+   make_provider("azure", account_name="...", ...)
+
+   :param provider_type: The type of the provider. See PROVIDERS_MAP.
+   :type provider_type: str
+   :param \*\*kwargs: The arguments for the provider implementation's constructor.
+
+   :returns: The provider of the given type.
+   :rtype: StorageProvider
+
+   :raises ValueError: If provider_type was invalid (i.e. not in PROVIDERS_MAP).
+   :raises TypeError: If the wrong arguments were given in kwargs.
+
+

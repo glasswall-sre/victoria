@@ -1,0 +1,108 @@
+:mod:`victoria.plugin`
+======================
+
+.. py:module:: victoria.plugin
+
+.. autoapi-nested-parse::
+
+   plugin
+
+   Contains functions for loading Victoria plugins at runtime.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.plugin.Plugin
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   victoria.plugin.load
+   victoria.plugin.load_all
+   victoria.plugin.ls
+
+
+.. py:class:: Plugin(name: str, cli: click.Command, config_schema: Schema = None)
+
+   Plugin is the API for creating a Victoria plugin. It defines plugin name,
+   CLI entry point, and optionally a schema for custom plugin config.
+
+   .. attribute:: name
+      :type: str
+
+      The name of the plugin. This will be the subcommand name.
+
+   .. attribute:: cli
+      :type: click.Command
+
+      The click entrypoint of the plugin command.
+
+   .. attribute:: config_schema
+      :type: marshmallow.Schema
+
+      The schema to use to validate config (OPTIONAL).
+
+   .. method:: __eq__(self, other)
+
+
+      Return self==value.
+
+
+
+.. function:: load(plugin_name: str) -> Plugin
+
+   Load a plugin by name.
+
+   Plugins are installed python modules with a name starting with 'victoria_'.
+   For example: 'victoria_config'. Plugin packages should define a plugin
+   object in their __init__.py and use it to wire up plugin functionality.
+
+   A plugin can optionally define a marshmallow schema that can be used for
+   validating its config. Plugin configs will be located in the
+   'plugins_config' object of the Victoria config, under an object with the
+   same name as the plugin.
+
+   :param plugin_name: The name of the plugin package to load. Plugin packages
+                       must be in the format "victoria_{plugin_name}".
+   :type plugin_name: str
+
+   :returns:
+
+             the plugin object as loaded from the module, or None if there was
+                 some error whilst loading.
+   :rtype: Plugin
+
+
+.. function:: load_all() -> List[Plugin]
+
+   Load all plugins that can be found.
+
+   :returns: The list of plugins successfully loaded.
+   :rtype: List[Plugin]
+
+
+.. function:: ls() -> List[str]
+
+   Get a list of plugins installed on the system.
+
+   :returns:
+
+             The list of plugin package names installed. Each plugin name
+                 will be in the list without the "victoria_" prefix.
+   :rtype: List[str]
+
+

@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Guide &mdash; Victoria  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer Guide" href="developer-guide.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Victoria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stock-plugins">Stock plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-configuration">Plugin configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-storage">Cloud storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-encryption">Cloud encryption</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kek-rotation">KEK rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-backends">Cloud backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#azure">Azure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#storage">Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encryption">Encryption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer-guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin-creation.html">Plugin Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Victoria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Python 3.6+</p></li>
+<li><p>Pip</p></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U victoria
+</pre></div>
+</div>
+</div>
+<div class="section" id="stock-plugins">
+<h2>Stock plugins<a class="headerlink" href="#stock-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Victoria comes with 3 plugins preinstalled:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>
+- can be used to print the current config, and get the path to it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">store</span></code>
+- can be used to interact with cloud storage backends</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encrypt</span></code>
+- can be used to encrypt data for Victoria to load in config files</p></li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Victoria has a YAML config file that it uses to control the main CLI, which can
+specify other YAML files (both local and remote) to use to configure plugins.</p>
+<p>You can get the path to the config file by running <code class="docutils literal notranslate"><span class="pre">victoria</span> <span class="pre">config</span> <span class="pre">path</span></code>.</p>
+<p>A quick way to edit your config if you have VSCode installed is by running
+<code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">$(victoria</span> <span class="pre">config</span> <span class="pre">path)</span></code>.</p>
+<p>Please note that the config file is not isolated. All installations of Victoria
+on the same machine will use the same core config file.</p>
+<div class="section" id="plugin-configuration">
+<h3>Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Config is in a section of the Victoria YAML config called <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">plugins_config</span><span class="p">:</span>
+  <span class="nt">some_plugin</span><span class="p">:</span>
+    <span class="nt">some_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">123</span>
+</pre></div>
+</div>
+<p>Sub-objects of <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code> have keys of the same name as the plugins. So
+a plugin called <code class="docutils literal notranslate"><span class="pre">verb</span></code> would have a key in <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code> also called <code class="docutils literal notranslate"><span class="pre">verb</span></code>.</p>
+<p>Additionally, you can specify separate config files for plugins with the
+<code class="docutils literal notranslate"><span class="pre">plugins_config_location</span></code> section of the YAML config, instead of
+keeping your config all in the core Victoria config file. You can even use
+config files stored in the cloud! To do this, you need to have configured a
+storage provider in your core config. A simple one to use is the <code class="docutils literal notranslate"><span class="pre">local</span></code>
+provider, which just uses a directory on your machine to store config files:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">storage_providers</span><span class="p">:</span>
+  <span class="nt">local</span><span class="p">:</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">C:/victoria_storage</span>
+</pre></div>
+</div>
+<p>Put that in your core config (you can change the directory to be wherever you
+want), and you can now configure a separate config location for <code class="docutils literal notranslate"><span class="pre">some_plugin</span></code>
+in your <code class="docutils literal notranslate"><span class="pre">plugins_config_location</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">plugins_config_location</span><span class="p">:</span>
+  <span class="nt">some_plugin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">local://path/to/the_config_for_some_plugin.yaml</span>
+</pre></div>
+</div>
+<p>As with <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>, the keys are plugin names. The values are of the
+format <code class="docutils literal notranslate"><span class="pre">{storage-provider-name}://{path-to-config-file}</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">{storage-provider-name}</span></code> is a key in the <code class="docutils literal notranslate"><span class="pre">storage_providers</span></code> section of your
+core config. The <code class="docutils literal notranslate"><span class="pre">{storage-provider-name}</span></code> can be called anything if you’d like
+it to be.</p>
+<p>Victoria will grab it and load it as if it were in <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>.</p>
+<p>Please see the ‘Cloud storage’ and ‘Cloud backends’ sections of the README for
+setting up a cloud storage provider.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># the python logging config</span>
+<span class="nt">logging_config</span><span class="p">:</span>
+  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+  <span class="nt">disable_existing_loggers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+  <span class="nt">formatters</span><span class="p">:</span>
+    <span class="nt">default</span><span class="p">:</span>
+      <span class="nt">format</span><span class="p">:</span> <span class="s">&quot;%(message)s&quot;</span>
+  <span class="nt">handlers</span><span class="p">:</span>
+    <span class="nt">console</span><span class="p">:</span>
+      <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logging.StreamHandler</span>
+      <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">INFO</span>
+      <span class="nt">formatter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+      <span class="nt">stream</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ext://sys.stdout</span>
+  <span class="nt">root</span><span class="p">:</span>
+    <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">INFO</span>
+    <span class="nt">handlers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">console</span><span class="p p-Indicator">]</span>
+  <span class="nt">loggers</span><span class="p">:</span>
+    <span class="nt">azure.core.pipeline.policies.http_logging_policy</span><span class="p">:</span>
+      <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CRITICAL</span>
+
+<span class="c1"># any storage provider config goes here - currently only Azure and local</span>
+<span class="c1"># storage is supported</span>
+<span class="nt">storage_providers</span><span class="p">:</span>
+  <span class="nt">azure</span><span class="p">:</span>
+    <span class="nt">connection_string</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-connection-string</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoriacontainer</span>
+  <span class="nt">local</span><span class="p">:</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">C:/victoria_storage</span>
+
+<span class="c1"># your encryption provider config goes here - again only Azure is supported</span>
+<span class="nt">encryption_provider</span><span class="p">:</span>
+  <span class="nt">provider</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">config</span><span class="p">:</span>
+    <span class="nt">vault_url</span><span class="p">:</span> <span class="s">&quot;https://your-vault.vault.azure.net/&quot;</span>
+    <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyencryptionkey</span>
+    <span class="nt">tenant_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tenant-id-here</span>
+    <span class="nt">client_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sp-client-id-here</span>
+    <span class="nt">client_secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sp-client-secret-here</span>
+
+<span class="c1"># inline config for any plugins loaded, objects should have the same name as</span>
+<span class="c1"># the plugin module, i.e. &#39;pbi.py&#39; would have a &#39;pbi&#39; object here</span>
+<span class="c1"># note: if you don&#39;t want to put this inline, use &#39;plugins_config_location&#39;</span>
+<span class="c1"># as below, you don&#39;t have to specify it all here</span>
+<span class="c1"># note: plugins_config_location takes precedence over this</span>
+<span class="nt">plugins_config</span><span class="p">:</span>
+  <span class="nt">config</span><span class="p">:</span>
+    <span class="nt">indent</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="c1"># here you can specify separate file locations for plugin config files</span>
+<span class="c1"># these use the storage_providers defined above. Like plugins_config, the</span>
+<span class="c1"># keys of this object need to have the same name as the plugin.</span>
+<span class="c1"># note: this takes precedence over plugins_config</span>
+<span class="nt">plugins_config_location</span><span class="p">:</span>
+  <span class="nt">a_plugin</span><span class="p">:</span> <span class="s">&quot;local://a_subdir/config_for_a_plugin.yaml&quot;</span>
+  <span class="nt">another_plugin</span><span class="p">:</span> <span class="s">&quot;azure://another_subdir/further/config_file.yaml&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cloud-storage">
+<h2>Cloud storage<a class="headerlink" href="#cloud-storage" title="Permalink to this headline">¶</a></h2>
+<p>Victoria can interact with cloud storage backends to get config for plugins!</p>
+<p>Say you had a plugin used by a team that had a complex config, and you wanted
+to share it so everyone could use the same config. You could store the YAML
+config in a cloud storage container, and have everyone point their Victoria
+config files at the container for that plugin.</p>
+<p>Victoria even comes with a stock plugin called <code class="docutils literal notranslate"><span class="pre">store</span></code> that makes it easy to
+store and list files in your cloud storage backends!</p>
+<p>Let’s go through an example in more detail.</p>
+<p>You’ve made a plugin called <code class="docutils literal notranslate"><span class="pre">helpful</span></code> which your team finds useful, but has
+quite a complex config file that changes a lot and needs to be shared around.
+You’ve previously had issues with it getting out of date and people having
+wrong versions, so you decide to put it in cloud storage instead.</p>
+<p>You’ve already set up an Azure storage backend in your Victoria config.</p>
+<p>You make a YAML file containing the config for the plugin (<code class="docutils literal notranslate"><span class="pre">helpful-config.yaml</span></code>),
+and you put it in cloud storage by running <code class="docutils literal notranslate"><span class="pre">victoria</span> <span class="pre">store</span> <span class="pre">azure</span> <span class="pre">put</span> <span class="pre">helpful-config.yaml</span></code>.</p>
+<p>You then ask your team to configure the same Azure storage backend in their
+Victoria config files, and point at the shared config file by putting this
+section in their config:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">plugins_config_location</span><span class="p">:</span>
+  <span class="nt">helpful</span><span class="p">:</span> <span class="s">&quot;azure://helpful-config.yaml&quot;</span>
+</pre></div>
+</div>
+<p>They can remove their old config from <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>, and now when they run
+<code class="docutils literal notranslate"><span class="pre">helpful</span></code> it will use the config from cloud storage! Easy.</p>
+<p>Please note that <cite>plugins_config_location</cite> takes precedence over <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>,
+so if you have a config specified for the same plugin in both, then only the one
+in <code class="docutils literal notranslate"><span class="pre">plugins_config_location</span></code> will be loaded.</p>
+</div>
+<div class="section" id="cloud-encryption">
+<h2>Cloud encryption<a class="headerlink" href="#cloud-encryption" title="Permalink to this headline">¶</a></h2>
+<p>Victoria can use <a class="reference external" href="https://cloud.google.com/kms/docs/envelope-encryption">envelope encryption</a>
+via a cloud key management solution to encrypt data that would normally have to
+be stored in config files in plaintext. This can help when storing config files
+with secrets in cloud storage, as it will ensure any sensitive data is securely
+encrypted at rest.</p>
+<p>Envelope encryption uses a cloud encryption key (the key encryption key, or KEK)
+in combination with a locally generated key (the data encryption key, or DEK) to
+keep your data secure.</p>
+<p>Please see the ‘Cloud backends’ section for configuring different encryption
+providers.</p>
+<p>You can envelope encrypt data by using the <cite>encrypt</cite> stock plugin provided with
+Victoria. Give it a piece of text to encrypt, and it will output the encrypted
+data in YAML format suitable for putting in a config file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ victoria encrypt data <span class="s2">&quot;your-top-secret-access-key&quot;</span>
+data: &lt;encrypted data&gt;
+key: &lt;encrypted data key&gt;
+iv: &lt;the nonce used with the key&gt;
+version: &lt;the key version&gt;
+</pre></div>
+</div>
+<p>You can then paste this directly into a plugin config that needs a secret value,
+like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">plugins_config</span><span class="p">:</span>
+  <span class="nt">some_plugin</span><span class="p">:</span>
+    <span class="nt">super_secret_access_key</span><span class="p">:</span>
+      <span class="nt">data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;encrypted data&gt;</span>
+      <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;encrypted data key&gt;</span>
+      <span class="nt">iv</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;the nonce used with the key&gt;</span>
+      <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;the key version&gt;</span>
+</pre></div>
+</div>
+<p>The plugin will handle decryption and usage of this encrypted data.</p>
+<p>If you want to test out to see if your data can be decrypted, then you can
+do so with the <cite>decrypt</cite> subcommand. It accepts a YAML file containing the
+encrypted data somewhere, and a path within the YAML file to get the data from.
+The path is in <a class="reference external" href="https://github.com/akesterson/dpath-python">dpath format</a>.</p>
+<p>Using the example from above, if you wanted to decrypt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ victoria encrypt decrypt ./some_config.yaml <span class="s2">&quot;plugins/some_plugin/super_secret_access_key&quot;</span>
+your-top-secret-access-key
+</pre></div>
+</div>
+<p>As you can see, it prints the decrypted value to the console.</p>
+<div class="section" id="kek-rotation">
+<h3>KEK rotation<a class="headerlink" href="#kek-rotation" title="Permalink to this headline">¶</a></h3>
+<p>Occasionally you may want to update your KEK to a new version in order to be
+more secure. Victoria supports this via key rotation.</p>
+<p>If your KEK ever gets out of date, data decryption will fail and you will
+see this message instead:
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Encryption</span> <span class="n">key</span> <span class="n">version</span> <span class="n">xxx</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span><span class="p">,</span> <span class="n">please</span> <span class="n">re</span><span class="o">-</span><span class="n">encrypt</span> <span class="k">with</span> <span class="s1">&#39;victoria encrypt rotate&#39;</span>
+</pre></div>
+</div>
+<p>This means you need to rotate the key of whatever you were trying to decrypt.</p>
+<p>This can be done with the <code class="docutils literal notranslate"><span class="pre">rotate</span></code> subcommand of the encrypt plugin. It has
+the same arguments as the <code class="docutils literal notranslate"><span class="pre">decrypt</span></code> subcommand: a YAML file containing the
+encrypted data somewhere, and a path within the YAML file to get the data from.
+The path is in <a class="reference external" href="https://github.com/akesterson/dpath-python">dpath format</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ victoria encrypt rotate ./some_config.yaml <span class="s2">&quot;plugins/some_plugin/super_secret_access_key&quot;</span>
+data: &lt;encrypted data&gt;
+key: &lt;encrypted data key&gt;
+iv: &lt;the nonce used with the key&gt;
+version: &lt;the new key version&gt;
+</pre></div>
+</div>
+<p>It will print out the data encrypted with the new key, and you can now
+paste it into the right location in the config file and it will be able
+to be decrypted.</p>
+</div>
+</div>
+<div class="section" id="cloud-backends">
+<h2>Cloud backends<a class="headerlink" href="#cloud-backends" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="azure">
+<h3>Azure<a class="headerlink" href="#azure" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="storage">
+<h4>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h4>
+<p>The Azure storage backend requires an Azure storage account with a blob container.</p>
+<p>You can create one like this (with Azure CLI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az group create --name rg-victoria <span class="se">\</span>
+    --location uksouth
+$ az storage account create --name <span class="o">{</span>storage-name<span class="o">}</span> <span class="se">\</span>
+    --resource-group rg-victoria <span class="se">\</span>
+    --location uksouth <span class="se">\</span>
+    --kind <span class="s2">&quot;StorageV2&quot;</span>
+$ az storage container create --name victoria <span class="se">\</span>
+    --public-access off
+</pre></div>
+</div>
+<p>This creates a resource group, a storage account within it, and a storage
+container for Victoria to use. Make sure you replace <code class="docutils literal notranslate"><span class="pre">{storage-name}</span></code> with
+whatever you want to call your account.</p>
+<p>This storage account can be used by putting this in your Victoria config:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">storage_providers</span><span class="p">:</span>
+  <span class="nt">azure</span><span class="p">:</span>
+    <span class="nt">connection_string</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-connection-string-here</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoria</span>
+</pre></div>
+</div>
+<p>Make sure you put your storage account name in the <code class="docutils literal notranslate"><span class="pre">account</span></code> field.</p>
+<p>In order to get the access key for the container, you can run (with Azure CLI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az storage account show-connection-string <span class="se">\</span>
+    --name stvictoria <span class="se">\</span>
+    --resource-group rg-victoria <span class="se">\</span>
+    --query <span class="s2">&quot;connectionString&quot;</span> <span class="se">\</span>
+    -o tsv
+</pre></div>
+</div>
+<p>Obviously this key is a secret, so don’t go putting it in source control or otherwise
+sharing it with anyone.</p>
+</div>
+<div class="section" id="encryption">
+<h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this headline">¶</a></h4>
+<p>The Azure encryption backend requires an Azure Key Vault with a key, as well as a
+service principal to perform actions with the key.</p>
+<p>You can create the key vault and key like this (with Azure CLI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az group create --name rg-victoria <span class="se">\</span>
+    --location uksouth
+$ az keyvault create --name <span class="o">{</span>keyvault-name<span class="o">}</span> <span class="se">\</span>
+    --resource-group rg-victoria <span class="se">\</span>
+    --location uksouth <span class="se">\</span>
+    --sku standard <span class="se">\</span>
+    --enabled-for-template-deployment <span class="nb">true</span>
+$ az keyvault key create --name keyencryptionkey <span class="se">\</span>
+    --vault-name <span class="o">{</span>keyvault-name<span class="o">}</span> <span class="se">\</span>
+    --kty RSA <span class="se">\</span>
+    --protection software <span class="se">\</span>
+    --size <span class="m">2048</span>
+</pre></div>
+</div>
+<p>Make sure you replace <code class="docutils literal notranslate"><span class="pre">{keyvault-name}</span></code> in the bottom two commands with
+whatever you want to call your key vault.</p>
+<p>You can create an Azure AD Service Principal to give Victoria access to your
+Key Vault like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az ad sp create-for-rbac --name VictoriaServicePrincipal
+</pre></div>
+</div>
+<p>Watch the output of this command, you’ll need the JSON fields <code class="docutils literal notranslate"><span class="pre">&quot;tenant&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;appId&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;password&quot;</span></code> for your config file. You can’t get the password
+back, so make sure you remember it!</p>
+<p>Give your new Service Principal the permissions it needs for keys (replacing
+<code class="docutils literal notranslate"><span class="pre">{your-sp-appid}</span></code> with the JSON <code class="docutils literal notranslate"><span class="pre">&quot;appId&quot;</span></code> field you got when creating the SP):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SP_OBJECT_ID</span><span class="o">=</span><span class="k">$(</span>az ad sp show --id <span class="o">{</span>your-sp-appid<span class="o">}</span> --query objectId -o tsv<span class="k">)</span>
+az keyvault set-policy --name kv-victoria <span class="se">\</span>
+    --object-id <span class="nv">$SP_OBJECT_ID</span> <span class="se">\</span>
+    --key-permissions get list encrypt decrypt
+</pre></div>
+</div>
+<p>Now finally, add the following to your Victoria config file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">encryption_provider</span><span class="p">:</span>
+  <span class="nt">provider</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">config</span><span class="p">:</span>
+    <span class="nt">vault_url</span><span class="p">:</span> <span class="s">&quot;https://{keyvault-name}.vault.azure.net/&quot;</span>
+    <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyencryptionkey</span>
+    <span class="nt">tenant_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-tenant-id-here</span>
+    <span class="nt">client_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-client-id-here</span>
+    <span class="nt">client_secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-client-secret-here</span>
+</pre></div>
+</div>
+<p>Replacing <code class="docutils literal notranslate"><span class="pre">{keyvault-name}</span></code> with the name of your keyvault, and mapping the
+JSON values from the SP creation to the keys here as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tenant_id</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;tenant&quot;</span></code> from JSON</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_id</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;appId&quot;</span></code> from JSON</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_secret</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;password&quot;</span></code> from JSON</p></li>
+</ul>
+<p>Obviously, all this stuff is secret, so don’t go putting it in source control or
+sharing it with anyone.</p>
+<p>Additionally, you can actually leave <code class="docutils literal notranslate"><span class="pre">tenant_id</span></code>, <code class="docutils literal notranslate"><span class="pre">client_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">client_secret</span></code>
+out of your config file and specify them in environment variables instead.
+These are (respectively): <code class="docutils literal notranslate"><span class="pre">AZURE_TENANT_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">AZURE_CLIENT_ID</span></code>, and <code class="docutils literal notranslate"><span class="pre">AZURE_CLIENT_SECRET</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developer-guide.html" class="btn btn-neutral float-right" title="Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Glasswall SRE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

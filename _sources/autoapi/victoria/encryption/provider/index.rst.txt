@@ -1,0 +1,161 @@
+:mod:`victoria.encryption.provider`
+===================================
+
+.. py:module:: victoria.encryption.provider
+
+.. autoapi-nested-parse::
+
+   victoria.encryption.provider
+
+   Abstract base class of an encryption provider.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.encryption.provider.EncryptionProvider
+
+
+
+.. py:class:: EncryptionProvider
+
+   Bases: :class:`abc.ABC`
+
+   Abstract base class for an encryption provider. Provides methods
+   for envelope encrypting/decrypting arbitrary byte/string sequences.
+
+   .. method:: encrypt(self, data: bytes)
+      :abstractmethod:
+
+
+      Encrypt bytes to an EncryptionEnvelope.
+
+      :param data: The data to encrypt.
+      :type data: bytes
+
+      :returns: The encrypted data.
+      :rtype: EncryptionEnvelope
+
+
+   .. method:: encrypt_str(self, data: str, encoding: Optional[str] = 'utf-8')
+
+
+      Encrypt a string to an EncryptionEnvelope.
+
+      :param data: The string to encrypt.
+      :type data: str
+      :param encoding: The encoding of the data. Default utf-8.
+      :type encoding: str, optional
+
+      :returns: The encrypted data.
+      :rtype: EncryptionEnvelope
+
+
+   .. method:: decrypt(self, envelope: EncryptionEnvelope)
+      :abstractmethod:
+
+
+      Decrypt an EncryptionEnvelope to bytes.
+
+      Please note that this can return None if the key encryption key
+      is out of date.
+
+      :param envelope: The envelope to decrypt.
+      :type envelope: EncryptionEnvelope
+
+      :returns: The decrypted data.
+                None: If the key encryption key was out of date.
+      :rtype: bytes
+
+
+   .. method:: decrypt_str(self, envelope: EncryptionEnvelope, encoding: Optional[str] = 'utf-8')
+
+
+      Decrypt an EncryptionEnvelope to a string.
+
+      Please note that this can return None if the key encryption key
+      is out of date.
+
+      :param envelope: The envelope to decrypt.
+      :type envelope: EncryptionEnvelope
+      :param encoding: The encoding of the data. Default utf-8.
+      :type encoding: str, optional
+
+      :returns: The decrypted data.
+                None: If the key encryption key was out of date.
+      :rtype: str
+
+
+   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None)
+      :abstractmethod:
+
+
+      Rotate an EncryptionEnvelope encrypted with an old version of the
+      key encryption key to a different version.
+
+      Basically just decrypts it with the old key and reencrypts it with the
+      new key.
+
+      :param envelope: The envelope to rotate.
+      :type envelope: EncryptionEnvelope
+      :param version: The specific KEK version to use. Defaults
+                      to the latest if not given. You probably don't want to specify
+                      this, as the latest will be the best version.
+      :type version: str, optional
+
+      :returns: The newly rotated encrypted data.
+      :rtype: EncryptionEnvelope
+
+
+   .. method:: _data_encrypt(self, data: bytes)
+
+
+      Asymmetrically encrypt a piece of data, returning a tuple containing
+      the encrypted data as a bytes object, the plaintext (!) encryption key
+      as a bytes object, and the nonce used to encrypt as a bytes object.
+
+      Uses a 256-bit AES cipher in Galois Counter Mode, as recommended by
+      Google for generating data encryption keys:
+      https://cloud.google.com/kms/docs/envelope-encryption#data_encryption_keys
+
+      Uses a 96-bit nonce length, as recommended by NIST for AES in GCM:
+      https://csrc.nist.gov/publications/detail/sp/800-38d/final
+
+      :param data: The data to encrypt.
+
+      :returns:     bytes: Encrypted data
+                    bytes: Plaintext (!) data encryption key -- encrypt with your
+                        key encryption key ASAP and do NOT store in plaintext!!
+                    bytes: 96-bit nonce value used with data encryption key when
+                        encrypting data. Under NO circumstances to be reused for
+                        encryption with the same key.
+      :rtype: Tuple
+
+
+   .. method:: _data_decrypt(self, data: bytes, key: bytes, nonce: bytes)
+
+
+      Decrypt a piece of data with its plaintext data encryption key, and
+      its nonce.
+
+      For more information on encryption, please see the '_data_encrypt()'
+      function.
+
+      :param data: The data to decrypt.
+      :param key: The plaintext (!) data encryption key.
+      :param nonce: The nonce used to encrypt the data with the key.
+
+      :returns: The decrypted data.
+      :rtype: bytes
+
+
+

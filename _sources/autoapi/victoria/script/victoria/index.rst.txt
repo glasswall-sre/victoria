@@ -1,0 +1,101 @@
+:mod:`victoria.script.victoria`
+===============================
+
+.. py:module:: victoria.script.victoria
+
+.. autoapi-nested-parse::
+
+   victoria
+
+   Victoria is the SRE toolbelt -- a single command with multiple pluggable
+   subcommands for automating any number of 'toil' tasks that inhibit SRE
+   productivity.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.script.victoria.VictoriaCLI
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   victoria.script.victoria.cli
+   victoria.script.victoria.main
+
+
+.. data:: CONTEXT_SETTINGS
+   
+
+   
+
+.. data:: HELP_TEXT
+   :annotation: = 
+V.I.C.T.O.R.I.A.
+
+
+Very
+Important
+Commands for
+Toil
+Optimization:
+Reducing
+Inessential
+Activities
+
+Victoria is the SRE toolbelt -- a single command with multiple pluggable
+subcommands for automating any number of 'toil' tasks that inhibit SRE
+productivity.
+
+
+   
+
+.. data:: VERSION_NUMBER
+   :annotation: = #{TAG_NAME}#
+
+   The version number of the application, to print when calling with --version.
+
+
+.. py:class:: VictoriaCLI(name=None, **attrs)
+
+   Bases: :class:`click.MultiCommand`
+
+   VictoriaCLI overrides click.MultiCommand to support loading click
+   commands from python files. This is the bread and butter of the plugin
+   system.
+
+   .. method:: list_commands(self, ctx)
+
+
+      List the available subcommands.
+
+
+   .. method:: get_command(self, ctx, name)
+
+
+      Get a subcommand from the list of installed plugins.
+
+
+
+.. function:: cli(ctx, config_file)
+
+   This is the main CLI of the application. It uses VictoriaCLI to call
+   loaded plugins based on subcommand name.
+
+
+.. function:: main()
+
+

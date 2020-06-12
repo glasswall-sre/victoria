@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Victoria  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Guide" href="user-guide.html" />
+    <link rel="prev" title="V.I.C.T.O.R.I.A. - infinitely customisable CLI" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Victoria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#backstory">Backstory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-it-called-victoria">Why is it called Victoria?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer-guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin-creation.html">Plugin Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Victoria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Victoria is a generic command-line interface (CLI) written in Python.
+On its own it doesn’t come with very much, but its power mainly comes from
+the ability to write plugins for it.</p>
+<p>You can write a plugin CLI to do any number of tasks and put it in a Python
+package, then a user can install the package and Victoria will dynamically
+load the plugin and execute it when the user calls it via the CLI.</p>
+<p>For example, say you find youself having to manually download data from blob
+storage somewhere and run a script on it to look at the data, perhaps extracting
+some important features from it. Your process for this before was to manually
+browse to the blob storage and download the data in an archive, then extract
+the archive and run a bespoke script to analyse the data.</p>
+<p>This bespoke script requires a bunch of configuration values that tend to change
+a lot as the data grows more complex, and lots of members of your team need to
+use it, so you have to share the config around and make sure everyone is
+synced up with all the changes.</p>
+<p>Not only this, but sometimes the data needs to be analysed very quickly, in
+time-sensitive situations. It’s a situation that is rife with the risk for
+human error.</p>
+<p>If this situation is in any way familiar to you, then Victoria may be useful
+for you.</p>
+<p>With Victoria, you could write a plugin that wraps up the script functionality
+as well as grabbing the data from blob storage. You could version the script
+with the config, allowing your team to install/update your tools
+quickly and deterministically. You could even store different configs in
+cloud storage (including with encrypted secret values), and Victoria will
+use the remote configs transparently to the user.</p>
+<div class="section" id="backstory">
+<h2>Backstory<a class="headerlink" href="#backstory" title="Permalink to this headline">¶</a></h2>
+<p>Victoria was developed by <a class="reference external" href="https://glasswallsolutions.com/">Glasswall</a>’s <a class="reference external" href="https://sre.glasswallsolutions.com/">SRE</a> team. We’re responsible for
+running a SaaS email platform for our customers that has very specific
+reliability requirements. We’re on-call 24/7 in case something goes wrong with
+the system, and when something does go wrong we have to figure out what’s gone
+wrong and solve it as fast as we can with minimal customer impact.</p>
+<p>As a team, we’re fairly young. We were formed in August 2019, and a lot of our
+work to support the system then was exploratory and highly manual. In Google’s
+SRE book, this work is called <a class="reference external" href="https://landing.google.com/sre/sre-book/chapters/eliminating-toil/">toil</a>.</p>
+<p>We had a process in place to identify manual work that was taking us too much time and
+had a high risk of human error, and when we identified this work we wrote
+various bespoke scripts that we could run to do certain things. Examples
+included rebuilding corrupted email data, replaying dead letters, analysing
+customer usage for capacity planning, redeploying masses of microservices at
+once, and many many more.</p>
+<p>Eventually, we had too many of these scripts and it was starting to get
+unwieldy sharing them around and ensuring the config was correct. Work started
+to find a solution to this problem, and Victoria was born.</p>
+<p>We’re now looking to put Victoria in the cloud in a serverless environment so
+we can use it as a chat bot. Watch this space!</p>
+</div>
+<div class="section" id="why-is-it-called-victoria">
+<h2>Why is it called Victoria?<a class="headerlink" href="#why-is-it-called-victoria" title="Permalink to this headline">¶</a></h2>
+<p>It’s an acronym! It stands for:</p>
+<ul class="simple">
+<li><p>Very</p></li>
+<li><p>Important</p></li>
+<li><p>Commands for</p></li>
+<li><p>Toil</p></li>
+<li><p>Optimisation:</p></li>
+<li><p>Reducing</p></li>
+<li><p>Inessential</p></li>
+<li><p>Activities</p></li>
+</ul>
+<p>We do not wish to comment on how much work went into coming up with the name.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user-guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="V.I.C.T.O.R.I.A. - infinitely customisable CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Glasswall SRE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

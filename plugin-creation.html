@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plugin Creation &mdash; Victoria  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Developer Guide" href="developer-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Victoria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer-guide.html">Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plugin Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-py"><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-structure">Package structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-py"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-plugin-config">Specifying plugin config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-core-victoria-config-from-a-plugin-s-config">Accessing core Victoria config from a plugin’s config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storing-secrets-in-config-files">Storing secrets in config files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Victoria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Plugin Creation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/plugin-creation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plugin-creation">
+<h1>Plugin Creation<a class="headerlink" href="#plugin-creation" title="Permalink to this headline">¶</a></h1>
+<p>A Victoria plugin is just a Python package with some certain
+requirements/properties.</p>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<p>Your package name must start with <code class="docutils literal notranslate"><span class="pre">victoria_</span></code> in order for Victoria to
+use it.</p>
+<p>For example: <code class="docutils literal notranslate"><span class="pre">victoria_pbi</span></code>.</p>
+</div>
+<div class="section" id="setup-py">
+<h2><code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#setup-py" title="Permalink to this headline">¶</a></h2>
+<p>In your <code class="docutils literal notranslate"><span class="pre">setup()</span></code> function you need to have <code class="docutils literal notranslate"><span class="pre">&quot;victoria&quot;</span></code> in your
+<code class="docutils literal notranslate"><span class="pre">install_requires</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;victoria&quot;</span>
+    <span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;victoria_pbi&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;#</span><span class="si">{TAG_NAME}</span><span class="s2">#&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Victoria plugin to manipulate Azure DevOps PBIs&quot;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Sam Gibson&quot;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s2">&quot;sgibson@glasswallsolutions.com&quot;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-structure">
+<h2>Package structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h2>
+<p>Your repo should have the following structure as a python package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">victoria_</span><span class="p">{</span><span class="n">plugin_name</span><span class="p">}</span><span class="o">/</span>
+    <span class="o">-</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="o">-</span> <span class="n">some_other_module</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="init-py">
+<h2><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code><a class="headerlink" href="#init-py" title="Permalink to this headline">¶</a></h2>
+<p>In your package’s <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> you need to declare a
+<a class="reference internal" href="autoapi/victoria/plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.plugin.Plugin</span></code></a> object called <code class="docutils literal notranslate"><span class="pre">plugin</span></code> for Victoria to
+know how to execute your plugin.</p>
+<p>A Plugin object has three elements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the subcommand.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cli</span></code>: The ‘entry point’ function to execute for the subcommand. Should be
+a <a class="reference external" href="https://click.palletsprojects.com/en/7.x/">Click</a> command or group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_schema</span></code>: If your plugin requires config, this is an instance of a
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/">Marshmallow schema</a> for
+your config. Otherwise, if you don’t specify it your plugin won’t use config,
+as it defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+<p>Here is a minimal example of a plugin defined in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">victoria.plugin</span> <span class="kn">import</span> <span class="n">Plugin</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+<span class="n">plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="n">hello</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When this package is installed, a <code class="docutils literal notranslate"><span class="pre">hello</span></code> subcommand will be available to
+Victoria.</p>
+<p>You will be able to run it like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ victoria hello <span class="s2">&quot;world&quot;</span>
+Hello, world!
+</pre></div>
+</div>
+<p>Obviously, you could specify your CLI entry point function in a separate Python
+module, import that function in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, and specify <code class="docutils literal notranslate"><span class="pre">cli</span></code> as that
+function. This is generally the best practice.</p>
+</div>
+<div class="section" id="specifying-plugin-config">
+<h2>Specifying plugin config<a class="headerlink" href="#specifying-plugin-config" title="Permalink to this headline">¶</a></h2>
+<p>You can specify plugin config by setting <code class="docutils literal notranslate"><span class="pre">config_schema</span></code> of your
+<a class="reference internal" href="autoapi/victoria/plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.plugin.Plugin</span></code></a> object to be an instance of a
+<a class="reference external" href="https://marshmallow.readthedocs.io/en/stable/">Marshmallow schema</a>.</p>
+<p>Config is in a section of the Victoria YAML config called <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>.
+Sub-objects of <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code> have keys of the same name as the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter
+in your <a class="reference internal" href="autoapi/victoria/plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.plugin.Plugin</span></code></a> object in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>.
+So this <code class="docutils literal notranslate"><span class="pre">Plugin(name=&quot;some_plugin&quot;,</span> <span class="pre">...)</span></code>
+would be in key <code class="docutils literal notranslate"><span class="pre">some_plugin</span></code> under <code class="docutils literal notranslate"><span class="pre">plugins_config</span></code>.</p>
+<p>Going by the example of a <code class="docutils literal notranslate"><span class="pre">hello</span></code> plugin in the previous section, let’s customise
+the greeting by allowing a user to specify a custom one in the Victoria config:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">plugins_config</span><span class="p">:</span>
+  <span class="nt">hello</span><span class="p">:</span>
+    <span class="nt">greeting</span><span class="p">:</span> <span class="s">&quot;Bonjour,&quot;</span>
+</pre></div>
+</div>
+<p>We need to create a Marshmallow schema for the config, put this in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">post_load</span>
+
+<span class="k">class</span> <span class="nc">HelloConfigSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@post_load</span>
+    <span class="k">def</span> <span class="nf">create_hello_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HelloConfig</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">HelloConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">greeting</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greeting</span> <span class="o">=</span> <span class="n">greeting</span>
+</pre></div>
+</div>
+<p>Note: you can use any field name inside your plugin schema except <code class="docutils literal notranslate"><span class="pre">victoria_config</span></code>,
+as this is reserved for storing the core Victoria config in Plugin configs.</p>
+<p>And now modify the definition of your <a class="reference internal" href="autoapi/victoria/plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.plugin.Plugin</span></code></a> object
+to include the schema:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="n">hello</span><span class="p">,</span> <span class="n">config_schema</span><span class="o">=</span><span class="n">HelloConfigSchema</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Now we need to pass the config object to the CLI entry point function, we can do this
+using Click by adding the <code class="docutils literal notranslate"><span class="pre">pass_obj</span></code> decorator and an argument to the function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">pass_obj</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">HelloConfig</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">greeting</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see, we’re using our config’s <code class="docutils literal notranslate"><span class="pre">greeting</span></code> field in the function now.</p>
+<p>When you run the plugin, it should now greet the user with the value from the config:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ victoria hello <span class="s2">&quot;le monde&quot;</span>
+Bonjour, le monde!
+</pre></div>
+</div>
+<p>This will also work with Click groups, like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@click</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">pass_obj</span>
+<span class="k">def</span> <span class="nf">grouped</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">HelloConfig</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nd">@grouped</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">pass_obj</span>
+<span class="k">def</span> <span class="nf">subcommand</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">HelloConfig</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-core-victoria-config-from-a-plugin-s-config">
+<h2>Accessing core Victoria config from a plugin’s config<a class="headerlink" href="#accessing-core-victoria-config-from-a-plugin-s-config" title="Permalink to this headline">¶</a></h2>
+<p>All plugin config objects will have the core Victoria config injected into them.
+Following the above example, within our <code class="docutils literal notranslate"><span class="pre">hello</span></code> function, we could access the
+core Victoria config like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">pass_obj</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">HelloConfig</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">core_config</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">victoria_config</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;My logging config is:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">pprint</span><span class="p">(</span><span class="n">core_config</span><span class="o">.</span><span class="n">logging_config</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Every plugin config will have the <code class="docutils literal notranslate"><span class="pre">victoria_config</span></code> field injected into it.
+It is of type <a class="reference internal" href="autoapi/victoria/config/index.html#victoria.config.Config" title="victoria.config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.config.Config</span></code></a>. As a consequence of the injection
+process, it is recommended to not use <code class="docutils literal notranslate"><span class="pre">victoria_config</span></code> as a field name in
+your schemas, as it is liable to be overwitten.</p>
+</div>
+<div class="section" id="storing-secrets-in-config-files">
+<h2>Storing secrets in config files<a class="headerlink" href="#storing-secrets-in-config-files" title="Permalink to this headline">¶</a></h2>
+<p>You can use a cloud encryption provider to handle encryption/decryption of
+secrets from config files.</p>
+<p>Perhaps your plugin accesses some API, and you need the user to specify an
+API key in their config file. You wouldn’t want them to store this in plaintext,
+so you require that it be encrypted in the config file.</p>
+<p>Your config schema could be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">post_load</span>
+
+<span class="kn">from</span> <span class="nn">victoria.encryption.schemas</span> <span class="kn">import</span> <span class="n">EncryptionEnvelopeSchema</span><span class="p">,</span> <span class="n">EncryptionEnvelope</span>
+
+<span class="k">class</span> <span class="nc">APIPluginConfigSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">EncryptionEnvelopeSchema</span><span class="p">)</span>
+
+    <span class="nd">@post_load</span>
+    <span class="k">def</span> <span class="nf">create_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">APIPluginConfig</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">APIPluginConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="autoapi/victoria/encryption/schemas/index.html#victoria.encryption.schemas.EncryptionEnvelope" title="victoria.encryption.schemas.EncryptionEnvelope"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.encryption.schemas.EncryptionEnvelope</span></code></a> is a container for
+encrypted data. Victoria uses <a class="reference external" href="https://cloud.google.com/kms/docs/envelope-encryption">envelope encryption</a>
+to securely store/transmit sensitive data. The <code class="docutils literal notranslate"><span class="pre">EncryptionEnvelope</span></code> object
+contains four fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: The sensitive data encrypted with the ‘data encryption key’ (DEK).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code>: The DEK encrypted with a ‘key encryption key’ (KEK) from your cloud
+encryption provider.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iv</span></code>: A 96-bit nonce used for further security.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: The version of the KEK used. This field is used to check if this
+envelope was encrypted with an old key.</p></li>
+</ul>
+<p>When a user installs your plugin, they will have to provide these
+fields in the plugin config by editing it. The fields can be
+easily generated by Victoria itself using the built-in <code class="docutils literal notranslate"><span class="pre">encrypt</span></code> command.
+The user would run <code class="docutils literal notranslate"><span class="pre">victoria</span> <span class="pre">encrypt</span> <span class="pre">data</span> <span class="pre">{their-api-key}</span></code> with Victoria
+configured to use a cloud encryption provider, and the <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">key</span></code>, <code class="docutils literal notranslate"><span class="pre">iv</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">version</span></code> fields will be printed to stdout in YAML format, ready for
+pasting into the plugin config file.</p>
+<p>To decrypt user-provided sensitive data from an <code class="docutils literal notranslate"><span class="pre">EncryptionEnvelope</span></code> in a
+plugin config file, use the encryption provider API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">pass_obj</span>
+<span class="k">def</span> <span class="nf">do_api_thing</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">APIPluginConfig</span><span class="p">):</span>
+    <span class="n">provider</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">victoria_config</span><span class="o">.</span><span class="n">get_encryption</span><span class="p">()</span>
+    <span class="n">decrypted_key</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">decrypt_str</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">api_key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">decrypted_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># the key was out of date</span>
+        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">some_api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">decrypted_key</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">decrypted_key</span>  <span class="c1"># get rid of it as soon as you don&#39;t need it anymore, it&#39;s plaintext!</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">perform_some_api_action</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we’re getting the encryption provider from the core Victoria config
+with <code class="docutils literal notranslate"><span class="pre">cfg.victoria_config.get_encryption()</span></code>
+(<a class="reference internal" href="autoapi/victoria/config/index.html#victoria.config.Config.get_encryption" title="victoria.config.Config.get_encryption"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.config.Config.get_encryption()</span></code></a>). The object returned is an
+<a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider" title="victoria.encryption.provider.EncryptionProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider</span></code></a>.
+This object is our connection
+to the cloud encryption service, and has functions to encrypt/decrypt data
+into envelopes for safe storage.</p>
+<p>As we’ve specified in our config schema that the <code class="docutils literal notranslate"><span class="pre">api_key</span></code> field is an
+<code class="docutils literal notranslate"><span class="pre">EncryptionEnvelope</span></code>, all we need to do to get the key is use the provider
+to securely decrypt it: <code class="docutils literal notranslate"><span class="pre">provider.decrypt_str(cfg.api_key)</span></code>.</p>
+<p><a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider.decrypt_str" title="victoria.encryption.provider.EncryptionProvider.decrypt_str"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider.decrypt_str()</span></code></a>
+can return <code class="docutils literal notranslate"><span class="pre">None</span></code> if the key in the envelope is now out of
+date. It will log that the user needs to rotate the key. Usually what you’ll
+want to do in this case is simply exit so the user can run
+<code class="docutils literal notranslate"><span class="pre">victoria</span> <span class="pre">encrypt</span> <span class="pre">rotate</span></code> on the data and try again.</p>
+<p>The result will be the plaintext value we need. We can do whatever we want
+with it now, just make sure you delete it as soon as you no longer need it
+anymore, as the longer it’s around in memory the more opportunities someone
+might have to steal your private information!</p>
+<p>The encryption provider API provides encryption methods
+<a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider.encrypt" title="victoria.encryption.provider.EncryptionProvider.encrypt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider.encrypt()</span></code></a> ,
+and <a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider.encrypt_str" title="victoria.encryption.provider.EncryptionProvider.encrypt_str"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider.encrypt_str()</span></code></a>
+for encrypting data into an <code class="docutils literal notranslate"><span class="pre">EncryptionEnvelope</span></code>,
+as well as
+<a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider.decrypt" title="victoria.encryption.provider.EncryptionProvider.decrypt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider.decrypt()</span></code></a>
+and <a class="reference internal" href="autoapi/victoria/encryption/provider/index.html#victoria.encryption.provider.EncryptionProvider.decrypt_str" title="victoria.encryption.provider.EncryptionProvider.decrypt_str"><code class="xref py py-meth docutils literal notranslate"><span class="pre">victoria.encryption.provider.EncryptionProvider.decrypt_str()</span></code></a>
+for decrypting an
+<code class="docutils literal notranslate"><span class="pre">EncryptionEnvelope</span></code>. The <code class="docutils literal notranslate"><span class="pre">*_str()</span></code> functions handle <code class="docutils literal notranslate"><span class="pre">str</span></code> data, and the rest
+handle <code class="docutils literal notranslate"><span class="pre">bytes</span></code> data. All of the decryption functions can return <code class="docutils literal notranslate"><span class="pre">None</span></code> in the
+event of an outdated key, so please be mindful of that.</p>
+<p>Victoria uses a 256-bit AES cipher in Galois-counter mode, with an
+initialization vector of 96-bits. This is based on advice from
+<a class="reference external" href="https://cloud.google.com/kms/docs/envelope-encryption#data_encryption_keys">Google</a>
+and <a class="reference external" href="https://csrc.nist.gov/publications/detail/sp/800-38d/final">NIST</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="developer-guide.html" class="btn btn-neutral float-left" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Glasswall SRE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

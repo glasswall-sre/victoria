@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>victoria.storage.azure_provider &mdash; Victoria  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Victoria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer-guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../plugin-creation.html">Plugin Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Victoria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.storage.azure_provider</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/autoapi/victoria/storage/azure_provider/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-victoria.storage.azure_provider">
+<span id="victoria-storage-azure-provider"></span><h1><a class="reference internal" href="#module-victoria.storage.azure_provider" title="victoria.storage.azure_provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.storage.azure_provider</span></code></a><a class="headerlink" href="#module-victoria.storage.azure_provider" title="Permalink to this headline">¶</a></h1>
+<p><p>victoria.storage.azure_provider</p>
+<p>Implementation of a StorageProvider for Azure Blob Storage.</p>
+<dl class="simple">
+<dt>Author:</dt><dd><p>Sam Gibson &lt;<a class="reference external" href="mailto:sgibson&#37;&#52;&#48;glasswallsolutions&#46;com">sgibson<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
+</dd>
+</dl>
+</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.azure_provider.AzureStorageProvider" title="victoria.storage.azure_provider.AzureStorageProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AzureStorageProvider</span></code></a>(connection_string: str, container: str = None)</p></td>
+<td><p>Storage provider for Azure Blob Storage.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="victoria.storage.azure_provider.AzureStorageProvider">
+<em class="property">class </em><code class="sig-prename descclassname">victoria.storage.azure_provider.</code><code class="sig-name descname">AzureStorageProvider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">connection_string</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">container</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.azure_provider.AzureStorageProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../provider/index.html#victoria.storage.provider.StorageProvider" title="victoria.storage.provider.StorageProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">victoria.storage.provider.StorageProvider</span></code></a></p>
+<p>Storage provider for Azure Blob Storage.</p>
+<dl class="py attribute">
+<dt id="victoria.storage.azure_provider.AzureStorageProvider.client">
+<code class="sig-name descname">client</code><em class="property">: ContainerClient</em><a class="headerlink" href="#victoria.storage.azure_provider.AzureStorageProvider.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Azure API blob client.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>connection_string</strong> (<em>str</em>) – The connection string to the Azure Storage account.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="victoria.storage.azure_provider.AzureStorageProvider.store">
+<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>IOBase<span class="p">, </span>str<span class="p">, </span>bytes<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.azure_provider.AzureStorageProvider.store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a piece of data at a given key in blob storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – The data to store.</p></li>
+<li><p><strong>key</strong> – The path within the container to store it in.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="victoria.storage.azure_provider.AzureStorageProvider.retrieve">
+<code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">stream</span><span class="p">:</span> <span class="n">IOBase</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.azure_provider.AzureStorageProvider.retrieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a piece of data from a given key in blob storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – The key within the container to get the data from.</p></li>
+<li><p><strong>stream</strong> – The stream to stream the data into.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="victoria.storage.azure_provider.AzureStorageProvider.ls">
+<code class="sig-name descname">ls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.azure_provider.AzureStorageProvider.ls" title="Permalink to this definition">¶</a></dt>
+<dd><p>List blobs within a container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>str</em> – The names of blobs within the container.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Glasswall SRE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

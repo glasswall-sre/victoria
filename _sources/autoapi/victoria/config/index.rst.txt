@@ -1,0 +1,260 @@
+:mod:`victoria.config`
+======================
+
+.. py:module:: victoria.config
+
+.. autoapi-nested-parse::
+
+   config
+
+   Contains various classes and methods for loading the config of Victoria.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.config.ConfigSchema
+   victoria.config.Config
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   victoria.config.get_config_loc
+   victoria.config.ensure
+   victoria.config._print_validation_err
+   victoria.config.load_plugin_config
+   victoria.config._handle_config_file_override
+   victoria.config._inject_core_config
+   victoria.config.load
+
+
+.. data:: APP_NAME
+   :annotation: = victoria
+
+   What the app is called.
+
+
+.. data:: APP_AUTHOR
+   :annotation: = GlasswallSRE
+
+   Who the author of the application is.
+
+
+.. data:: DEFAULT_CONFIG_NAME
+   :annotation: = victoria.yaml
+
+   The default filename of the config file. This will be loaded if no other
+   file is given.
+
+
+.. data:: EXAMPLE_CONFIG_FILE
+   :annotation: = victoria_example.yaml
+
+   The example config that will be created if a config wasn't found.
+
+
+.. function:: get_config_loc() -> str
+
+   Get the path to the config file.
+
+
+.. function:: ensure() -> None
+
+   Ensure that a config exists in the location.
+
+
+.. py:class:: ConfigSchema(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)
+
+   Bases: :class:`marshmallow.Schema`
+
+   Marshmallow schema for the Config object.
+
+   .. attribute:: logging_config
+      
+
+      
+
+   .. attribute:: storage_providers
+      
+
+      
+
+   .. attribute:: encryption_provider
+      
+
+      
+
+   .. attribute:: plugins_config_location
+      
+
+      
+
+   .. attribute:: plugins_config
+      
+
+      
+
+   .. method:: make_config_obj(self, data, **kwargs)
+
+
+
+
+.. data:: CONFIG_SCHEMA
+   
+
+   Instance of ConfigSchema used for validating loaded configs.
+
+
+.. py:class:: Config(logging_config: dict, plugins_config: dict = None, plugins_config_location: Mapping[str, str] = None, storage_providers: dict = None, encryption_provider: encryption.EncryptionProviderConfig = None)
+
+   Config is used for storing deserialized values from Config files.
+
+   .. attribute:: logging_config
+      :type: dict
+
+      The config to use for logging.
+
+   .. attribute:: plugins_config
+      :type: dict
+
+      The config to use for plugins.
+
+   .. attribute:: plugins_config_location
+      :type: Mapping[str, str]
+
+      Config file location overrides for plugins.
+
+   .. attribute:: storage_providers
+      :type: dict
+
+      Data used for connecting to storage.
+
+   .. attribute:: encryption_provider
+      :type: EncryptionProviderConfig
+
+      Config for the encryption provider.
+
+   .. method:: __eq__(self, other)
+
+
+      Return self==value.
+
+
+   .. method:: as_dict(self)
+
+
+
+   .. method:: get_storage(self, provider: str)
+
+
+      Get the storage provider of a given type.
+
+      :param provider: The provider type to get. Any key of 'storage_providers'
+                       mapping in Victoria core config.
+      :type provider: str
+
+      :returns: The storage provider.
+      :rtype: StorageProvider
+
+      :raises ValueError: if the provider type was invalid.
+
+
+   .. method:: get_encryption(self)
+
+
+      Get the encryption provider.
+
+      :returns: The encryption provider.
+      :rtype: EncryptionProvider
+
+
+
+.. data:: pass_config
+   
+
+   Decorator for passing the Victoria config to a command.
+
+
+.. function:: _print_validation_err(err: ValidationError, name: str, use_log: bool = True) -> None
+
+   Internal function used for printing a validation error in the Schema.
+
+   :param err: The error to log.
+   :type err: ValidationError
+   :param name: A human-readable identifier for the Schema data source.
+                Like a filename.
+   :type name: str
+   :param use_log: Whether to use the logging package to log the error.
+                   This is needed because sometimes a validation error might occur
+                   when loading the logging config, before it's configured.
+   :type use_log: bool
+
+
+.. function:: load_plugin_config(plugin: Plugin, cfg: Config) -> object
+
+   Load the config of a plugin from the main Victoria config.
+
+   :param plugin: The plugin to load the config for.
+   :type plugin: Plugin
+   :param cfg: The config file to load the config from.
+   :type cfg: Config
+
+   :returns:
+
+             The loaded config object. It will be the same type as whatever
+                 the plugin's config marshmallow schema will marshal it to, or None
+                 if there was some error loading the plugin config.
+   :rtype: object
+
+   :raises ValueError: if the plugin didn't have a config schema.
+
+
+.. function:: _handle_config_file_override(override_loc: str, plugin: Plugin, cfg: Config) -> object
+
+   Handle a plugin config override from the 'plugins_config_location'
+   section of the Victoria core config.
+
+   Attempts to get config from a storage provider.
+
+   :param override_loc: The location of the file. {provider}://{file_path}
+   :type override_loc: str
+   :param plugin: The plugin we're getting config for.
+   :type plugin: Plugin
+   :param cfg: Core Victoria config.
+   :type cfg: Config
+
+   :returns: The config loaded from the storage provider.
+   :rtype: object
+
+
+.. function:: _inject_core_config(core_cfg: Config, loaded_config: object) -> object
+
+   Inject the core config into a loaded plugin config object.
+
+
+.. function:: load(config_path: str) -> Config
+
+   Load a config file from a given path and make sure it's valid.
+
+   If an error occurred, it will print it and return None.
+
+   :param config_path: The path to the YAML config file.
+   :type config_path: str
+
+   :returns: The loaded config file, or None if an error occurred.
+   :rtype: Config
+
+

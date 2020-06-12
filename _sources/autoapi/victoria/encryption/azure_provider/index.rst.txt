@@ -1,0 +1,141 @@
+:mod:`victoria.encryption.azure_provider`
+=========================================
+
+.. py:module:: victoria.encryption.azure_provider
+
+.. autoapi-nested-parse::
+
+   victoria.encryption.azure_provider
+
+   Implementation of an EncryptionProvider for Azure Key Vault.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.encryption.azure_provider.AzureEncryptionProvider
+
+
+
+.. data:: ENCRYPTION_ALGORITHM
+   
+
+   
+
+.. data:: TENANT_ID_ENVVAR
+   :annotation: = AZURE_TENANT_ID
+
+   
+
+.. data:: CLIENT_ID_ENVVAR
+   :annotation: = AZURE_CLIENT_ID
+
+   
+
+.. data:: CLIENT_SECRET_ENVVAR
+   :annotation: = AZURE_CLIENT_SECRET
+
+   
+
+.. py:class:: AzureEncryptionProvider(vault_url: str, key: str, **kwargs)
+
+   Bases: :class:`victoria.encryption.provider.EncryptionProvider`
+
+   An EncryptionProvider implementation for Azure Key Vault.
+
+   To authenticate, please provide Azure AD service principal info as
+   'tenant_id', 'client_id', and 'client_secret' kwargs, or as
+   AZURE_TENANT_ID, AZURE_CLIENT_ID, and AZURE_CLIENT_SECRET environment
+   variables.
+
+   .. attribute:: tenant_id
+      :type: str
+
+      The tenant ID of the Azure SP to connect with.
+
+   .. attribute:: client_id
+      :type: str
+
+      The client ID of the Azure SP to connect with.
+
+   .. attribute:: client_secret
+      :type: str
+
+      The client secret of the Azure SP to connect with.
+
+   .. attribute:: key_client
+      :type: KeyClient
+
+      Azure Key Vault key client.
+
+   .. attribute:: crypto_client
+      :type: CryptographyClient
+
+      Azure Key Vault crypto client.
+
+   :param vault_url: The URL of the key vault to connect to.
+   :type vault_url: str
+   :param key: The name of the key encryption key to use for envelope encryption.
+   :type key: str
+   :param \*\*kwargs: Authentication information.
+
+   :raises TypeError: If authentication information is not provided correctly.
+
+   .. method:: encrypt(self, data: bytes)
+
+
+      Encrypt bytes to an EncryptionEnvelope.
+
+      :param data: The data to encrypt.
+      :type data: bytes
+
+      :returns: The encrypted data.
+      :rtype: EncryptionEnvelope
+
+
+   .. method:: decrypt(self, envelope: EncryptionEnvelope)
+
+
+      Decrypt an EncryptionEnvelope to bytes.
+
+      Please note that this can return None if the key encryption key
+      is out of date.
+
+      :param envelope: The envelope to decrypt.
+      :type envelope: EncryptionEnvelope
+
+      :returns: The decrypted data.
+                None: If the key encryption key was out of date.
+      :rtype: bytes
+
+
+   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None)
+
+
+      Rotate an EncryptionEnvelope encrypted with an old version of the
+      key encryption key to a different version.
+
+      Basically just decrypts it with the old key and reencrypts it with the
+      new key.
+
+      :param envelope: The envelope to rotate.
+      :type envelope: EncryptionEnvelope
+      :param version: The specific KEK version to use. Defaults
+                      to the latest if not given. You probably don't want to specify
+                      this, as the latest will be the best version.
+      :type version: str, optional
+
+      :returns: The newly rotated encrypted data.
+      :rtype: EncryptionEnvelope
+
+
+

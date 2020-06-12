@@ -1,0 +1,126 @@
+:mod:`victoria.encryption`
+==========================
+
+.. py:module:: victoria.encryption
+
+.. autoapi-nested-parse::
+
+   victoria.encryption
+
+   Package providing encryption functionality for Victoria.
+
+   Author:
+       Sam Gibson <sgibson@glasswallsolutions.com>
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   azure_provider/index.rst
+   provider/index.rst
+   schemas/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   victoria.encryption.EncryptionProviderConfigSchema
+   victoria.encryption.EncryptionProviderConfig
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   victoria.encryption.make_provider
+
+
+.. py:class:: EncryptionProviderConfigSchema(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)
+
+   Bases: :class:`marshmallow.Schema`
+
+   Marshmallow schema for the encryption provider config in Victoria core
+   config.
+
+   Fields:
+       provider (str): The type of the provider.
+       config (Mapping[str, str]): Params to pass to the constructor of the
+           encryption provider implementation.
+
+   .. attribute:: provider
+      
+
+      
+
+   .. attribute:: config
+      
+
+      
+
+   .. method:: make_encryption_provider_config(self, data, **kwargs)
+
+
+
+
+.. py:class:: EncryptionProviderConfig(provider: str, config: dict)
+
+   Stores config for Victoria's encryption providing functionality.
+
+   .. attribute:: provider
+      :type: str
+
+      The type of the provider.
+
+   .. attribute:: config
+      :type: Mapping[str, str]
+
+      Params to pass to the constructor of the
+      encryption provider implementation.
+
+   .. method:: to_yaml(cls, dumper, data)
+      :classmethod:
+
+
+
+
+.. data:: EncryptionProvider
+   
+
+   
+
+.. data:: PROVIDERS_MAP
+   
+
+   Map provider names to implementations. Used in make_provider() factory
+   function.
+
+
+.. function:: make_provider(provider_type: str, **kwargs) -> provider.EncryptionProvider
+
+   Make an EncryptionProvider from a provider type. Call with the arguments
+   you would normally provide to the specific implementation's constructor.
+
+   make_provider("azure", vault_url="...", ...)
+
+   :param provider_type: The type of the provider. See PROVIDERS_MAP.
+   :type provider_type: str
+   :param \*\*kwargs: The arguments for the provider implementation's constructor.
+
+   :returns: The provider of the given type.
+   :rtype: EncryptionProvider
+
+   :raises ValueError: If provider_type was invalid (i.e. not in PROVIDERS_MAP).
+   :raises TypeError: If the wrong arguments were given in kwargs.
+
+
