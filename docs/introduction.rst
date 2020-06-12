@@ -45,8 +45,7 @@ As a team, we're fairly young. We were formed in August 2019, and a lot of our
 work to support the system then was exploratory and highly manual. In Google's
 SRE book, this work is called toil_.
 
-We had a 
-process in place to identify manual work that was taking us too much time and
+We had a process in place to identify manual work that was taking us too much time and
 had a high risk of human error, and when we identified this work we wrote
 various bespoke scripts that we could run to do certain things. Examples
 included rebuilding corrupted email data, replaying dead letters, analysing

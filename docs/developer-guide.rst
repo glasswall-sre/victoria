@@ -4,7 +4,7 @@ Developer Guide
 Prerequisites
 -------------
 
-- Python
+- Python 3.6+
 - Pipenv
 
 Quick start
