@@ -13,6 +13,10 @@ pytest-cov = "*"
 pytest-azurepipelines = "*"
 pyfakefs = "*"
 munch = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+m2r = "*"
+sphinx-autoapi = "*"
 
 [packages]
 click = "*"
