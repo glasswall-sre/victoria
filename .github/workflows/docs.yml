@@ -19,7 +19,7 @@ jobs:
           pipenv sync --dev
       - name: Build docs
         run: |
-          make html
+          pipenv run make html
         working-directory: ./docs
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3
