@@ -33,9 +33,10 @@ Classes
    Storage provider for local file storage.
 
    .. attribute:: container
-      :type: str
 
       The folder we're using to store files in.
+
+      :type: str
 
    .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
 

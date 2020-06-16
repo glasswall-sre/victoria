@@ -58,34 +58,41 @@ Classes
    variables.
 
    .. attribute:: tenant_id
-      :type: str
 
       The tenant ID of the Azure SP to connect with.
 
-   .. attribute:: client_id
       :type: str
+
+   .. attribute:: client_id
 
       The client ID of the Azure SP to connect with.
 
-   .. attribute:: client_secret
       :type: str
+
+   .. attribute:: client_secret
 
       The client secret of the Azure SP to connect with.
 
+      :type: str
+
    .. attribute:: key_client
-      :type: KeyClient
 
       Azure Key Vault key client.
 
+      :type: KeyClient
+
    .. attribute:: crypto_client
-      :type: CryptographyClient
 
       Azure Key Vault crypto client.
+
+      :type: CryptographyClient
 
    :param vault_url: The URL of the key vault to connect to.
    :type vault_url: str
    :param key: The name of the key encryption key to use for envelope encryption.
    :type key: str
+   :param auth_via_cli: If we should auth via Azure CLI.
+   :type auth_via_cli: bool, kwarg
    :param \*\*kwargs: Authentication information.
 
    :raises TypeError: If authentication information is not provided correctly.

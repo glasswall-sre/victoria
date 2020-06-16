@@ -123,29 +123,34 @@ Functions
    Config is used for storing deserialized values from Config files.
 
    .. attribute:: logging_config
-      :type: dict
 
       The config to use for logging.
 
-   .. attribute:: plugins_config
       :type: dict
+
+   .. attribute:: plugins_config
 
       The config to use for plugins.
 
+      :type: dict
+
    .. attribute:: plugins_config_location
-      :type: Mapping[str, str]
 
       Config file location overrides for plugins.
 
+      :type: Mapping[str, str]
+
    .. attribute:: storage_providers
-      :type: dict
 
       Data used for connecting to storage.
 
+      :type: dict
+
    .. attribute:: encryption_provider
-      :type: EncryptionProviderConfig
 
       Config for the encryption provider.
+
+      :type: EncryptionProviderConfig
 
    .. method:: __eq__(self, other)
 

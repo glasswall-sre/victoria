@@ -274,8 +274,9 @@ setting up a cloud storage provider.</p>
 <span class="c1"># storage is supported</span>
 <span class="nt">storage_providers</span><span class="p">:</span>
   <span class="nt">azure</span><span class="p">:</span>
-    <span class="nt">connection_string</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-connection-string</span>
-    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoriacontainer</span>
+    <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">account_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-account-name</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoria</span>
   <span class="nt">local</span><span class="p">:</span>
     <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">C:/victoria_storage</span>
 
@@ -285,9 +286,7 @@ setting up a cloud storage provider.</p>
   <span class="nt">config</span><span class="p">:</span>
     <span class="nt">vault_url</span><span class="p">:</span> <span class="s">&quot;https://your-vault.vault.azure.net/&quot;</span>
     <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyencryptionkey</span>
-    <span class="nt">tenant_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tenant-id-here</span>
-    <span class="nt">client_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sp-client-id-here</span>
-    <span class="nt">client_secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sp-client-secret-here</span>
+    <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># inline config for any plugins loaded, objects should have the same name as</span>
 <span class="c1"># the plugin module, i.e. &#39;pbi.py&#39; would have a &#39;pbi&#39; object here</span>
@@ -434,12 +433,20 @@ whatever you want to call your account.</p>
 <p>This storage account can be used by putting this in your Victoria config:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">storage_providers</span><span class="p">:</span>
   <span class="nt">azure</span><span class="p">:</span>
-    <span class="nt">connection_string</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your-connection-string-here</span>
+    <span class="nt">account_name</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">storage-name</span><span class="p p-Indicator">}</span>
     <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoria</span>
+    <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
-<p>Make sure you put your storage account name in the <code class="docutils literal notranslate"><span class="pre">account</span></code> field.</p>
-<p>In order to get the access key for the container, you can run (with Azure CLI):</p>
+<p>Make sure you put your storage account name in the <code class="docutils literal notranslate"><span class="pre">account_name</span></code> field.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">auth_via_cli</span></code> here means that Victoria will piggyback off of the
+Azure CLI login on the machine it’s running on. As long as you’re logged in
+with <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">login</span></code> and you have the right IAM permissions you’ll be able to
+use the storage provider.</p>
+<p>Victoria requires ‘Storage Blob Data Contributor’ permissions for the Service
+Principal being used to access the storage account.</p>
+<p>You can also connect to blob storage directly with a connection string.</p>
+<p>In order to get the connection string for the container, you can run (with Azure CLI):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az storage account show-connection-string <span class="se">\</span>
     --name stvictoria <span class="se">\</span>
     --resource-group rg-victoria <span class="se">\</span>
@@ -449,6 +456,13 @@ whatever you want to call your account.</p>
 </div>
 <p>Obviously this key is a secret, so don’t go putting it in source control or otherwise
 sharing it with anyone.</p>
+<p>You can put it in your config like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">storage_providers</span><span class="p">:</span>
+  <span class="nt">azure</span><span class="p">:</span>
+    <span class="nt">connection_string</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">your-connection-string</span><span class="p p-Indicator">}</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoria</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="encryption">
 <h4>Encryption<a class="headerlink" href="#encryption" title="Permalink to this headline">¶</a></h4>
@@ -471,6 +485,35 @@ $ az keyvault key create --name keyencryptionkey <span class="se">\</span>
 </div>
 <p>Make sure you replace <code class="docutils literal notranslate"><span class="pre">{keyvault-name}</span></code> in the bottom two commands with
 whatever you want to call your key vault.</p>
+<p>Now add the following to your config to use Azure Key Vault as your encryption
+provider:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">encryption_provider</span><span class="p">:</span>
+  <span class="nt">provider</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">config</span><span class="p">:</span>
+    <span class="nt">vault_url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://{keyvault-name}.vault.azure.net/</span>
+    <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyencryptionkey</span>
+    <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">auth_via_cli</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> here allows Victoria to piggyback off of
+the Azure CLI login on the system. As long as you’re logged into Azure CLI via
+<code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">login</span></code> and the Key Vault’s access policy is set up correctly it’ll work.</p>
+<p>The Service Principal Victoria uses to access Key Vault needs to have the
+following access policy on the Key Vault:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Key permissions</dt><dd><ul>
+<li><p>get</p></li>
+<li><p>list</p></li>
+<li><p>encrypt</p></li>
+<li><p>decrypt</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Alternatively, if you don’t want to authenticate using the Azure CLI, you can
+directly use Service Principal details.</p>
 <p>You can create an Azure AD Service Principal to give Victoria access to your
 Key Vault like this:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ az ad sp create-for-rbac --name VictoriaServicePrincipal

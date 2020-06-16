@@ -42,19 +42,22 @@ Functions
    CLI entry point, and optionally a schema for custom plugin config.
 
    .. attribute:: name
-      :type: str
 
       The name of the plugin. This will be the subcommand name.
 
+      :type: str
+
    .. attribute:: cli
-      :type: click.Command
 
       The click entrypoint of the plugin command.
 
+      :type: click.Command
+
    .. attribute:: config_schema
-      :type: marshmallow.Schema
 
       The schema to use to validate config (OPTIONAL).
+
+      :type: marshmallow.Schema
 
    .. method:: __eq__(self, other)
 

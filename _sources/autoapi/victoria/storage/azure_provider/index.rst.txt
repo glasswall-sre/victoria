@@ -26,18 +26,31 @@ Classes
 
 
 
-.. py:class:: AzureStorageProvider(connection_string: str, container: str = None)
+.. py:class:: AzureStorageProvider(container: str, auth_via_cli: bool = False, account_name: str = '', connection_string: str = '')
 
    Bases: :class:`victoria.storage.provider.StorageProvider`
 
    Storage provider for Azure Blob Storage.
 
+   .. attribute:: main_client
+
+      The Azure blob service client.
+
+      :type: BlobServiceClient
+
    .. attribute:: client
-      :type: ContainerClient
 
       The Azure API blob client.
 
-   :param connection_string: The connection string to the Azure Storage account.
+      :type: ContainerClient
+
+   :param container: The storage container to use.
+   :type container: str
+   :param auth_via_cli: Whether we should authenticate via the Azure CLI.
+   :type auth_via_cli: bool
+   :param account_name: The name of the storage account. Only used if auth via CLI.
+   :type account_name: str
+   :param connection_string: The connection string to the Azure Storage account. Only used if not auth via CLI.
    :type connection_string: str
 
    .. method:: store(self, data: Union[IOBase, str, bytes], key: str)

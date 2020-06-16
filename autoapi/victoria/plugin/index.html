@@ -201,20 +201,35 @@
 CLI entry point, and optionally a schema for custom plugin config.</p>
 <dl class="py attribute">
 <dt id="victoria.plugin.Plugin.name">
-<code class="sig-name descname">name</code><em class="property">: str</em><a class="headerlink" href="#victoria.plugin.Plugin.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><a class="headerlink" href="#victoria.plugin.Plugin.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name of the plugin. This will be the subcommand name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="victoria.plugin.Plugin.cli">
-<code class="sig-name descname">cli</code><em class="property">: click.Command</em><a class="headerlink" href="#victoria.plugin.Plugin.cli" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cli</code><a class="headerlink" href="#victoria.plugin.Plugin.cli" title="Permalink to this definition">¶</a></dt>
 <dd><p>The click entrypoint of the plugin command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>click.Command</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="victoria.plugin.Plugin.config_schema">
-<code class="sig-name descname">config_schema</code><em class="property">: marshmallow.Schema</em><a class="headerlink" href="#victoria.plugin.Plugin.config_schema" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">config_schema</code><a class="headerlink" href="#victoria.plugin.Plugin.config_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>The schema to use to validate config (OPTIONAL).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>marshmallow.Schema</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

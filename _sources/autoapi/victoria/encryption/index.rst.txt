@@ -78,15 +78,17 @@ Functions
    Stores config for Victoria's encryption providing functionality.
 
    .. attribute:: provider
-      :type: str
 
       The type of the provider.
 
+      :type: str
+
    .. attribute:: config
-      :type: Mapping[str, str]
 
       Params to pass to the constructor of the
       encryption provider implementation.
+
+      :type: Mapping[str, str]
 
    .. method:: to_yaml(cls, dumper, data)
       :classmethod:
