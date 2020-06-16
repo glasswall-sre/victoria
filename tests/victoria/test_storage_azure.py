@@ -52,9 +52,14 @@ def mock_azure_classes(monkeypatch):
         def get_blob_client(self, key):
             return self.blobs.setdefault(key, BlobClientMock())
 
+    def mock_get_client_from_cli_profile(cls, **kwargs):
+        return cls()
+
     monkeypatch.setattr(azure_provider, "ContainerClient", ContainerClientMock)
     monkeypatch.setattr(azure_provider, "BlobServiceClient",
                         BlobServiceClientMock)
+    monkeypatch.setattr(azure_provider, "get_client_from_cli_profile",
+                        mock_get_client_from_cli_profile)
 
 
 @pytest.mark.parametrize(
