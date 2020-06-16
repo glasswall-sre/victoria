@@ -116,8 +116,9 @@ Example
     # storage is supported
     storage_providers:
       azure:
-        connection_string: your-connection-string
-        container: victoriacontainer
+        auth_via_cli: true
+        account_name: your-account-name
+        container: victoria
       local:
         container: C:/victoria_storage
 
@@ -127,9 +128,7 @@ Example
       config:
         vault_url: "https://your-vault.vault.azure.net/"
         key: keyencryptionkey
-        tenant_id: tenant-id-here
-        client_id: sp-client-id-here
-        client_secret: sp-client-secret-here
+        auth_via_cli: true
 
     # inline config for any plugins loaded, objects should have the same name as
     # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
@@ -317,13 +316,24 @@ This storage account can be used by putting this in your Victoria config:
 
     storage_providers:
       azure:
-        connection_string: your-connection-string-here
+        account_name: {storage-name}
         container: victoria
+        auth_via_cli: true
 
 
-Make sure you put your storage account name in the ``account`` field.
+Make sure you put your storage account name in the ``account_name`` field.
 
-In order to get the access key for the container, you can run (with Azure CLI):
+Setting ``auth_via_cli`` here means that Victoria will piggyback off of the
+Azure CLI login on the machine it's running on. As long as you're logged in
+with ``az login`` and you have the right IAM permissions you'll be able to
+use the storage provider.
+
+Victoria requires 'Storage Blob Data Contributor' permissions for the Service
+Principal being used to access the storage account.
+
+You can also connect to blob storage directly with a connection string.
+
+In order to get the connection string for the container, you can run (with Azure CLI):
 
 .. code-block:: bash
 
@@ -336,6 +346,16 @@ In order to get the access key for the container, you can run (with Azure CLI):
 
 Obviously this key is a secret, so don't go putting it in source control or otherwise
 sharing it with anyone.
+
+You can put it in your config like so:
+
+.. code-block:: yaml
+
+    storage_providers:
+      azure:
+        connection_string: {your-connection-string}
+        container: victoria
+
 
 Encryption
 **********
@@ -363,6 +383,34 @@ You can create the key vault and key like this (with Azure CLI):
 
 Make sure you replace ``{keyvault-name}`` in the bottom two commands with
 whatever you want to call your key vault.
+
+Now add the following to your config to use Azure Key Vault as your encryption
+provider:
+
+.. code-block:: yaml
+
+    encryption_provider:
+      provider: azure
+      config:
+        vault_url: https://{keyvault-name}.vault.azure.net/
+        key: keyencryptionkey
+        auth_via_cli: true
+
+Setting ``auth_via_cli`` to ``true`` here allows Victoria to piggyback off of
+the Azure CLI login on the system. As long as you're logged into Azure CLI via
+``az login`` and the Key Vault's access policy is set up correctly it'll work.
+
+The Service Principal Victoria uses to access Key Vault needs to have the 
+following access policy on the Key Vault:
+
+- Key permissions
+    - get 
+    - list 
+    - encrypt 
+    - decrypt
+
+Alternatively, if you don't want to authenticate using the Azure CLI, you can
+directly use Service Principal details.
 
 You can create an Azure AD Service Principal to give Victoria access to your
 Key Vault like this:
