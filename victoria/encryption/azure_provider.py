@@ -11,7 +11,9 @@ import os
 from os import path
 from typing import Optional, Union
 
-from azure.identity import ClientSecretCredential
+from azure.cli.core import CLIError
+from azure.common.client_factory import get_client_from_cli_profile
+from azure.identity import ClientSecretCredential, InteractiveBrowserCredential, SharedTokenCacheCredential
 from azure.keyvault.keys import KeyClient
 from azure.keyvault.keys.crypto import CryptographyClient, EncryptionAlgorithm
 
@@ -42,29 +44,45 @@ class AzureEncryptionProvider(EncryptionProvider):
     Args:
         vault_url (str): The URL of the key vault to connect to.
         key (str): The name of the key encryption key to use for envelope encryption.
+        auth_via_cli (bool, kwarg): If we should auth via Azure CLI.
         **kwargs: Authentication information.
 
     Raises:
         TypeError: If authentication information is not provided correctly.
     """
     def __init__(self, vault_url: str, key: str, **kwargs) -> None:
-        tenant_id = kwargs.pop("tenant_id", os.getenv(TENANT_ID_ENVVAR))
-        client_id = kwargs.pop("client_id", os.getenv(CLIENT_ID_ENVVAR))
-        client_secret = kwargs.pop("client_secret",
-                                   os.getenv(CLIENT_SECRET_ENVVAR))
-        if tenant_id is None or client_id is None or client_secret is None:
-            raise TypeError(
-                "Please specify tenant_id, client_id, and client_secret "
-                "in config or in environment variables as in "
-                "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity#service-principal-with-secret"
-            )
-        self.cred = ClientSecretCredential(tenant_id, client_id, client_secret)
-        self.key_client = KeyClient(vault_url,
-                                    credential=self.cred,
-                                    logger=None)
-        self.key_encryption_key = self.key_client.get_key(key)
-        self.crypto_client = CryptographyClient(self.key_encryption_key,
-                                                self.cred)
+        auth_via_cli = bool(kwargs.pop("auth_via_cli", False))
+        if auth_via_cli:
+            try:
+                self.key_client = get_client_from_cli_profile(
+                    KeyClient, vault_url=vault_url)
+                self.key_encryption_key = self.key_client.get_key(key)
+                self.crypto_client = get_client_from_cli_profile(
+                    CryptographyClient, key=self.key_encryption_key)
+            except CLIError:
+                logging.error(
+                    "ERROR: Unable to authenticate via Azure CLI, have you "
+                    "logged in with 'az login'?")
+                raise SystemExit(1)
+        else:
+            tenant_id = kwargs.pop("tenant_id", os.getenv(TENANT_ID_ENVVAR))
+            client_id = kwargs.pop("client_id", os.getenv(CLIENT_ID_ENVVAR))
+            client_secret = kwargs.pop("client_secret",
+                                       os.getenv(CLIENT_SECRET_ENVVAR))
+            if tenant_id is None or client_id is None or client_secret is None:
+                raise TypeError(
+                    "Please specify tenant_id, client_id, and client_secret "
+                    "in config or in environment variables as in "
+                    "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity#service-principal-with-secret"
+                )
+            self.cred = ClientSecretCredential(tenant_id, client_id,
+                                               client_secret)
+            self.key_client = KeyClient(vault_url,
+                                        credential=self.cred,
+                                        logger=None)
+            self.key_encryption_key = self.key_client.get_key(key)
+            self.crypto_client = CryptographyClient(self.key_encryption_key,
+                                                    self.cred)
 
     # overrides EncryptionProvider.encrypt()
     def encrypt(self, data: bytes) -> EncryptionEnvelope:

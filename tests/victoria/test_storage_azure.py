@@ -29,6 +29,14 @@ def mock_azure_classes(monkeypatch):
         def download_blob(self):
             return MockStreamDownloader(self.data)
 
+    class BlobServiceClientMock:
+        @classmethod
+        def from_connection_string(cls, conn_str: str):
+            return cls()
+
+        def get_container_client(self, container: str):
+            return ContainerClientMock()
+
     class ContainerClientMock:
         def __init__(self, *args, **kwargs):
             self.blobs = {}
@@ -45,6 +53,8 @@ def mock_azure_classes(monkeypatch):
             return self.blobs.setdefault(key, BlobClientMock())
 
     monkeypatch.setattr(azure_provider, "ContainerClient", ContainerClientMock)
+    monkeypatch.setattr(azure_provider, "BlobServiceClient",
+                        BlobServiceClientMock)
 
 
 @pytest.mark.parametrize(
@@ -54,13 +64,15 @@ def mock_azure_classes(monkeypatch):
      (StringIO("test"), "stream_blob.txt", "test", does_not_raise())])
 def test_store(mock_azure_classes, data, key, expected, raises):
     with raises:
-        provider = azure_provider.AzureStorageProvider("", "container")
+        provider = azure_provider.AzureStorageProvider(
+            "container", connection_string="test")
         provider.store(data, key)
         assert provider.client.blobs[key].data == expected
 
 
 def test_retrieve(mock_azure_classes):
-    provider = azure_provider.AzureStorageProvider("", "container")
+    provider = azure_provider.AzureStorageProvider("container",
+                                                   connection_string="test")
     provider.store("test", "test.file")
     stream = StringIO()
     provider.retrieve("test.file", stream)
@@ -68,7 +80,8 @@ def test_retrieve(mock_azure_classes):
 
 
 def test_ls(mock_azure_classes):
-    provider = azure_provider.AzureStorageProvider("", "container")
+    provider = azure_provider.AzureStorageProvider("container",
+                                                   connection_string="test")
     provider.store("test", "test.file")
     provider.store("test", "test2.file")
     ls = list(provider.ls())

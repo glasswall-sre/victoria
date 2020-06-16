@@ -16,7 +16,8 @@ setup(
     install_requires=[
         "appdirs>=1.4.3", "click>=7.0", "marshmallow>=3.2.1", "pyyaml>=5.1.2",
         "azure-storage-blob>=12.3.0", "cryptography>=2.8",
-        "azure-keyvault>=4.0.0", "azure-identity>=1.3.0", "dpath>=2.0.1"
+        "azure-keyvault>=4.0.0", "azure-identity>=1.3.0", "dpath>=2.0.1",
+        "azure-cli-core>=2.7.0"
     ],
     name="victoria",
     version="#{VERSION}#",
