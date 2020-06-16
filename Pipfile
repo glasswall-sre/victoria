@@ -32,6 +32,7 @@ cryptography = "*"
 azure-keyvault = "*"
 azure-identity = "*"
 dpath = "*"
+azure-cli-core = "*"
 
 [requires]
 python_version = "3.7"

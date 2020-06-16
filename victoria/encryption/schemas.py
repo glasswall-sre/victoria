@@ -58,7 +58,7 @@ class EncryptionProviderConfigSchema(Schema):
             encryption provider implementation.
     """
     provider = fields.Str(required=True)
-    config = fields.Mapping(keys=fields.Str(), values=fields.Str(), missing={})
+    config = fields.Mapping(keys=fields.Str(), values=fields.Raw(), missing={})
 
     @post_load
     def make_encryption_provider_config(self, data, **kwargs):

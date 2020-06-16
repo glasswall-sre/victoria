@@ -17,7 +17,12 @@ from test_encryption_azure import mock_azure_classes
         "client_id": "",
         "client_secret": ""
     }, azure_provider.AzureEncryptionProvider, does_not_raise()),
-     ("unknown", {}, None, pytest.raises(ValueError))])
+     ("unknown", {}, None, pytest.raises(ValueError)),
+     ("azure", {
+         "vault_url": "",
+         "key": "",
+         "auth_via_cli": True
+     }, azure_provider.AzureEncryptionProvider, does_not_raise())])
 def test_make_provider(mock_azure_classes, fs, kind, kwargs, expected, raises):
     with raises:
         provider = encryption.make_provider(kind, **kwargs)

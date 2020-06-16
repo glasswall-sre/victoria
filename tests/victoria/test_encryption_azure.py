@@ -22,7 +22,7 @@ def mock_azure_classes(monkeypatch):
             return munchify({"name": key, "properties": {"version": version}})
 
     class MockCryptoClient:
-        def __init__(self, key_encryption_key, creds):
+        def __init__(self, key_encryption_key, creds=None):
             pass
 
         def encrypt(self, algorithm, data):
@@ -32,10 +32,15 @@ def mock_azure_classes(monkeypatch):
         def decrypt(self, algorithm, data):
             return munchify({"plaintext": data})
 
+    def mock_get_client_from_cli_profile(cls, **kwargs):
+        return cls(kwargs)
+
     monkeypatch.setattr(azure_provider, "ClientSecretCredential",
                         MockClientSecretCredential)
     monkeypatch.setattr(azure_provider, "KeyClient", MockKeyClient)
     monkeypatch.setattr(azure_provider, "CryptographyClient", MockCryptoClient)
+    monkeypatch.setattr(azure_provider, "get_client_from_cli_profile",
+                        mock_get_client_from_cli_profile)
 
 
 def test_provider_init(mock_azure_classes):
