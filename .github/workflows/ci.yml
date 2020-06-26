@@ -25,7 +25,7 @@ jobs:
           pipenv sync --dev
       - name: Lint with pylint
         run: |
-          pipenv run pylint victoria --disable="C,W,R"
+          pipenv run pylint victoria --disable="C,R"
       - name: Test with pytest
         run: |
           pipenv run pytest tests/ --cov victoria --cov-report term-missing

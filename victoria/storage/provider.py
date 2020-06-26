@@ -7,7 +7,7 @@ Author:
 """
 from abc import ABC, abstractmethod
 from io import IOBase
-from typing import Generator, ContextManager, Union
+from typing import Generator, Union
 
 
 class StorageProvider(ABC):

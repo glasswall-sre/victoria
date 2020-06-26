@@ -5,14 +5,13 @@ Implementation of a StorageProvider for Azure Blob Storage.
 Author:
     Sam Gibson <sgibson@glasswallsolutions.com>
 """
-from contextlib import contextmanager
 from io import IOBase
 import logging
-from typing import Generator, ContextManager, Union
+from typing import Generator, Union
 
 from azure.cli.core import CLIError
 from azure.common.client_factory import get_client_from_cli_profile
-from azure.storage.blob import ContainerClient, BlobServiceClient
+from azure.storage.blob import BlobServiceClient
 
 from . import provider
 

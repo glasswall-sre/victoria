@@ -8,7 +8,6 @@ Author:
 
 import importlib
 import logging
-from os.path import basename, splitext
 import pkgutil
 from typing import List
 
@@ -64,8 +63,8 @@ def load(plugin_name: str) -> Plugin:
         spec = importlib.util.find_spec(f"victoria_{plugin_name}")
         if spec is None:
             logging.error(
-                f"Error loading plugin 'victoria_{plugin_name}': module spec not found"
-            )
+                "Error loading plugin 'victoria_%s': module spec not found",
+                plugin_name)
             return None
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -73,13 +72,14 @@ def load(plugin_name: str) -> Plugin:
         if type(plugin_obj) is not Plugin:
             # check that the plugin object is of the right type
             logging.error(
-                f"Error loading plugin 'victoria_{plugin_name}': 'plugin' "
-                "must be of type 'Plugin'")
+                "Error loading plugin 'victoria_%s': 'plugin' "
+                "must be of type 'Plugin'", plugin_name)
             return None
     except (ValueError, ModuleNotFoundError, AttributeError) as err:
         # if there was some error finding the module spec or getting
         # the plugin object from the loaded module
-        logging.error(f"Error loading plugin 'victoria_{plugin_name}': {err}")
+        logging.error("Error loading plugin 'victoria_%s': %s", plugin_name,
+                      err)
         return None
     return plugin_obj
 
@@ -97,8 +97,9 @@ def load_all() -> List[Plugin]:
 
         if loaded_plugin.name in already_loaded_names:
             logging.error(
-                f"Error loading plugin 'victoria_{loaded_plugin.name}"
-                ": a plugin with the same name is already loaded")
+                "Error loading plugin 'victoria_%s"
+                ": a plugin with the same name is already loaded",
+                loaded_plugin.name)
             continue
 
         if loaded_plugin is not None:

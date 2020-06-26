@@ -68,6 +68,8 @@ We accept pull requests! To contribute:
 3. Follow the [Google style guide for Python](http://google.github.io/styleguide/pyguide.html).
    Every piece of code needs to be documented with [Google-style docstrings](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html).
    We use [pylint](https://pypi.org/project/pylint/) to lint our code.
+   We run pylint without the 'convention' and 'refactor' message classes.
+   You can lint your code with: `pipenv run pylint victoria --disable="C,R"`.
    We use [yapf](https://github.com/google/yapf) to automatically format our code. We recommend having it
    format the code whenever you save.
 4. Make commits for each part of your pull request. Try not to make too many (if it's a small issue you may only need one).

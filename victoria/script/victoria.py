@@ -8,22 +8,16 @@ productivity.
 Author:
     Sam Gibson <sgibson@glasswallsolutions.com>
 """
-
 import argparse
-import importlib
-import importlib.util
-import pkg_resources
 
 import click
 
 from .. import config
 from .. import plugin
-from ..util import basenamenoext
 
-# Used for making it so we can use both -h and --help for help text.
+# used for making it so we can use both -h and --help for help text.
 CONTEXT_SETTINGS = {"help_option_names": ["-h", "--help"]}
 
-# TODO(sam): Write full help text
 HELP_TEXT = """
 V.I.C.T.O.R.I.A.
 
@@ -58,11 +52,11 @@ class VictoriaCLI(click.MultiCommand):
         """List the available subcommands."""
         return [plgn.name for plgn in self.plugins]
 
-    def get_command(self, ctx, name):
+    def get_command(self, ctx, cmd_name):
         """Get a subcommand from the list of installed plugins."""
         for plgn in self.plugins:
             # if the command name matches a loaded plugin name
-            if plgn.name == name:
+            if plgn.name == cmd_name:
                 # if the plugin has a config schema, load its config
                 if plgn.config_schema and ctx.obj:
                     cfg = config.load_plugin_config(plgn, ctx.obj)
@@ -83,12 +77,13 @@ class VictoriaCLI(click.MultiCommand):
               "--config-file",
               default=config.get_config_loc(),
               metavar="FILE",
-              help=f"The config file to load.")
+              help="The config file to load.")
 @click.version_option(version=VERSION_NUMBER)
 @click.pass_context
 def cli(ctx, config_file):
     """This is the main CLI of the application. It uses VictoriaCLI to call
     loaded plugins based on subcommand name."""
+    #pylint: disable=unused-argument
     if config_file is None:
         raise SystemExit(1)
 

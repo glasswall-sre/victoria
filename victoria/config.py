@@ -9,7 +9,7 @@ import io
 import logging.config
 import os
 from os import path
-from typing import List, Mapping
+from typing import Mapping
 
 import appdirs
 import click
@@ -78,6 +78,7 @@ class ConfigSchema(Schema):
 
     @post_load
     def make_config_obj(self, data, **kwargs):
+        #pylint: disable=unused-argument
         return Config(**data)
 
 
@@ -96,12 +97,12 @@ class Config:
         encryption_provider (EncryptionProviderConfig): Config for the encryption provider.
     """
     def __init__(
-        self,
-        logging_config: dict,
-        plugins_config: dict = None,
-        plugins_config_location: Mapping[str, str] = None,
-        storage_providers: dict = None,
-        encryption_provider: encryption.EncryptionProviderConfig = None):
+            self,
+            logging_config: dict,
+            plugins_config: dict = None,
+            plugins_config_location: Mapping[str, str] = None,
+            storage_providers: dict = None,
+            encryption_provider: encryption.EncryptionProviderConfig = None):
         self.logging_config = logging_config
         logging.config.dictConfig(logging_config)
         self.plugins_config = plugins_config
@@ -166,18 +167,13 @@ pass_config = click.make_pass_decorator(Config)
 """Decorator for passing the Victoria config to a command."""
 
 
-def _print_validation_err(err: ValidationError,
-                          name: str,
-                          use_log: bool = True) -> None:
+def _print_validation_err(err: ValidationError, name: str) -> None:
     """Internal function used for printing a validation error in the Schema.
 
     Args:
         err (ValidationError): The error to log.
         name (str): A human-readable identifier for the Schema data source. 
             Like a filename.
-        use_log (bool): Whether to use the logging package to log the error.
-            This is needed because sometimes a validation error might occur
-            when loading the logging config, before it's configured.
     """
     # build up a string for each error
     log_str = []
@@ -219,7 +215,7 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     # check to see if there's a location override for the config
     if plugin.name in cfg.plugins_config_location:
         loc = cfg.plugins_config_location[plugin.name]
-        raw_config = _handle_config_file_override(loc, plugin, cfg)
+        raw_config = _handle_config_file_override(loc, cfg)
     elif cfg.plugins_config is not None and plugin.name in cfg.plugins_config:
         # otherwise use the one in the main config
         if not cfg.plugins_config:
@@ -245,8 +241,7 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
         return None
 
 
-def _handle_config_file_override(override_loc: str, plugin: Plugin,
-                                 cfg: Config) -> object:
+def _handle_config_file_override(override_loc: str, cfg: Config) -> object:
     """Handle a plugin config override from the 'plugins_config_location'
     section of the Victoria core config.
 
@@ -254,16 +249,15 @@ def _handle_config_file_override(override_loc: str, plugin: Plugin,
 
     Args:
         override_loc (str): The location of the file. {provider}://{file_path}
-        plugin (Plugin): The plugin we're getting config for.
         cfg (Config): Core Victoria config.
 
     Returns:
         object: The config loaded from the storage provider.
     """
-    provider_type, path = tuple(override_loc.split("://"))
+    provider_type, file_path = tuple(override_loc.split("://"))
     provider = cfg.get_storage(provider_type)
     config_file = io.BytesIO()
-    provider.retrieve(path, config_file)
+    provider.retrieve(file_path, config_file)
     config_str = config_file.getvalue().decode("utf-8")
     return yaml.safe_load(config_str)
 

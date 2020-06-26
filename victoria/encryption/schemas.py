@@ -5,8 +5,6 @@ Marshmallow schemas for the encryption functionality.
 Author:
     Sam Gibson <sgibson@glasswallsolutions.com>
 """
-from typing import Mapping
-
 from marshmallow import Schema, fields, post_load
 
 
@@ -26,6 +24,7 @@ class EncryptionEnvelopeSchema(Schema):
 
     @post_load
     def make_encryption_envelope(self, data, **kwargs):
+        #pylint: disable=unused-argument
         return EncryptionEnvelope(**data)
 
 
@@ -62,6 +61,7 @@ class EncryptionProviderConfigSchema(Schema):
 
     @post_load
     def make_encryption_provider_config(self, data, **kwargs):
+        #pylint: disable=unused-argument
         return EncryptionProviderConfig(**data)
 
 
@@ -79,4 +79,5 @@ class EncryptionProviderConfig:
 
     @classmethod
     def to_yaml(cls, dumper, data):
+        #pylint: disable=unused-argument
         return vars(data)
