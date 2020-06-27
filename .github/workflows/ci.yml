@@ -29,6 +29,9 @@ jobs:
       - name: Test with pytest
         run: |
           pipenv run pytest tests/ --cov victoria --cov-report term-missing
+      - name: Check for security issues with bandit
+        run: |
+          pipenv run bandit -r victoria
 
       - name: Codecov
         uses: codecov/codecov-action@v1.0.7
