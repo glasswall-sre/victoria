@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -49,7 +50,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> Victoria
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Victoria
           
 
           
@@ -72,6 +73,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,6 +93,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -129,7 +132,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.config</span></code></li>
     
@@ -192,13 +195,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.ensure" title="victoria.config.ensure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensure</span></code></a>()</p></td>
 <td><p>Ensure that a config exists in the location.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._print_validation_err" title="victoria.config._print_validation_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_print_validation_err</span></code></a>(err: ValidationError, name: str, use_log: bool = True)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._print_validation_err" title="victoria.config._print_validation_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_print_validation_err</span></code></a>(err: ValidationError, name: str)</p></td>
 <td><p>Internal function used for printing a validation error in the Schema.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.load_plugin_config" title="victoria.config.load_plugin_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_plugin_config</span></code></a>(plugin: Plugin, cfg: Config)</p></td>
 <td><p>Load the config of a plugin from the main Victoria config.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, plugin: Plugin, cfg: Config)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, cfg: Config)</p></td>
 <td><p>Handle a plugin config override from the ‘plugins_config_location’</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#victoria.config._inject_core_config" title="victoria.config._inject_core_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_inject_core_config</span></code></a>(core_cfg: Config, loaded_config: object)</p></td>
@@ -404,7 +407,7 @@ mapping in Victoria core config.</p>
 
 <dl class="py function">
 <dt id="victoria.config._print_validation_err">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_print_validation_err</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">err</span><span class="p">:</span> <span class="n">ValidationError</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">use_log</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.config._print_validation_err" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_print_validation_err</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">err</span><span class="p">:</span> <span class="n">ValidationError</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.config._print_validation_err" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal function used for printing a validation error in the Schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -412,9 +415,6 @@ mapping in Victoria core config.</p>
 <li><p><strong>err</strong> (<em>ValidationError</em>) – The error to log.</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – A human-readable identifier for the Schema data source.
 Like a filename.</p></li>
-<li><p><strong>use_log</strong> (<em>bool</em>) – Whether to use the logging package to log the error.
-This is needed because sometimes a validation error might occur
-when loading the logging config, before it’s configured.</p></li>
 </ul>
 </dd>
 </dl>
@@ -450,7 +450,7 @@ if there was some error loading the plugin config.</p>
 
 <dl class="py function">
 <dt id="victoria.config._handle_config_file_override">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_handle_config_file_override</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">override_loc</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">plugin</span><span class="p">:</span> <span class="n">Plugin</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">Config</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._handle_config_file_override" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_handle_config_file_override</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">override_loc</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">Config</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._handle_config_file_override" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a plugin config override from the ‘plugins_config_location’
 section of the Victoria core config.</p>
 <p>Attempts to get config from a storage provider.</p>
@@ -458,7 +458,6 @@ section of the Victoria core config.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>override_loc</strong> (<em>str</em>) – The location of the file. {provider}://{file_path}</p></li>
-<li><p><strong>plugin</strong> (<a class="reference internal" href="../plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><em>Plugin</em></a>) – The plugin we’re getting config for.</p></li>
 <li><p><strong>cfg</strong> (<a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config"><em>Config</em></a>) – Core Victoria config.</p></li>
 </ul>
 </dd>
@@ -510,11 +509,19 @@ section of the Victoria core config.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, Glasswall SRE
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -525,7 +532,6 @@ section of the Victoria core config.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

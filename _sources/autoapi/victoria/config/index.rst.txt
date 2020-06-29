@@ -193,7 +193,7 @@ Functions
    Decorator for passing the Victoria config to a command.
 
 
-.. function:: _print_validation_err(err: ValidationError, name: str, use_log: bool = True) -> None
+.. function:: _print_validation_err(err: ValidationError, name: str) -> None
 
    Internal function used for printing a validation error in the Schema.
 
@@ -202,10 +202,6 @@ Functions
    :param name: A human-readable identifier for the Schema data source.
                 Like a filename.
    :type name: str
-   :param use_log: Whether to use the logging package to log the error.
-                   This is needed because sometimes a validation error might occur
-                   when loading the logging config, before it's configured.
-   :type use_log: bool
 
 
 .. function:: load_plugin_config(plugin: Plugin, cfg: Config) -> object
@@ -227,7 +223,7 @@ Functions
    :raises ValueError: if the plugin didn't have a config schema.
 
 
-.. function:: _handle_config_file_override(override_loc: str, plugin: Plugin, cfg: Config) -> object
+.. function:: _handle_config_file_override(override_loc: str, cfg: Config) -> object
 
    Handle a plugin config override from the 'plugins_config_location'
    section of the Victoria core config.
@@ -236,8 +232,6 @@ Functions
 
    :param override_loc: The location of the file. {provider}://{file_path}
    :type override_loc: str
-   :param plugin: The plugin we're getting config for.
-   :type plugin: Plugin
    :param cfg: Core Victoria config.
    :type cfg: Config
 

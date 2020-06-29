@@ -1,15 +1,19 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>V.I.C.T.O.R.I.A. - infinitely customisable CLI &mdash; Victoria  documentation</title>
+  <title>Features &mdash; Victoria  documentation</title>
   
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
 
   
   
@@ -17,7 +21,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction" href="introduction.html" /> 
@@ -50,7 +51,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> Victoria
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Victoria
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -92,6 +94,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -130,9 +133,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>V.I.C.T.O.R.I.A. - infinitely customisable CLI</li>
+      <li>Features</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -151,29 +154,129 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="v-i-c-t-o-r-i-a-infinitely-customisable-cli">
-<h1>V.I.C.T.O.R.I.A. - infinitely customisable CLI<a class="headerlink" href="#v-i-c-t-o-r-i-a-infinitely-customisable-cli" title="Permalink to this headline">¶</a></h1>
-<img alt="https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/victoria.gif" src="https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/victoria.gif" />
-<p><strong>V</strong>ery <strong>I</strong>mportant <strong>C</strong>ommands for <strong>T</strong>oil <strong>O</strong>ptimization: <strong>R</strong>educing <strong>I</strong>nessential <strong>A</strong>ctivities.</p>
-<p>Victoria is the SRE toolbelt—a single command with multiple pluggable
-subcommands for automating any number of ‘toil’ tasks that inhibit SRE
-productivity.</p>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install -U victoria
-</pre></div>
+  <div align="center" style="text-align:center">
+
+# V.I.C.T.O.R.I.A.
+
+![Victoria demo](https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/victoria.gif)
+
+**V**ery **I**mportant **C**ommands for **T**oil **O**ptimization: **R**educing **I**nessential **A**ctivities.
+
+Victoria is the SRE toolbelt—a single CLI with multiple pluggable
+subcommands for automating any number of 'toil' tasks that inhibit SRE
+productivity.
+
+<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=alert_status">
+<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=sqale_rating">
+<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=reliability_rating">
+<img align="center" src="https://codecov.io/gh/glasswall-sre/victoria/branch/master/graph/badge.svg">
+<img align="center" src="https://img.shields.io/github/license/glasswall-sre/victoria">
+<img align="center" src="https://img.shields.io/github/workflow/status/glasswall-sre/victoria/CD">
+<img align="center" src="https://img.shields.io/pypi/pyversions/victoria">
+<img align="center" src="https://img.shields.io/pypi/v/victoria">
+</div><div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Plugin architecture for easy extension</p></li>
+<li><p>Store config for plugins in cloud storage</p>
+<ul>
+<li><p>Azure Blob Storage</p></li>
+</ul>
+</li>
+<li><p>Encrypt secret config data at rest using cloud encruption provider</p>
+<ul>
+<li><p>Azure Key Vault</p></li>
+</ul>
+</li>
+</ul>
 </div>
-</div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Python 3.6+</p></li>
 <li><p>Pip</p></li>
 </ul>
 </div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-terminal notranslate"><div class="highlight"><pre><span></span>pip install -U victoria
+</pre></div>
+</div>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>The documentation <a class="reference external" href="https://sre.glasswallsolutions.com/victoria/index.html">can be found here</a>.</p>
+</div>
 <div class="section" id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
-<p>Victoria is licensed under the MIT license.</p>
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/glasswall-sre/victoria/blob/master/LICENSE">Victoria is licensed under the MIT license.</a></p>
+</div>
+<div class="section" id="contribution">
+<h1>Contribution<a class="headerlink" href="#contribution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bug-reports">
+<h2>Bug reports<a class="headerlink" href="#bug-reports" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/glasswall-sre/victoria/issues/new?assignees=&amp;labels=bug&amp;template=bug_report.md&amp;title=%5BBUG%5D+%7BDescription+of+issue%7D">You can submit a bug report here.</a></p>
+</div>
+<div class="section" id="feature-requests">
+<h2>Feature requests<a class="headerlink" href="#feature-requests" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/glasswall-sre/victoria/issues/new?assignees=&amp;labels=enhancement&amp;template=feature_request.md&amp;title=%5BREQUEST%5D">You can request a new feature here.</a></p>
+</div>
+<div class="section" id="vulnerability-reports">
+<h2>Vulnerability reports<a class="headerlink" href="#vulnerability-reports" title="Permalink to this headline">¶</a></h2>
+<p>We prefer vulnerabilities to be reported in private so as to minimise their
+impact (so we can fix them before they are exploited!). To this end, please
+email any security vulnerability reports to <a class="reference external" href="mailto:'sre&#37;&#52;&#48;glasswallsolutions&#46;com">‘sre<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>’.
+We would appreciate it if you use the issue template in the link below.
+All vulnerabilities will be acknowledged within one business day.</p>
+<p><a class="reference external" href="https://github.com/glasswall-sre/victoria/issues/new?assignees=&amp;labels=Incident%2C+bug&amp;template=vulnerability-report.md&amp;title=%5BVULNERABILITY%5D">You can publicly report a security vulnerability here.</a></p>
+</div>
+<div class="section" id="pull-requests">
+<h2>Pull requests<a class="headerlink" href="#pull-requests" title="Permalink to this headline">¶</a></h2>
+<p>We accept pull requests! To contribute:</p>
+<ol class="arabic simple">
+<li><p>Pick up an unassigned issue from <a class="reference external" href="https://github.com/glasswall-sre/victoria/issues">our issue board</a>.
+Assign yourself to the issue so other people know you’re working on it.</p></li>
+<li><p>Work on your code in a feature branch that’s got a descriptive name (like <code class="docutils literal notranslate"><span class="pre">rework-fancy-integrator</span></code>).</p></li>
+<li><p>Follow the <a class="reference external" href="http://google.github.io/styleguide/pyguide.html">Google style guide for Python</a>.
+Every piece of code needs to be documented with <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google-style docstrings</a>.
+We use <a class="reference external" href="https://pypi.org/project/pylint/">pylint</a> to lint our code.
+We run pylint without the ‘convention’ and ‘refactor’ message classes.
+You can lint your code with: <code class="docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">run</span> <span class="pre">pylint</span> <span class="pre">victoria</span> <span class="pre">--disable=&quot;C,R&quot;</span></code>.
+We use <a class="reference external" href="https://github.com/google/yapf">yapf</a> to automatically format our code. We recommend having it
+format the code whenever you save.</p></li>
+<li><p>Make commits for each part of your pull request. Try not to make too many (if it’s a small issue you may only need one).
+We try to use <a class="reference external" href="https://chris.beams.io/posts/git-commit/#imperative">the imperative mood</a>
+in commit message subjects.</p></li>
+<li><p>We expect all new code to have at least 80% test coverage. This is enforced by <a class="reference external" href="https://codecov.io/gh/glasswall-sre/victoria">Codecov</a>.</p></li>
+<li><p>To run tests locally and check coverage, use: <code class="docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">run</span> <span class="pre">pytest</span> <span class="pre">tests/</span> <span class="pre">--cov=victoria</span></code>.</p></li>
+<li><p>When ready to merge, create a pull request from your branch into master.</p></li>
+<li><p>Make sure you link your pull request to the issue(s) it addresses.</p></li>
+<li><p>The <a class="reference external" href="https://github.com/glasswall-sre/victoria/actions?query=workflow%3ACI">CI build</a> will run
+for your pull request. If it fails then it cannot be merged. Inspect the output, figure
+out why it failed, and fix the problem.
+The CI build will lint your code, run tests, and send coverage/code to Codecov
+and <a class="reference external" href="https://sonarcloud.io/dashboard?id=victoria">SonarCloud</a>.</p></li>
+<li><p>Someone will review your pull request and suggest changes if necessary.</p></li>
+<li><p>When everything is signed off, your pull request will be merged! Congrats.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="development-guide">
+<h1>Development guide<a class="headerlink" href="#development-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Prerequisites<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Python</p></li>
+<li><p>Pipenv</p></li>
+</ul>
+</div>
+<div class="section" id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Clone the repo.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">sync</span> <span class="pre">--dev</span></code>.</p></li>
+<li><p>You’re good to go.</p></li>
+</ol>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
@@ -262,11 +365,19 @@ productivity.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, Glasswall SRE
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -277,7 +388,6 @@ productivity.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
