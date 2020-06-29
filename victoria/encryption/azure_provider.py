@@ -8,12 +8,11 @@ Author:
 import base64
 import logging
 import os
-from os import path
 from typing import Optional, Union
 
 from azure.cli.core import CLIError
 from azure.common.client_factory import get_client_from_cli_profile
-from azure.identity import ClientSecretCredential, InteractiveBrowserCredential, SharedTokenCacheCredential
+from azure.identity import ClientSecretCredential
 from azure.keyvault.keys import KeyClient
 from azure.keyvault.keys.crypto import CryptographyClient, EncryptionAlgorithm
 
@@ -23,7 +22,7 @@ ENCRYPTION_ALGORITHM = EncryptionAlgorithm.rsa_oaep_256
 
 TENANT_ID_ENVVAR = "AZURE_TENANT_ID"
 CLIENT_ID_ENVVAR = "AZURE_CLIENT_ID"
-CLIENT_SECRET_ENVVAR = "AZURE_CLIENT_SECRET"
+CLIENT_SECRET_ENVVAR = "AZURE_CLIENT_SECRET"  # nosec
 
 
 class AzureEncryptionProvider(EncryptionProvider):
@@ -108,8 +107,9 @@ class AzureEncryptionProvider(EncryptionProvider):
     def decrypt(self, envelope: EncryptionEnvelope) -> Union[bytes, None]:
         if envelope.version != self.key_encryption_key.properties.version:
             logging.error(
-                f"Encryption key version {envelope.version} is out of "
-                "date, please re-encrypt with 'victoria encrypt rotate'")
+                "Encryption key version %s is out of "
+                "date, please re-encrypt with 'victoria encrypt rotate'",
+                envelope.version)
             return None
 
         # decode from base64

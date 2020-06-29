@@ -21,6 +21,7 @@ class LocalStorageProvider(provider.StorageProvider):
         container (str): The folder we're using to store files in.
     """
     def __init__(self, container: str, **kwargs):
+        #pylint: disable=unused-argument
         self.container = container
 
     def store(self, data: Union[IOBase, str, bytes], key: str) -> None:
