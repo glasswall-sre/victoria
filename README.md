@@ -75,7 +75,7 @@ We accept pull requests! To contribute:
 4. Make commits for each part of your pull request. Try not to make too many (if it's a small issue you may only need one).
    We try to use [the imperative mood](https://chris.beams.io/posts/git-commit/#imperative)
    in commit message subjects.
-5. We expect all new code to have at least 60% test coverage. This is enforced by [Codecov](https://codecov.io/gh/glasswall-sre/victoria).
+5. We expect all new code to have at least 80% test coverage. This is enforced by [Codecov](https://codecov.io/gh/glasswall-sre/victoria).
 6. To run tests locally and check coverage, use: `pipenv run pytest tests/ --cov=victoria`.
 7. When ready to merge, create a pull request from your branch into master.
 8. Make sure you link your pull request to the issue(s) it addresses.
