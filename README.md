@@ -8,6 +8,7 @@ Victoria is the SRE toolbelt—a single CLI with multiple pluggable
 subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
 
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4111/badge)](https://bestpractices.coreinfrastructure.org/projects/4111)
 ![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=alert_status)
 ![Maintainability rating](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=sqale_rating)
 ![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=reliability_rating)
@@ -16,6 +17,8 @@ productivity.
 ![Build status](https://img.shields.io/github/workflow/status/glasswall-sre/victoria/CD)
 ![Python versions](https://img.shields.io/pypi/pyversions/victoria)
 ![PyPI version](https://img.shields.io/pypi/v/victoria)
+
+![Best practices badge](https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/cii-badge.png)
 
 ## Features
 - Plugin architecture for easy extension
