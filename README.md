@@ -1,5 +1,3 @@
-<div align="center" style="text-align:center">
-
 # V.I.C.T.O.R.I.A.
 
 ![Victoria demo](https://raw.githubusercontent.com/glasswall-sre/victoria/master/img/victoria.gif)
@@ -10,15 +8,14 @@ Victoria is the SRE toolbelt—a single CLI with multiple pluggable
 subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
 
-<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=alert_status">
-<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=sqale_rating">
-<img align="center" src="https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=reliability_rating">
-<img align="center" src="https://codecov.io/gh/glasswall-sre/victoria/branch/master/graph/badge.svg">
-<img align="center" src="https://img.shields.io/github/license/glasswall-sre/victoria">
-<img align="center" src="https://img.shields.io/github/workflow/status/glasswall-sre/victoria/CD">
-<img align="center" src="https://img.shields.io/pypi/pyversions/victoria">
-<img align="center" src="https://img.shields.io/pypi/v/victoria">
-</div>
+![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=alert_status)
+![Maintainability rating](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=sqale_rating)
+![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=victoria&metric=reliability_rating)
+![Code coverage](https://codecov.io/gh/glasswall-sre/victoria/branch/master/graph/badge.svg)
+![License](https://img.shields.io/github/license/glasswall-sre/victoria)
+![Build status](https://img.shields.io/github/workflow/status/glasswall-sre/victoria/CD)
+![Python versions](https://img.shields.io/pypi/pyversions/victoria)
+![PyPI version](https://img.shields.io/pypi/v/victoria)
 
 ## Features
 - Plugin architecture for easy extension
@@ -53,7 +50,7 @@ The documentation [can be found here](https://sre.glasswallsolutions.com/victori
 ### Vulnerability reports
 We prefer vulnerabilities to be reported in private so as to minimise their
 impact (so we can fix them before they are exploited!). To this end, please
-email any security vulnerability reports to 'sre@glasswallsolutions.com'.
+email any security vulnerability reports to '[sre@glasswallsolutions.com](mailto://sre@glasswallsolutions.com)'.
 We would appreciate it if you use the issue template in the link below.
 All vulnerabilities will be acknowledged within one business day.
 
