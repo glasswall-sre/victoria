@@ -23,7 +23,7 @@ logging_config:
 encryption_provider: null
 
 # the storage backends to use - to configure this, see the README
-storage_providers: null
+storage_providers: {}
 
 # inline config for any plugins loaded, objects should have the same name as
 # the plugin module, i.e. 'pbi.py' would have a 'pbi' object here
