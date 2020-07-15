@@ -70,8 +70,7 @@ class ConfigSchema(Schema):
     encryption_provider = fields.Nested(
         encryption.EncryptionProviderConfigSchema,
         required=False,
-        allow_none=True,
-        missing={})
+        allow_none=True)
     plugins_config_location = fields.Mapping(keys=fields.Str(),
                                              values=fields.Str(),
                                              default={})

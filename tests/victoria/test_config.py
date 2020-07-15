@@ -38,7 +38,8 @@ VALID_LOGGING_CONFIG = {
 VALID_CONFIG = victoria.config.Config(VALID_LOGGING_CONFIG,
                                       {'test': {
                                           'test_field': 2
-                                      }})
+                                      }},
+                                      storage_providers={})
 
 
 class PluginSchema(Schema):

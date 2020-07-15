@@ -49,7 +49,7 @@ plugins_config:
   config:
     indent: 2
 plugins_config_location: {}
-storage_providers: null
+storage_providers: {}
 
 """
 
