@@ -23,7 +23,7 @@ jobs:
       - name: Inject version number
         uses: cschleiden/replace-tokens@v1.0
         with:
-          files: setup.py
+          files: victoria/script/victoria.py
         env:
           VERSION: ${{ env.GIT_TAG }}
       - name: Build and publish
