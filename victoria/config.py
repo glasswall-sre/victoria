@@ -66,7 +66,7 @@ def ensure() -> None:
 class ConfigSchema(Schema):
     """Marshmallow schema for the Config object."""
     logging_config = fields.Dict(required=True)
-    storage_providers = fields.Dict(required=False, default={})
+    storage_providers = fields.Dict(required=False, default={}, missing={})
     encryption_provider = fields.Nested(
         encryption.EncryptionProviderConfigSchema,
         required=False,
@@ -74,7 +74,7 @@ class ConfigSchema(Schema):
     plugins_config_location = fields.Mapping(keys=fields.Str(),
                                              values=fields.Str(),
                                              default={})
-    plugins_config = fields.Dict(required=False, default={})
+    plugins_config = fields.Dict(required=False, default={}, missing={})
 
     @post_load
     def make_config_obj(self, data, **kwargs):

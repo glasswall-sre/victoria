@@ -287,6 +287,36 @@ Cloud backends
 Azure
 ^^^^^
 
+An easy way to deploy the Victoria Azure cloud backend is to use Pulumi_.
+
+A Pulumi project that deploys all of the necessary Azure infrastructure can
+be found here: https://github.com/glasswall-sre/victoria_cloud_backend
+
+You'll need to add the following sections to your ``victoria.yaml`` config:
+
+.. code-block:: yaml
+
+    storage_providers:
+      azure:
+        account_name: {storage-name}
+        container: victoria
+        auth_via_cli: true
+
+    encryption_provider:
+      provider: azure
+      config:
+        vault_url: {vault-url}
+        key: keyencryptionkey
+        auth_via_cli: true
+
+Where ``{storage-name}`` can be found by running: 
+``pulumi stack output storage_account_name``
+
+And ``{vault-url}`` can be found by running:
+``pulumi stack output key_vault_url``
+
+.. _Pulumi: https://www.pulumi.com/
+
 Storage
 *******
 
