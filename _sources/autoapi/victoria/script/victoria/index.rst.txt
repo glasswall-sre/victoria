@@ -64,7 +64,7 @@ productivity.
    
 
 .. data:: VERSION_NUMBER
-   :annotation: = #{TAG_NAME}#
+   :annotation: = #{VERSION}#
 
    The version number of the application, to print when calling with --version.
 
