@@ -1,4 +1,3 @@
-from contextlib import nullcontext as does_not_raise
 from io import StringIO, BytesIO
 from os import path
 
@@ -6,6 +5,8 @@ import pytest
 from pyfakefs.pytest_plugin import fs
 
 from victoria.storage import local_provider
+
+from helpers import does_not_raise
 
 
 @pytest.mark.parametrize(

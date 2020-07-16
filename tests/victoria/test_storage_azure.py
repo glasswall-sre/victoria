@@ -1,10 +1,11 @@
-from contextlib import nullcontext as does_not_raise
 from io import IOBase, StringIO, RawIOBase
 
 import pytest
 from munch import munchify
 
 from victoria.storage import azure_provider
+
+from helpers import does_not_raise
 
 
 @pytest.fixture

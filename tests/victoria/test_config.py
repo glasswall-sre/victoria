@@ -1,5 +1,4 @@
 import builtins
-from contextlib import nullcontext as does_not_raise
 import io
 from os import path
 import pkg_resources
@@ -11,6 +10,7 @@ import pytest
 import victoria.config
 import victoria.plugin
 
+from helpers import does_not_raise
 from test_storage_azure import mock_azure_classes as mock_storage
 from test_encryption_azure import mock_azure_classes as mock_encryption
 

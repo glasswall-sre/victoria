@@ -1,5 +1,3 @@
-from contextlib import nullcontext as does_not_raise
-
 import pytest
 
 from victoria import storage
@@ -7,6 +5,7 @@ from victoria.storage import azure_provider, local_provider
 
 from test_storage_azure import mock_azure_classes
 from test_storage_local import fs
+from helpers import does_not_raise
 
 
 @pytest.mark.parametrize(
