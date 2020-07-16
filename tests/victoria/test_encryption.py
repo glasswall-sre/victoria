@@ -1,11 +1,10 @@
-from contextlib import nullcontext as does_not_raise
-
 import pytest
 
 from victoria import encryption
 from victoria.encryption import azure_provider
 
 from test_encryption_azure import mock_azure_classes
+from helpers import does_not_raise
 
 
 @pytest.mark.parametrize(

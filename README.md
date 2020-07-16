@@ -90,10 +90,10 @@ We accept pull requests! To contribute:
 ## Development guide
 
 ### Prerequisites
-- Python
-- Pipenv
+- Python 3.6+
+- Poetry
 
 ### Quick start
 1. Clone the repo.
-2. Run `pipenv sync --dev`.
+2. Run `poetry install`.
 3. You're good to go.
