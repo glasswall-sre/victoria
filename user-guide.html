@@ -423,21 +423,25 @@ be found here: <a class="reference external" href="https://github.com/glasswall-
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">storage_providers</span><span class="p">:</span>
   <span class="nt">azure</span><span class="p">:</span>
     <span class="nt">account_name</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">storage-name</span><span class="p p-Indicator">}</span>
-    <span class="nt">container</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">victoria</span>
+    <span class="nt">container</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">container-name</span><span class="p p-Indicator">}</span>
     <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="nt">encryption_provider</span><span class="p">:</span>
   <span class="nt">provider</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">config</span><span class="p">:</span>
     <span class="nt">vault_url</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">vault-url</span><span class="p p-Indicator">}</span>
-    <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">keyencryptionkey</span>
+    <span class="nt">key</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">key-name</span><span class="p p-Indicator">}</span>
     <span class="nt">auth_via_cli</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">{storage-name}</span></code> can be found by running:
 <code class="docutils literal notranslate"><span class="pre">pulumi</span> <span class="pre">stack</span> <span class="pre">output</span> <span class="pre">storage_account_name</span></code></p>
+<p>And <code class="docutils literal notranslate"><span class="pre">{container-name}</span></code> can be found by running:
+<code class="docutils literal notranslate"><span class="pre">pulumi</span> <span class="pre">stack</span> <span class="pre">output</span> <span class="pre">container_name</span></code></p>
 <p>And <code class="docutils literal notranslate"><span class="pre">{vault-url}</span></code> can be found by running:
 <code class="docutils literal notranslate"><span class="pre">pulumi</span> <span class="pre">stack</span> <span class="pre">output</span> <span class="pre">key_vault_url</span></code></p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">{key-name}</span></code> can be found by running:
+<code class="docutils literal notranslate"><span class="pre">pulumi</span> <span class="pre">stack</span> <span class="pre">output</span> <span class="pre">key_name</span></code></p>
 <div class="section" id="storage">
 <h4>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h4>
 <p>The Azure storage backend requires an Azure storage account with a blob container.</p>

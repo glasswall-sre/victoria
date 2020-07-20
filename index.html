@@ -238,14 +238,14 @@ Assign yourself to the issue so other people know you’re working on it.</p></l
 Every piece of code needs to be documented with <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google-style docstrings</a>.
 We use <a class="reference external" href="https://pypi.org/project/pylint/">pylint</a> to lint our code.
 We run pylint without the ‘convention’ and ‘refactor’ message classes.
-You can lint your code with: <code class="docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">run</span> <span class="pre">pylint</span> <span class="pre">victoria</span> <span class="pre">--disable=&quot;C,R&quot;</span></code>.
+You can lint your code with: <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">run</span> <span class="pre">pylint</span> <span class="pre">victoria</span> <span class="pre">--disable=&quot;C,R&quot;</span></code>.
 We use <a class="reference external" href="https://github.com/google/yapf">yapf</a> to automatically format our code. We recommend having it
 format the code whenever you save.</p></li>
 <li><p>Make commits for each part of your pull request. Try not to make too many (if it’s a small issue you may only need one).
 We try to use <a class="reference external" href="https://chris.beams.io/posts/git-commit/#imperative">the imperative mood</a>
 in commit message subjects.</p></li>
 <li><p>We expect all new code to have at least 80% test coverage. This is enforced by <a class="reference external" href="https://codecov.io/gh/glasswall-sre/victoria">Codecov</a>.</p></li>
-<li><p>To run tests locally and check coverage, use: <code class="docutils literal notranslate"><span class="pre">pipenv</span> <span class="pre">run</span> <span class="pre">pytest</span> <span class="pre">tests/</span> <span class="pre">--cov=victoria</span></code>.</p></li>
+<li><p>To run tests locally and check coverage, use: <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">run</span> <span class="pre">pytest</span> <span class="pre">tests/</span> <span class="pre">--cov=victoria</span></code>.</p></li>
 <li><p>When ready to merge, create a pull request from your branch into master.</p></li>
 <li><p>Make sure you link your pull request to the issue(s) it addresses.</p></li>
 <li><p>The <a class="reference external" href="https://github.com/glasswall-sre/victoria/actions?query=workflow%3ACI">CI build</a> will run

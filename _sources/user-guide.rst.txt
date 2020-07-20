@@ -299,21 +299,27 @@ You'll need to add the following sections to your ``victoria.yaml`` config:
     storage_providers:
       azure:
         account_name: {storage-name}
-        container: victoria
+        container: {container-name}
         auth_via_cli: true
 
     encryption_provider:
       provider: azure
       config:
         vault_url: {vault-url}
-        key: keyencryptionkey
+        key: {key-name}
         auth_via_cli: true
 
 Where ``{storage-name}`` can be found by running: 
 ``pulumi stack output storage_account_name``
 
+And ``{container-name}`` can be found by running:
+``pulumi stack output container_name``
+
 And ``{vault-url}`` can be found by running:
 ``pulumi stack output key_vault_url``
+
+Finally, ``{key-name}`` can be found by running:
+``pulumi stack output key_name``
 
 .. _Pulumi: https://www.pulumi.com/
 
