@@ -70,14 +70,14 @@ We accept pull requests! To contribute:
    Every piece of code needs to be documented with [Google-style docstrings](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html).
    We use [pylint](https://pypi.org/project/pylint/) to lint our code.
    We run pylint without the 'convention' and 'refactor' message classes.
-   You can lint your code with: `pipenv run pylint victoria --disable="C,R"`.
+   You can lint your code with: `poetry run pylint victoria --disable="C,R"`.
    We use [yapf](https://github.com/google/yapf) to automatically format our code. We recommend having it
    format the code whenever you save.
 4. Make commits for each part of your pull request. Try not to make too many (if it's a small issue you may only need one).
    We try to use [the imperative mood](https://chris.beams.io/posts/git-commit/#imperative)
    in commit message subjects.
 5. We expect all new code to have at least 80% test coverage. This is enforced by [Codecov](https://codecov.io/gh/glasswall-sre/victoria).
-6. To run tests locally and check coverage, use: `pipenv run pytest tests/ --cov=victoria`.
+6. To run tests locally and check coverage, use: `poetry run pytest tests/ --cov=victoria`.
 7. When ready to merge, create a pull request from your branch into master.
 8. Make sure you link your pull request to the issue(s) it addresses.
 9. The [CI build](https://github.com/glasswall-sre/victoria/actions?query=workflow%3ACI) will run 
