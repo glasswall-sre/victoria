@@ -3,7 +3,7 @@
 Package providing storage functionality for Victoria.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 import logging
 

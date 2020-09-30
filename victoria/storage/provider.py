@@ -3,7 +3,7 @@
 Abstract base class of a storage provider.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 from abc import ABC, abstractmethod
 from io import IOBase

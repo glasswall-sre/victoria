@@ -3,7 +3,7 @@
 Marshmallow schemas for the encryption functionality.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 from marshmallow import Schema, fields, post_load
 

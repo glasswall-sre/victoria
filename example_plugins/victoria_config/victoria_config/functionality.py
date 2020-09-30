@@ -3,7 +3,7 @@
 This is where the main functionality of the config plugin is implemented.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 
 import click

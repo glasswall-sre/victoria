@@ -3,7 +3,7 @@
 A Victoria plugin to print the currently loaded config.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 
 import click

@@ -20,13 +20,13 @@ setup(
         "azure-cli-core>=2.7.0"
     ],
     name="victoria",
-    version="0.6.1",
+    version="0.7.1",
     description=
     "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity.",
     long_description=repo_file_as_string("README.md"),
     long_description_content_type="text/markdown",
-    author="Sam Gibson",
-    author_email="sgibson@glasswallsolutions.com",
+    author="Ash Powell",
+    author_email="apowell@glasswallsolutions.com",
     url="https://github.com/glasswall-sre/victoria",
     classifiers=[
         "Development Status :: 4 - Beta", "Environment :: Console",
