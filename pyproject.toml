@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "victoria"
-version = "0.7.4"
+version = "0.7.6"
 description = "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity."
 authors = ["Ash Powell <apowell@glasswallsolutions.com>"]
 license = "MIT"

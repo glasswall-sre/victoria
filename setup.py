@@ -20,7 +20,7 @@ setup(
         "azure-cli-core>=2.7.0"
     ],
     name="victoria",
-    version="0.7.4",
+    version="0.7.6",
     description=
     "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity.",
     long_description=repo_file_as_string("README.md"),
