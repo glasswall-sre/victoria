@@ -46,11 +46,11 @@ class AzureStorageProvider(provider.StorageProvider):
                     account_url=f"https://{account_name}.blob.core.windows.net/"
                 )
 
-            except CLIError:
+            except CLIError as err:
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
-                raise SystemExit(1)
+                raise SystemExit(1) from err
         else:
             if not connection_string:
                 logging.error(

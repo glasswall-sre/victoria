@@ -58,11 +58,11 @@ class AzureEncryptionProvider(EncryptionProvider):
                 self.key_encryption_key = self.key_client.get_key(key)
                 self.crypto_client = get_client_from_cli_profile(
                     CryptographyClient, key=self.key_encryption_key)
-            except CLIError:
+            except CLIError as err:
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
-                raise SystemExit(1)
+                raise SystemExit(1) from err
         else:
             tenant_id = kwargs.pop("tenant_id", os.getenv(TENANT_ID_ENVVAR))
             client_id = kwargs.pop("client_id", os.getenv(CLIENT_ID_ENVVAR))

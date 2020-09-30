@@ -36,5 +36,5 @@ def make_provider(provider_type: str, **kwargs) -> provider.EncryptionProvider:
     """
     try:
         return PROVIDERS_MAP[provider_type](**kwargs)
-    except KeyError:
-        raise ValueError(f"Invalid encryption provider_type '{provider_type}'")
+    except KeyError as err:
+        raise ValueError(f"Invalid encryption provider_type '{provider_type}'") from err
