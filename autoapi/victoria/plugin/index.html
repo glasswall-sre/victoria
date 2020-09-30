@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.plugin">
 <span id="victoria-plugin"></span><h1><a class="reference internal" href="#module-victoria.plugin" title="victoria.plugin"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.plugin</span></code></a><a class="headerlink" href="#module-victoria.plugin" title="Permalink to this headline">¶</a></h1>
-<p><p>plugin</p>
+<p>plugin</p>
 <p>Contains functions for loading Victoria plugins at runtime.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,7 +171,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code></a>(name: str, cli: click.Command, config_schema: Schema = None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code></a></p></td>
 <td><p>Plugin is the API for creating a Victoria plugin. It defines plugin name,</p></td>
 </tr>
 </tbody>
@@ -186,13 +185,13 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.load" title="victoria.plugin.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(plugin_name: str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.load" title="victoria.plugin.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(plugin_name: str) → Plugin</p></td>
 <td><p>Load a plugin by name.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.plugin.load_all" title="victoria.plugin.load_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_all</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.plugin.load_all" title="victoria.plugin.load_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_all</span></code></a>() → List[Plugin]</p></td>
 <td><p>Load all plugins that can be found.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.ls" title="victoria.plugin.ls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ls</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.plugin.ls" title="victoria.plugin.ls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ls</span></code></a>() → List[str]</p></td>
 <td><p>Get a list of plugins installed on the system.</p></td>
 </tr>
 </tbody>
@@ -245,7 +244,7 @@ CLI entry point, and optionally a schema for custom plugin config.</p>
 
 <dl class="py function">
 <dt id="victoria.plugin.load">
-<code class="sig-prename descclassname">victoria.plugin.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; Plugin<a class="headerlink" href="#victoria.plugin.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.plugin.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#victoria.plugin.Plugin" title="victoria.plugin.Plugin">Plugin</a><a class="headerlink" href="#victoria.plugin.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a plugin by name.</p>
 <p>Plugins are installed python modules with a name starting with ‘<a href="#id1"><span class="problematic" id="id2">victoria_</span></a>’.
 For example: ‘victoria_config’. Plugin packages should define a plugin
@@ -274,7 +273,7 @@ must be in the format “victoria_{plugin_name}”.</p>
 
 <dl class="py function">
 <dt id="victoria.plugin.load_all">
-<code class="sig-prename descclassname">victoria.plugin.</code><code class="sig-name descname">load_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Plugin<span class="p">]</span><a class="headerlink" href="#victoria.plugin.load_all" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.plugin.</code><code class="sig-name descname">load_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#victoria.plugin.Plugin" title="victoria.plugin.Plugin">Plugin</a><span class="p">]</span><a class="headerlink" href="#victoria.plugin.load_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load all plugins that can be found.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

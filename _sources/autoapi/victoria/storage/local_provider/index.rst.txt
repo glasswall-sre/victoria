@@ -38,8 +38,7 @@ Classes
 
       :type: str
 
-   .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
-
+   .. method:: store(self, data: Union[IOBase, str, bytes], key: str) -> None
 
       Store a piece of data at a given key in blob storage.
 
@@ -47,8 +46,7 @@ Classes
       :param key: The path within the container to store it in.
 
 
-   .. method:: retrieve(self, key: str, stream: IOBase)
-
+   .. method:: retrieve(self, key: str, stream: IOBase) -> None
 
       Retrieve a piece of data from a given key in blob storage.
 
@@ -56,16 +54,14 @@ Classes
       :param stream: The stream to stream the data into.
 
 
-   .. method:: ls(self)
-
+   .. method:: ls(self) -> Generator[str, None, None]
 
       List blobs within a container.
 
       :Yields: *str* -- The names of blobs within the container.
 
 
-   .. method:: _ensure_container(self)
-
+   .. method:: _ensure_container(self) -> None
 
 
 

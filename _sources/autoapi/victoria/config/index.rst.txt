@@ -111,7 +111,6 @@ Functions
 
 
 
-
 .. data:: CONFIG_SCHEMA
    
 
@@ -154,16 +153,13 @@ Functions
 
    .. method:: __eq__(self, other)
 
-
       Return self==value.
 
 
-   .. method:: as_dict(self)
+   .. method:: as_dict(self) -> dict
 
 
-
-   .. method:: get_storage(self, provider: str)
-
+   .. method:: get_storage(self, provider: str) -> storage.StorageProvider
 
       Get the storage provider of a given type.
 
@@ -177,8 +173,7 @@ Functions
       :raises ValueError: if the provider type was invalid.
 
 
-   .. method:: get_encryption(self)
-
+   .. method:: get_encryption(self) -> encryption.EncryptionProvider
 
       Get the encryption provider.
 

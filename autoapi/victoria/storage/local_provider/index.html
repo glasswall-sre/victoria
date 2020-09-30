@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.storage.local_provider">
 <span id="victoria-storage-local-provider"></span><h1><a class="reference internal" href="#module-victoria.storage.local_provider" title="victoria.storage.local_provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.storage.local_provider</span></code></a><a class="headerlink" href="#module-victoria.storage.local_provider" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.storage.local_provider</p>
+<p>victoria.storage.local_provider</p>
 <p>Implementation of a StorageProvider for local file storage.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,7 +171,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.local_provider.LocalStorageProvider" title="victoria.storage.local_provider.LocalStorageProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocalStorageProvider</span></code></a>(container: str, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.local_provider.LocalStorageProvider" title="victoria.storage.local_provider.LocalStorageProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocalStorageProvider</span></code></a></p></td>
 <td><p>Storage provider for local file storage.</p></td>
 </tr>
 </tbody>
@@ -195,7 +194,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.local_provider.LocalStorageProvider.store">
-<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>IOBase<span class="p">, </span>str<span class="p">, </span>bytes<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.store" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>IOBase<span class="p">, </span>str<span class="p">, </span>bytes<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.store" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store a piece of data at a given key in blob storage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -209,7 +208,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.local_provider.LocalStorageProvider.retrieve">
-<code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">stream</span><span class="p">:</span> <span class="n">IOBase</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.retrieve" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">stream</span><span class="p">:</span> <span class="n">IOBase</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.retrieve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a piece of data from a given key in blob storage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -223,7 +222,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.local_provider.LocalStorageProvider.ls">
-<code class="sig-name descname">ls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.ls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Generator<span class="p">[</span>str<span class="p">, </span>None<span class="p">, </span>None<span class="p">]</span><a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider.ls" title="Permalink to this definition">¶</a></dt>
 <dd><p>List blobs within a container.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
@@ -234,7 +233,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.local_provider.LocalStorageProvider._ensure_container">
-<code class="sig-name descname">_ensure_container</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider._ensure_container" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_ensure_container</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.storage.local_provider.LocalStorageProvider._ensure_container" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

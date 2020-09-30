@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.storage.provider">
 <span id="victoria-storage-provider"></span><h1><a class="reference internal" href="#module-victoria.storage.provider" title="victoria.storage.provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.storage.provider</span></code></a><a class="headerlink" href="#module-victoria.storage.provider" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.storage.provider</p>
+<p>victoria.storage.provider</p>
 <p>Abstract base class of a storage provider.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,7 +171,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.provider.StorageProvider" title="victoria.storage.provider.StorageProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StorageProvider</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.provider.StorageProvider" title="victoria.storage.provider.StorageProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StorageProvider</span></code></a></p></td>
 <td><p>Abstract base class of a storage provider.</p></td>
 </tr>
 </tbody>
@@ -184,7 +183,7 @@
 <p>Abstract base class of a storage provider.</p>
 <dl class="py method">
 <dt id="victoria.storage.provider.StorageProvider.store">
-<em class="property">abstract </em><code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>IOBase<span class="p">, </span>str<span class="p">, </span>bytes<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.provider.StorageProvider.store" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>IOBase<span class="p">, </span>str<span class="p">, </span>bytes<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.storage.provider.StorageProvider.store" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store a piece of data at a given key in blob storage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -198,7 +197,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.provider.StorageProvider.retrieve">
-<em class="property">abstract </em><code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">stream</span><span class="p">:</span> <span class="n">IOBase</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.provider.StorageProvider.retrieve" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">stream</span><span class="p">:</span> <span class="n">IOBase</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#victoria.storage.provider.StorageProvider.retrieve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a piece of data from a given key in blob storage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -212,7 +211,7 @@
 
 <dl class="py method">
 <dt id="victoria.storage.provider.StorageProvider.ls">
-<em class="property">abstract </em><code class="sig-name descname">ls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.storage.provider.StorageProvider.ls" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">ls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Generator<span class="p">[</span>str<span class="p">, </span>None<span class="p">, </span>None<span class="p">]</span><a class="headerlink" href="#victoria.storage.provider.StorageProvider.ls" title="Permalink to this definition">¶</a></dt>
 <dd><p>List blobs within a container.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>

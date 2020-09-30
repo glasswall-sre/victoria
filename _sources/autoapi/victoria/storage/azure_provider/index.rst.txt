@@ -53,8 +53,7 @@ Classes
    :param connection_string: The connection string to the Azure Storage account. Only used if not auth via CLI.
    :type connection_string: str
 
-   .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
-
+   .. method:: store(self, data: Union[IOBase, str, bytes], key: str) -> None
 
       Store a piece of data at a given key in blob storage.
 
@@ -64,15 +63,13 @@ Classes
 
    .. method:: retrieve(self, key: str, stream: IOBase)
 
-
       Retrieve a piece of data from a given key in blob storage.
 
       :param key: The key within the container to get the data from.
       :param stream: The stream to stream the data into.
 
 
-   .. method:: ls(self)
-
+   .. method:: ls(self) -> Generator[str, None, None]
 
       List blobs within a container.
 

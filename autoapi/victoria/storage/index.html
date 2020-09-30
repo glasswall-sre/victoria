@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.storage">
 <span id="victoria-storage"></span><h1><a class="reference internal" href="#module-victoria.storage" title="victoria.storage"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.storage</span></code></a><a class="headerlink" href="#module-victoria.storage" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.storage</p>
+<p>victoria.storage</p>
 <p>Package providing storage functionality for Victoria.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -182,7 +181,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.make_provider" title="victoria.storage.make_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_provider</span></code></a>(provider_type: str, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.storage.make_provider" title="victoria.storage.make_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_provider</span></code></a>(provider_type: str, **kwargs) → provider.StorageProvider</p></td>
 <td><p>Make a StorageProvider from a provider type. Call with the arguments</p></td>
 </tr>
 </tbody>
@@ -201,7 +200,7 @@ function.</p>
 
 <dl class="py function">
 <dt id="victoria.storage.make_provider">
-<code class="sig-prename descclassname">victoria.storage.</code><code class="sig-name descname">make_provider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">provider_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; provider.StorageProvider<a class="headerlink" href="#victoria.storage.make_provider" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.storage.</code><code class="sig-name descname">make_provider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">provider_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="provider/index.html#victoria.storage.provider.StorageProvider" title="victoria.storage.provider.StorageProvider">provider.StorageProvider</a><a class="headerlink" href="#victoria.storage.make_provider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a StorageProvider from a provider type. Call with the arguments
 you would normally provide to the specific implementation’s constructor.</p>
 <p>make_provider(“azure”, account_name=”…”, …)</p>

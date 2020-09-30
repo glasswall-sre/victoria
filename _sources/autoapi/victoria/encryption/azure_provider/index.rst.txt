@@ -97,8 +97,7 @@ Classes
 
    :raises TypeError: If authentication information is not provided correctly.
 
-   .. method:: encrypt(self, data: bytes)
-
+   .. method:: encrypt(self, data: bytes) -> EncryptionEnvelope
 
       Encrypt bytes to an EncryptionEnvelope.
 
@@ -109,8 +108,7 @@ Classes
       :rtype: EncryptionEnvelope
 
 
-   .. method:: decrypt(self, envelope: EncryptionEnvelope)
-
+   .. method:: decrypt(self, envelope: EncryptionEnvelope) -> Union[bytes, None]
 
       Decrypt an EncryptionEnvelope to bytes.
 
@@ -125,8 +123,7 @@ Classes
       :rtype: bytes
 
 
-   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None)
-
+   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None) -> EncryptionEnvelope
 
       Rotate an EncryptionEnvelope encrypted with an old version of the
       key encryption key to a different version.

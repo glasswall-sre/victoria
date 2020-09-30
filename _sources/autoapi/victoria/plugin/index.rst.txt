@@ -61,7 +61,6 @@ Functions
 
    .. method:: __eq__(self, other)
 
-
       Return self==value.
 
 

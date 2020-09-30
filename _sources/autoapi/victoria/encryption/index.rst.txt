@@ -72,7 +72,6 @@ Functions
 
 
 
-
 .. py:class:: EncryptionProviderConfig(provider: str, config: dict)
 
    Stores config for Victoria's encryption providing functionality.
@@ -92,7 +91,6 @@ Functions
 
    .. method:: to_yaml(cls, dumper, data)
       :classmethod:
-
 
 
 

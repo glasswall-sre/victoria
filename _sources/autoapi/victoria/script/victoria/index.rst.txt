@@ -79,12 +79,10 @@ productivity.
 
    .. method:: list_commands(self, ctx)
 
-
       List the available subcommands.
 
 
    .. method:: get_command(self, ctx, cmd_name)
-
 
       Get a subcommand from the list of installed plugins.
 

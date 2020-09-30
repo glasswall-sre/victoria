@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.encryption.azure_provider">
 <span id="victoria-encryption-azure-provider"></span><h1><a class="reference internal" href="#module-victoria.encryption.azure_provider" title="victoria.encryption.azure_provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.encryption.azure_provider</span></code></a><a class="headerlink" href="#module-victoria.encryption.azure_provider" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.encryption.azure_provider</p>
+<p>victoria.encryption.azure_provider</p>
 <p>Implementation of an EncryptionProvider for Azure Key Vault.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,7 +171,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.azure_provider.AzureEncryptionProvider" title="victoria.encryption.azure_provider.AzureEncryptionProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AzureEncryptionProvider</span></code></a>(vault_url: str, key: str, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.azure_provider.AzureEncryptionProvider" title="victoria.encryption.azure_provider.AzureEncryptionProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AzureEncryptionProvider</span></code></a></p></td>
 <td><p>An EncryptionProvider implementation for Azure Key Vault.</p></td>
 </tr>
 </tbody>
@@ -276,7 +275,7 @@ variables.</p>
 </dl>
 <dl class="py method">
 <dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.encrypt">
-<code class="sig-name descname">encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.encrypt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; EncryptionEnvelope<a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.encrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encrypt bytes to an EncryptionEnvelope.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -293,7 +292,7 @@ variables.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.decrypt">
-<code class="sig-name descname">decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.decrypt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>bytes<span class="p">, </span>None<span class="p">]</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.decrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrypt an EncryptionEnvelope to bytes.</p>
 <p>Please note that this can return None if the key encryption key
 is out of date.</p>
@@ -313,7 +312,7 @@ None: If the key encryption key was out of date.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.azure_provider.AzureEncryptionProvider.rotate_key">
-<code class="sig-name descname">rotate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.rotate_key" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rotate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; EncryptionEnvelope<a class="headerlink" href="#victoria.encryption.azure_provider.AzureEncryptionProvider.rotate_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotate an EncryptionEnvelope encrypted with an old version of the
 key encryption key to a different version.</p>
 <p>Basically just decrypts it with the old key and reencrypts it with the

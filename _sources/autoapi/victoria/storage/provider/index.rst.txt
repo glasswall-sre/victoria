@@ -32,9 +32,8 @@ Classes
 
    Abstract base class of a storage provider.
 
-   .. method:: store(self, data: Union[IOBase, str, bytes], key: str)
+   .. method:: store(self, data: Union[IOBase, str, bytes], key: str) -> None
       :abstractmethod:
-
 
       Store a piece of data at a given key in blob storage.
 
@@ -42,9 +41,8 @@ Classes
       :param key: The path within the container to store it in.
 
 
-   .. method:: retrieve(self, key: str, stream: IOBase)
+   .. method:: retrieve(self, key: str, stream: IOBase) -> None
       :abstractmethod:
-
 
       Retrieve a piece of data from a given key in blob storage.
 
@@ -52,9 +50,8 @@ Classes
       :param stream: The stream to stream the data into.
 
 
-   .. method:: ls(self)
+   .. method:: ls(self) -> Generator[str, None, None]
       :abstractmethod:
-
 
       List blobs within a container.
 

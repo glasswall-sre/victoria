@@ -33,9 +33,8 @@ Classes
    Abstract base class for an encryption provider. Provides methods
    for envelope encrypting/decrypting arbitrary byte/string sequences.
 
-   .. method:: encrypt(self, data: bytes)
+   .. method:: encrypt(self, data: bytes) -> EncryptionEnvelope
       :abstractmethod:
-
 
       Encrypt bytes to an EncryptionEnvelope.
 
@@ -46,8 +45,7 @@ Classes
       :rtype: EncryptionEnvelope
 
 
-   .. method:: encrypt_str(self, data: str, encoding: Optional[str] = 'utf-8')
-
+   .. method:: encrypt_str(self, data: str, encoding: Optional[str] = 'utf-8') -> EncryptionEnvelope
 
       Encrypt a string to an EncryptionEnvelope.
 
@@ -60,9 +58,8 @@ Classes
       :rtype: EncryptionEnvelope
 
 
-   .. method:: decrypt(self, envelope: EncryptionEnvelope)
+   .. method:: decrypt(self, envelope: EncryptionEnvelope) -> Union[bytes, None]
       :abstractmethod:
-
 
       Decrypt an EncryptionEnvelope to bytes.
 
@@ -77,8 +74,7 @@ Classes
       :rtype: bytes
 
 
-   .. method:: decrypt_str(self, envelope: EncryptionEnvelope, encoding: Optional[str] = 'utf-8')
-
+   .. method:: decrypt_str(self, envelope: EncryptionEnvelope, encoding: Optional[str] = 'utf-8') -> Union[str, None]
 
       Decrypt an EncryptionEnvelope to a string.
 
@@ -95,9 +91,8 @@ Classes
       :rtype: str
 
 
-   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None)
+   .. method:: rotate_key(self, envelope: EncryptionEnvelope, version: Optional[str] = None) -> EncryptionEnvelope
       :abstractmethod:
-
 
       Rotate an EncryptionEnvelope encrypted with an old version of the
       key encryption key to a different version.
@@ -116,8 +111,7 @@ Classes
       :rtype: EncryptionEnvelope
 
 
-   .. method:: _data_encrypt(self, data: bytes)
-
+   .. method:: _data_encrypt(self, data: bytes) -> Tuple[bytes, bytes, bytes]
 
       Asymmetrically encrypt a piece of data, returning a tuple containing
       the encrypted data as a bytes object, the plaintext (!) encryption key
@@ -141,8 +135,7 @@ Classes
       :rtype: Tuple
 
 
-   .. method:: _data_decrypt(self, data: bytes, key: bytes, nonce: bytes)
-
+   .. method:: _data_decrypt(self, data: bytes, key: bytes, nonce: bytes) -> bytes
 
       Decrypt a piece of data with its plaintext data encryption key, and
       its nonce.

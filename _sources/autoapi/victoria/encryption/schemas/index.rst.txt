@@ -65,7 +65,6 @@ Classes
 
 
 
-
 .. py:class:: EncryptionEnvelope(data: str, key: str, iv: str, version: str)
 
    Stores data that has been envelope encrypted.
@@ -124,7 +123,6 @@ Classes
 
 
 
-
 .. py:class:: EncryptionProviderConfig(provider: str, config: dict)
 
    Stores config for Victoria's encryption providing functionality.
@@ -144,7 +142,6 @@ Classes
 
    .. method:: to_yaml(cls, dumper, data)
       :classmethod:
-
 
 
 

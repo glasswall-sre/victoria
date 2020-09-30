@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.encryption.provider">
 <span id="victoria-encryption-provider"></span><h1><a class="reference internal" href="#module-victoria.encryption.provider" title="victoria.encryption.provider"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.encryption.provider</span></code></a><a class="headerlink" href="#module-victoria.encryption.provider" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.encryption.provider</p>
+<p>victoria.encryption.provider</p>
 <p>Abstract base class of an encryption provider.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,7 +171,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.provider.EncryptionProvider" title="victoria.encryption.provider.EncryptionProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProvider</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.provider.EncryptionProvider" title="victoria.encryption.provider.EncryptionProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProvider</span></code></a></p></td>
 <td><p>Abstract base class for an encryption provider. Provides methods</p></td>
 </tr>
 </tbody>
@@ -185,7 +184,7 @@
 for envelope encrypting/decrypting arbitrary byte/string sequences.</p>
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider.encrypt">
-<em class="property">abstract </em><code class="sig-name descname">encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.encrypt" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; EncryptionEnvelope<a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.encrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encrypt bytes to an EncryptionEnvelope.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -202,7 +201,7 @@ for envelope encrypting/decrypting arbitrary byte/string sequences.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider.encrypt_str">
-<code class="sig-name descname">encrypt_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.encrypt_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encrypt_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span> &#x2192; EncryptionEnvelope<a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.encrypt_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encrypt a string to an EncryptionEnvelope.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -222,7 +221,7 @@ for envelope encrypting/decrypting arbitrary byte/string sequences.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider.decrypt">
-<em class="property">abstract </em><code class="sig-name descname">decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.decrypt" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>bytes<span class="p">, </span>None<span class="p">]</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.decrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrypt an EncryptionEnvelope to bytes.</p>
 <p>Please note that this can return None if the key encryption key
 is out of date.</p>
@@ -242,7 +241,7 @@ None: If the key encryption key was out of date.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider.decrypt_str">
-<code class="sig-name descname">decrypt_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.decrypt_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decrypt_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>str<span class="p">, </span>None<span class="p">]</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.decrypt_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrypt an EncryptionEnvelope to a string.</p>
 <p>Please note that this can return None if the key encryption key
 is out of date.</p>
@@ -265,7 +264,7 @@ None: If the key encryption key was out of date.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider.rotate_key">
-<em class="property">abstract </em><code class="sig-name descname">rotate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.rotate_key" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">rotate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">envelope</span><span class="p">:</span> <span class="n">EncryptionEnvelope</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; EncryptionEnvelope<a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider.rotate_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotate an EncryptionEnvelope encrypted with an old version of the
 key encryption key to a different version.</p>
 <p>Basically just decrypts it with the old key and reencrypts it with the
@@ -290,7 +289,7 @@ this, as the latest will be the best version.</p></li>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider._data_encrypt">
-<code class="sig-name descname">_data_encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider._data_encrypt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_data_encrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bytes<span class="p">, </span>bytes<span class="p">, </span>bytes<span class="p">]</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider._data_encrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Asymmetrically encrypt a piece of data, returning a tuple containing
 the encrypted data as a bytes object, the plaintext (!) encryption key
 as a bytes object, and the nonce used to encrypt as a bytes object.</p>
@@ -324,7 +323,7 @@ encryption with the same key.</p>
 
 <dl class="py method">
 <dt id="victoria.encryption.provider.EncryptionProvider._data_decrypt">
-<code class="sig-name descname">_data_decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">nonce</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider._data_decrypt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">_data_decrypt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">nonce</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#victoria.encryption.provider.EncryptionProvider._data_decrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrypt a piece of data with its plaintext data encryption key, and
 its nonce.</p>
 <p>For more information on encryption, please see the ‘_data_encrypt()’

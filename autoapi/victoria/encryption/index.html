@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.encryption">
 <span id="victoria-encryption"></span><h1><a class="reference internal" href="#module-victoria.encryption" title="victoria.encryption"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.encryption</span></code></a><a class="headerlink" href="#module-victoria.encryption" title="Permalink to this headline">¶</a></h1>
-<p><p>victoria.encryption</p>
+<p>victoria.encryption</p>
 <p>Package providing encryption functionality for Victoria.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -182,10 +181,10 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.EncryptionProviderConfigSchema" title="victoria.encryption.EncryptionProviderConfigSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProviderConfigSchema</span></code></a>(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.EncryptionProviderConfigSchema" title="victoria.encryption.EncryptionProviderConfigSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProviderConfigSchema</span></code></a></p></td>
 <td><p>Marshmallow schema for the encryption provider config in Victoria core</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.encryption.EncryptionProviderConfig" title="victoria.encryption.EncryptionProviderConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProviderConfig</span></code></a>(provider: str, config: dict)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.encryption.EncryptionProviderConfig" title="victoria.encryption.EncryptionProviderConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptionProviderConfig</span></code></a></p></td>
 <td><p>Stores config for Victoria’s encryption providing functionality.</p></td>
 </tr>
 </tbody>
@@ -199,7 +198,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.make_provider" title="victoria.encryption.make_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_provider</span></code></a>(provider_type: str, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.encryption.make_provider" title="victoria.encryption.make_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_provider</span></code></a>(provider_type: str, **kwargs) → provider.EncryptionProvider</p></td>
 <td><p>Make an EncryptionProvider from a provider type. Call with the arguments</p></td>
 </tr>
 </tbody>
@@ -283,7 +282,7 @@ function.</p>
 
 <dl class="py function">
 <dt id="victoria.encryption.make_provider">
-<code class="sig-prename descclassname">victoria.encryption.</code><code class="sig-name descname">make_provider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">provider_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; provider.EncryptionProvider<a class="headerlink" href="#victoria.encryption.make_provider" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.encryption.</code><code class="sig-name descname">make_provider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">provider_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="provider/index.html#victoria.encryption.provider.EncryptionProvider" title="victoria.encryption.provider.EncryptionProvider">provider.EncryptionProvider</a><a class="headerlink" href="#victoria.encryption.make_provider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an EncryptionProvider from a provider type. Call with the arguments
 you would normally provide to the specific implementation’s constructor.</p>
 <p>make_provider(“azure”, vault_url=”…”, …)</p>

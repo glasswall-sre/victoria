@@ -155,13 +155,12 @@
             
   <div class="section" id="module-victoria.config">
 <span id="victoria-config"></span><h1><a class="reference internal" href="#module-victoria.config" title="victoria.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">victoria.config</span></code></a><a class="headerlink" href="#module-victoria.config" title="Permalink to this headline">¶</a></h1>
-<p><p>config</p>
+<p>config</p>
 <p>Contains various classes and methods for loading the config of Victoria.</p>
 <dl class="simple">
 <dt>Author:</dt><dd><p>Ash Powell &lt;<a class="reference external" href="mailto:apowell&#37;&#52;&#48;glasswallsolutions&#46;com">apowell<span>&#64;</span>glasswallsolutions<span>&#46;</span>com</a>&gt;</p>
 </dd>
 </dl>
-</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -172,10 +171,10 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.ConfigSchema" title="victoria.config.ConfigSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConfigSchema</span></code></a>(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.ConfigSchema" title="victoria.config.ConfigSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConfigSchema</span></code></a></p></td>
 <td><p>Marshmallow schema for the Config object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Config</span></code></a>(logging_config: dict, plugins_config: dict = None, plugins_config_location: Mapping[str, str] = None, storage_providers: dict = None, encryption_provider: encryption.EncryptionProviderConfig = None)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Config</span></code></a></p></td>
 <td><p>Config is used for storing deserialized values from Config files.</p></td>
 </tr>
 </tbody>
@@ -189,25 +188,25 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.get_config_loc" title="victoria.config.get_config_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config_loc</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.get_config_loc" title="victoria.config.get_config_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config_loc</span></code></a>() → str</p></td>
 <td><p>Get the path to the config file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.ensure" title="victoria.config.ensure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensure</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.ensure" title="victoria.config.ensure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensure</span></code></a>() → None</p></td>
 <td><p>Ensure that a config exists in the location.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._print_validation_err" title="victoria.config._print_validation_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_print_validation_err</span></code></a>(err: ValidationError, name: str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._print_validation_err" title="victoria.config._print_validation_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_print_validation_err</span></code></a>(err: ValidationError, name: str) → None</p></td>
 <td><p>Internal function used for printing a validation error in the Schema.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.load_plugin_config" title="victoria.config.load_plugin_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_plugin_config</span></code></a>(plugin: Plugin, cfg: Config)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.load_plugin_config" title="victoria.config.load_plugin_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_plugin_config</span></code></a>(plugin: Plugin, cfg: Config) → object</p></td>
 <td><p>Load the config of a plugin from the main Victoria config.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, cfg: Config)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, cfg: Config) → object</p></td>
 <td><p>Handle a plugin config override from the ‘plugins_config_location’</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config._inject_core_config" title="victoria.config._inject_core_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_inject_core_config</span></code></a>(core_cfg: Config, loaded_config: object)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config._inject_core_config" title="victoria.config._inject_core_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_inject_core_config</span></code></a>(core_cfg: Config, loaded_config: object) → object</p></td>
 <td><p>Inject the core config into a loaded plugin config object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.load" title="victoria.config.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(config_path: str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.load" title="victoria.config.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(config_path: str) → Config</p></td>
 <td><p>Load a config file from a given path and make sure it’s valid.</p></td>
 </tr>
 </tbody>
@@ -359,12 +358,12 @@ file is given.</p>
 
 <dl class="py method">
 <dt id="victoria.config.Config.as_dict">
-<code class="sig-name descname">as_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.config.Config.as_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#victoria.config.Config.as_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="victoria.config.Config.get_storage">
-<code class="sig-name descname">get_storage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">provider</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.config.Config.get_storage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_storage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">provider</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; storage.StorageProvider<a class="headerlink" href="#victoria.config.Config.get_storage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the storage provider of a given type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -385,7 +384,7 @@ mapping in Victoria core config.</p>
 
 <dl class="py method">
 <dt id="victoria.config.Config.get_encryption">
-<code class="sig-name descname">get_encryption</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#victoria.config.Config.get_encryption" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_encryption</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; encryption.EncryptionProvider<a class="headerlink" href="#victoria.config.Config.get_encryption" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the encryption provider.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -422,7 +421,7 @@ Like a filename.</p></li>
 
 <dl class="py function">
 <dt id="victoria.config.load_plugin_config">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">load_plugin_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin</span><span class="p">:</span> <span class="n">Plugin</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">Config</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config.load_plugin_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">load_plugin_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plugin</span><span class="p">:</span> <span class="n">Plugin</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config">Config</a></span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config.load_plugin_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the config of a plugin from the main Victoria config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -450,7 +449,7 @@ if there was some error loading the plugin config.</p>
 
 <dl class="py function">
 <dt id="victoria.config._handle_config_file_override">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_handle_config_file_override</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">override_loc</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n">Config</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._handle_config_file_override" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_handle_config_file_override</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">override_loc</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config">Config</a></span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._handle_config_file_override" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a plugin config override from the ‘plugins_config_location’
 section of the Victoria core config.</p>
 <p>Attempts to get config from a storage provider.</p>
@@ -472,13 +471,13 @@ section of the Victoria core config.</p>
 
 <dl class="py function">
 <dt id="victoria.config._inject_core_config">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_inject_core_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">core_cfg</span><span class="p">:</span> <span class="n">Config</span></em>, <em class="sig-param"><span class="n">loaded_config</span><span class="p">:</span> <span class="n">object</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._inject_core_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_inject_core_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">core_cfg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config">Config</a></span></em>, <em class="sig-param"><span class="n">loaded_config</span><span class="p">:</span> <span class="n">object</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._inject_core_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inject the core config into a loaded plugin config object.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="victoria.config.load">
-<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_path</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; Config<a class="headerlink" href="#victoria.config.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_path</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config">Config</a><a class="headerlink" href="#victoria.config.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a config file from a given path and make sure it’s valid.</p>
 <p>If an error occurred, it will print it and return None.</p>
 <dl class="field-list simple">
