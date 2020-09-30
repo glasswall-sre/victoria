@@ -33,12 +33,12 @@ jobs:
         run: |
           poetry run bandit -r victoria
 
-      - name: Codecov
-        uses: codecov/codecov-action@v1.0.7
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          fail_ci_if_error: true
+      # - name: Codecov
+      #   uses: codecov/codecov-action@v1.0.7
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: ./coverage.xml
+      #     fail_ci_if_error: true
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1.2
