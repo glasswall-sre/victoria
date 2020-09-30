@@ -30,8 +30,8 @@ For example:
         name="victoria_pbi",
         version="#{TAG_NAME}#",
         description="Victoria plugin to manipulate Azure DevOps PBIs",
-        author="Sam Gibson",
-        author_email="sgibson@glasswallsolutions.com",
+        author="Ash Powell",
+        author_email="apowell@glasswallsolutions.com",
         packages=find_packages(),
     )
 

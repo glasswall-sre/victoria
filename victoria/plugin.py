@@ -3,7 +3,7 @@
 Contains functions for loading Victoria plugins at runtime.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 
 import importlib

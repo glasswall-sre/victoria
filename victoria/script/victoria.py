@@ -6,7 +6,7 @@ subcommands for automating any number of 'toil' tasks that inhibit SRE
 productivity.
 
 Author:
-    Sam Gibson <sgibson@glasswallsolutions.com>
+    Ash Powell <apowell@glasswallsolutions.com>
 """
 import argparse
 
