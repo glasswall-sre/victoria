@@ -9,7 +9,6 @@ from io import IOBase
 import logging
 from typing import Generator, Union
 
-from azure.cli.core import CLIError
 from azure.common.client_factory import get_client_from_cli_profile
 from azure.storage.blob import BlobServiceClient
 
@@ -46,7 +45,7 @@ class AzureStorageProvider(provider.StorageProvider):
                     account_url=f"https://{account_name}.blob.core.windows.net/"
                 )
 
-            except CLIError as err:
+            except ImportError as err:
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
