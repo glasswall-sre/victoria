@@ -3,7 +3,7 @@
 Contains various classes and methods for loading the config of Victoria.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 import io
 import logging.config
