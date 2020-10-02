@@ -10,7 +10,7 @@
    Abstract base class of an encryption provider.
 
    Author:
-       Ash Powell <apowell@glasswallsolutions.com>
+       Sam Gibson
 
 
 
