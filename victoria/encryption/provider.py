@@ -3,7 +3,7 @@
 Abstract base class of an encryption provider.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 from abc import ABC, abstractmethod
 import os

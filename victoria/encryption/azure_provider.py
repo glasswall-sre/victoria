@@ -3,7 +3,7 @@
 Implementation of an EncryptionProvider for Azure Key Vault.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 import base64
 import logging

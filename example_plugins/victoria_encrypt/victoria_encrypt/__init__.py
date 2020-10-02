@@ -3,7 +3,7 @@
 A Victoria plugin to make envelope encryption easier.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 import logging
 

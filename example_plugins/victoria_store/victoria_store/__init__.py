@@ -3,7 +3,7 @@
 A Victoria plugin to store things in cloud storage.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 import io
 import logging

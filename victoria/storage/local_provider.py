@@ -3,7 +3,7 @@
 Implementation of a StorageProvider for local file storage.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 from io import IOBase
 import os

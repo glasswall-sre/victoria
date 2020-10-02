@@ -3,7 +3,7 @@
 Used for installing victoria_config via pip.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson
 """
 
 from setuptools import setup, find_packages
@@ -14,7 +14,6 @@ setup(
     name="victoria_config",
     version="0.1",
     description="Victoria plugin to print config",
-    author="Ash Powell",
-    author_email="apowell@glasswallsolutions.com",
+    author="Sam Gibson",
     packages=find_packages(),
 )
