@@ -21,7 +21,7 @@ ENCRYPTION_ALGORITHM = EncryptionAlgorithm.rsa_oaep_256
 
 TENANT_ID_ENVVAR = "AZURE_TENANT_ID"
 CLIENT_ID_ENVVAR = "AZURE_CLIENT_ID"
-CLIENT_SECRET_ENVVAR = "AZlURE_CLIENT_SECRET"  # nosec
+CLIENT_SECRET_ENVVAR = "AZURE_CLIENT_SECRET"  # nosec
 
 
 class AzureEncryptionProvider(EncryptionProvider):
