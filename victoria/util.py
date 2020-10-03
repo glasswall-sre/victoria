@@ -3,7 +3,7 @@
 Contains various utility functions and classes used in Victoria.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 
 from os.path import splitext, basename

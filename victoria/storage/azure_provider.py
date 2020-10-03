@@ -3,7 +3,7 @@
 Implementation of a StorageProvider for Azure Blob Storage.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 from io import IOBase
 import logging

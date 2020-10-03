@@ -3,7 +3,7 @@
 This is used to store a schema for the plugin's config section.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 
 from marshmallow import Schema, fields, post_load, validate

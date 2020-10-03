@@ -3,7 +3,7 @@
 Used for installing victoria_store via pip.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 
 from setuptools import setup, find_packages
@@ -14,7 +14,6 @@ setup(
     name="victoria_store",
     version="0.1",
     description="Victoria plugin to store things in cloud storage",
-    author="Ash Powell",
-    author_email="apowell@glasswallsolutions.com",
+    author="Sam Gibson",
     packages=find_packages(),
 )

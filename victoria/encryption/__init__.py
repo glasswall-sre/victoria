@@ -3,7 +3,7 @@
 Package providing encryption functionality for Victoria.
 
 Author:
-    Ash Powell <apowell@glasswallsolutions.com>
+    Sam Gibson 
 """
 import logging
 

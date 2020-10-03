@@ -25,8 +25,8 @@ setup(
     "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity.",
     long_description=repo_file_as_string("README.md"),
     long_description_content_type="text/markdown",
-    author="Ash Powell",
-    author_email="apowell@glasswallsolutions.com",
+    author="Glasswall SRE",
+    author_email="sre@glasswallsolutions.com",
     url="https://github.com/glasswall-sre/victoria",
     classifiers=[
         "Development Status :: 4 - Beta", "Environment :: Console",
