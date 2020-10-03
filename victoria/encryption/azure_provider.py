@@ -10,7 +10,6 @@ import logging
 import os
 from typing import Optional, Union
 
-from azure.cli.core import CLIError
 from azure.common.client_factory import get_client_from_cli_profile
 from azure.identity import ClientSecretCredential
 from azure.keyvault.keys import KeyClient
@@ -58,7 +57,7 @@ class AzureEncryptionProvider(EncryptionProvider):
                 self.key_encryption_key = self.key_client.get_key(key)
                 self.crypto_client = get_client_from_cli_profile(
                     CryptographyClient, key=self.key_encryption_key)
-            except CLIError as err:
+            except ImportError as err:
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
