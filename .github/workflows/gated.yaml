@@ -1,0 +1,38 @@
+name: Gated
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: dschep/install-poetry-action@v1.3
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Lint with pylint
+        run: |
+          poetry run pylint victoria --disable="C,R"
+      - name: Test with pytest
+        run: |
+          poetry run pytest tests/ --cov victoria --cov-report xml
+      - name: Check for security issues with bandit
+        run: |
+          poetry run bandit -r victoria
+      - name: Codecov
+        uses: codecov/codecov-action@v1.0.7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          fail_ci_if_error: true
