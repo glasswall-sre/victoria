@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "victoria"
-version = "0.7.8"
+version = "0.7.9"
 description = "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity."
 authors = ["Sam Gibson"]
 license = "MIT"
@@ -34,6 +34,7 @@ sphinx-rtd-theme = "^0.5.0"
 m2r = "^0.2.1"
 sphinx-autoapi = "^1.4.0"
 bandit = "^1.6.2"
+coverage = "^5.3"
 
 [build-system]
 requires = ["poetry>=0.12"]
