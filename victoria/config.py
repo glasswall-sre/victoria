@@ -213,16 +213,16 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
     raw_config = {}
 
     # check to see if there's a location override for the config
-    if plugin.name in cfg.plugins_config_location:
-        loc = cfg.plugins_config_location[plugin.name]
-        raw_config = _handle_config_file_override(loc, cfg)
-    elif cfg.plugins_config is not None and plugin.name in cfg.plugins_config:
+    if cfg.plugins_config is not None and plugin.name in cfg.plugins_config:
         # otherwise use the one in the main config
         if not cfg.plugins_config:
             logging.error("Can't load plugin config: config did not "
                           "have 'plugins_config' section")
             return None
         raw_config = cfg.plugins_config[plugin.name]
+    elif plugin.name in cfg.plugins_config_location:
+        loc = cfg.plugins_config_location[plugin.name]
+        raw_config = _handle_config_file_override(loc, cfg)
     else:
         logging.error(
             "Can't load plugin config: "
