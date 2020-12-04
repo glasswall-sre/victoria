@@ -284,5 +284,5 @@ plugins_config_location:
     plugin_def = victoria.plugin.Plugin("config", None, PluginSchema())
     plugin_config = victoria.config.load_plugin_config(plugin_def, config)
 
-    # plugins_config_location should take precedence over plugins_config
-    assert plugin_config["test_field"] == 2
+    # plugins_config should take precedence over plugins_config_location
+    assert plugin_config["test_field"] == 4
