@@ -95,14 +95,14 @@ def load_all() -> List[Plugin]:
     for plgn in ls():
         loaded_plugin = load(plgn)
 
-        if loaded_plugin.name in already_loaded_names:
-            logging.error(
-                "Error loading plugin 'victoria_%s"
-                ": a plugin with the same name is already loaded",
-                loaded_plugin.name)
-            continue
-
         if loaded_plugin is not None:
+            if loaded_plugin.name in already_loaded_names:
+                logging.error(
+                    "Error loading plugin 'victoria_%s"
+                    ": a plugin with the same name is already loaded",
+                    loaded_plugin.name)
+                continue
+
             already_loaded_names.append(loaded_plugin.name)
             plugins.append(loaded_plugin)
     return plugins
