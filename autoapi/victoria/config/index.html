@@ -200,13 +200,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.load_plugin_config" title="victoria.config.load_plugin_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_plugin_config</span></code></a>(plugin: Plugin, cfg: Config) → object</p></td>
 <td><p>Load the config of a plugin from the main Victoria config.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, cfg: Config) → object</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_merge" title="victoria.config._handle_config_file_merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_merge</span></code></a>(override_loc: str, cfg: Config, plugin: Plugin) → object</p></td>
+<td><p>Handle a plugin config merge from the ‘plugins_config_location’</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config._handle_config_file_override" title="victoria.config._handle_config_file_override"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_handle_config_file_override</span></code></a>(override_loc: str, cfg: Config) → object</p></td>
 <td><p>Handle a plugin config override from the ‘plugins_config_location’</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config._inject_core_config" title="victoria.config._inject_core_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_inject_core_config</span></code></a>(core_cfg: Config, loaded_config: object) → object</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config._inject_core_config" title="victoria.config._inject_core_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_inject_core_config</span></code></a>(core_cfg: Config, loaded_config: object) → object</p></td>
 <td><p>Inject the core config into a loaded plugin config object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#victoria.config.load" title="victoria.config.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(config_path: str) → Config</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#victoria.config.load" title="victoria.config.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(config_path: str) → Config</p></td>
 <td><p>Load a config file from a given path and make sure it’s valid.</p></td>
 </tr>
 </tbody>
@@ -443,6 +446,29 @@ if there was some error loading the plugin config.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>ValueError</strong> – if the plugin didn’t have a config schema.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="victoria.config._handle_config_file_merge">
+<code class="sig-prename descclassname">victoria.config.</code><code class="sig-name descname">_handle_config_file_merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">override_loc</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cfg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config">Config</a></span></em>, <em class="sig-param"><span class="n">plugin</span><span class="p">:</span> <span class="n">Plugin</span></em><span class="sig-paren">)</span> &#x2192; object<a class="headerlink" href="#victoria.config._handle_config_file_merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle a plugin config merge from the ‘plugins_config_location’
+section of the Victoria core config.</p>
+<p>Attempts to get config from a storage provider and merge it with config provided in victoria.yaml.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>override_loc</strong> (<em>str</em>) – The location of the file. {provider}://{file_path}</p></li>
+<li><p><strong>cfg</strong> (<a class="reference internal" href="#victoria.config.Config" title="victoria.config.Config"><em>Config</em></a>) – Core Victoria config.</p></li>
+<li><p><strong>plugin</strong> (<a class="reference internal" href="../plugin/index.html#victoria.plugin.Plugin" title="victoria.plugin.Plugin"><em>Plugin</em></a>) – Plugin</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Config.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>cfg</p>
 </dd>
 </dl>
 </dd></dl>

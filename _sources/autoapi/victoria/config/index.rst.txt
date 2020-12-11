@@ -36,6 +36,7 @@ Functions
    victoria.config.ensure
    victoria.config._print_validation_err
    victoria.config.load_plugin_config
+   victoria.config._handle_config_file_merge
    victoria.config._handle_config_file_override
    victoria.config._inject_core_config
    victoria.config.load
@@ -216,6 +217,24 @@ Functions
    :rtype: object
 
    :raises ValueError: if the plugin didn't have a config schema.
+
+
+.. function:: _handle_config_file_merge(override_loc: str, cfg: Config, plugin: Plugin) -> object
+
+   Handle a plugin config merge from the 'plugins_config_location'
+   section of the Victoria core config.
+
+   Attempts to get config from a storage provider and merge it with config provided in victoria.yaml.
+
+   :param override_loc: The location of the file. {provider}://{file_path}
+   :type override_loc: str
+   :param cfg: Core Victoria config.
+   :type cfg: Config
+   :param plugin: Plugin
+   :type plugin: Plugin
+
+   :returns: Config.
+   :rtype: cfg
 
 
 .. function:: _handle_config_file_override(override_loc: str, cfg: Config) -> object
