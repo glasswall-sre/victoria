@@ -220,6 +220,11 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
                           "have 'plugins_config' section")
             return None
         raw_config = cfg.plugins_config[plugin.name]
+
+        if plugin.name in cfg.plugins_config_location:
+            loc = cfg.plugins_config_location[plugin.name]
+            cfg = _handle_config_file_merge(loc, cfg, plugin)
+
     elif plugin.name in cfg.plugins_config_location:
         loc = cfg.plugins_config_location[plugin.name]
         raw_config = _handle_config_file_override(loc, cfg)
@@ -240,6 +245,30 @@ def load_plugin_config(plugin: Plugin, cfg: Config) -> object:
         _print_validation_err(err, f"plugins_config.{plugin.name}")
         return None
 
+def _handle_config_file_merge(override_loc: str, cfg: Config, plugin: Plugin) -> object:
+    """Handle a plugin config merge from the 'plugins_config_location'
+    section of the Victoria core config.
+
+    Attempts to get config from a storage provider and merge it with config provided in victoria.yaml.
+
+    Args:
+        override_loc (str): The location of the file. {provider}://{file_path}
+        cfg (Config): Core Victoria config.
+        plugin (Plugin): Plugin
+
+    Returns:
+        cfg: Config.
+    """
+    provider_type, file_path = tuple(override_loc.split("://"))
+    provider = cfg.get_storage(provider_type)
+    config_file = io.BytesIO()
+    provider.retrieve(file_path, config_file)
+    config_str = config_file.getvalue().decode("utf-8")
+    config_to_merge = yaml.safe_load(config_str)
+    for key, value in config_to_merge.items():
+        if key not in cfg.plugins_config[plugin.name]:
+            cfg.plugins_config[plugin.name][key] = value
+    return cfg
 
 def _handle_config_file_override(override_loc: str, cfg: Config) -> object:
     """Handle a plugin config override from the 'plugins_config_location'
