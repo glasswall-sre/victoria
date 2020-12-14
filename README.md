@@ -98,3 +98,4 @@ We accept pull requests! To contribute:
 1. Clone the repo.
 2. Run `poetry install`.
 3. You're good to go.
+
