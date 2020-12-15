@@ -29,7 +29,7 @@ Classes
 
 
 
-.. py:class:: EncryptionEnvelopeSchema(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)
+.. py:class:: EncryptionEnvelopeSchema(*, only: typing.Optional[types.StrSequenceOrSet] = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Optional[typing.Dict] = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: typing.Optional[str] = None)
 
    Bases: :class:`marshmallow.Schema`
 
@@ -97,7 +97,7 @@ Classes
        https://cloud.google.com/kms/docs/envelope-encryption
 
 
-.. py:class:: EncryptionProviderConfigSchema(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)
+.. py:class:: EncryptionProviderConfigSchema(*, only: typing.Optional[types.StrSequenceOrSet] = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Optional[typing.Dict] = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: typing.Optional[str] = None)
 
    Bases: :class:`marshmallow.Schema`
 

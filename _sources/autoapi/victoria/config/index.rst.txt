@@ -77,7 +77,7 @@ Functions
    Ensure that a config exists in the location.
 
 
-.. py:class:: ConfigSchema(*, only: types.StrSequenceOrSet = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Dict = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: str = None)
+.. py:class:: ConfigSchema(*, only: typing.Optional[types.StrSequenceOrSet] = None, exclude: types.StrSequenceOrSet = (), many: bool = False, context: typing.Optional[typing.Dict] = None, load_only: types.StrSequenceOrSet = (), dump_only: types.StrSequenceOrSet = (), partial: typing.Union[bool, types.StrSequenceOrSet] = False, unknown: typing.Optional[str] = None)
 
    Bases: :class:`marshmallow.Schema`
 
