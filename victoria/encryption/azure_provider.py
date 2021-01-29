@@ -61,7 +61,7 @@ class AzureEncryptionProvider(EncryptionProvider):
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
-                raise SystemExit(1) from err
+                raise err
         else:
             tenant_id = kwargs.pop("tenant_id", os.getenv(TENANT_ID_ENVVAR))
             client_id = kwargs.pop("client_id", os.getenv(CLIENT_ID_ENVVAR))
