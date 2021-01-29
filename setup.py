@@ -19,7 +19,7 @@ setup(
         "azure-keyvault>=4.0.0", "azure-identity>=1.3.0", "dpath>=2.0.1"
     ],
     name="victoria",
-    version="0.8.3",
+    version="0.8.4",
     description=
     "Automation toolbelt -- a single command with multiple pluggable subcommands for automating any number of 'toil' tasks that inhibit productivity.",
     long_description=repo_file_as_string("README.md"),
