@@ -21,6 +21,7 @@ victoria-store = {path = "example_plugins/victoria_store"}
 victoria-encrypt = {path = "example_plugins/victoria_encrypt"}
 adal = "^1.2.4"
 msrestazure = "^0.6.4"
+azure-cli-core = "^2.18.0"
 
 [tool.poetry.dev-dependencies]
 setuptools = "^49.2.0"

@@ -49,7 +49,7 @@ class AzureStorageProvider(provider.StorageProvider):
                 logging.error(
                     "ERROR: Unable to authenticate via Azure CLI, have you "
                     "logged in with 'az login'?")
-                raise SystemExit(1) from err
+                raise err
         else:
             if not connection_string:
                 logging.error(
